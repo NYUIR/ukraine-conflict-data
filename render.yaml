@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: nyu-ukraine-monitor
+    env: static
+    staticPublishPath: .
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: ALLOWALL
+      - path: /*
+        name: Content-Security-Policy
+        value: frame-ancestors *
+      - path: /*
+        name: Access-Control-Allow-Origin
+        value: "*"
