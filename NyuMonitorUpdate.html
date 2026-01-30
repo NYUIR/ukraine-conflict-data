@@ -1759,6 +1759,120 @@
                 -webkit-overflow-scrolling: touch;
             }
         }
+        
+        /* ============================================ */
+        /* MOBILE LANDSCAPE ORIENTATION LOCK           */
+        /* ============================================ */
+        
+        /* Orientation Lock Overlay - CSS Fallback & JavaScript-Enhanced */
+        
+        /* Hide overlay by default (will be shown by JS or CSS media query) */
+        #orientation-lock-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            z-index: 999999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        /* Show overlay on mobile portrait (CSS-only fallback) */
+        @media screen and (max-width: 1024px) and (orientation: portrait) {
+            #orientation-lock-overlay {
+                display: flex !important;
+            }
+        }
+        
+        /* Ensure overlay is hidden in landscape on mobile */
+        @media screen and (max-width: 1024px) and (orientation: landscape) {
+            #orientation-lock-overlay {
+                display: none !important;
+            }
+        }
+        
+        /* Never show on desktop/tablets in landscape */
+        @media screen and (min-width: 1025px) {
+            #orientation-lock-overlay {
+                display: none !important;
+            }
+        }
+        
+        /* Overlay Content Styling */
+        .orientation-lock-content {
+            text-align: center;
+            color: #ffffff;
+            max-width: 320px;
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .orientation-icon {
+            font-size: 80px;
+            margin-bottom: 24px;
+            animation: rotatePhone 2s ease-in-out infinite;
+            display: inline-block;
+        }
+        
+        .orientation-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        
+        .orientation-message {
+            font-size: 16px;
+            opacity: 0.9;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+        
+        .orientation-platform-note {
+            font-size: 14px;
+            opacity: 0.7;
+            margin-top: 20px;
+            font-style: italic;
+        }
+        
+        /* Animations */
+        @keyframes rotatePhone {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(-90deg) scale(1.1);
+            }
+            50% {
+                transform: rotate(-90deg) scale(1.1);
+            }
+            75% {
+                transform: rotate(0deg);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Prevent scrolling when overlay is active */
+        body.orientation-locked {
+            overflow: hidden !important;
+            position: fixed !important;
+            width: 100% !important;
+        }
     </style>
     <!-- Preconnect to CDNs for faster loading -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
@@ -1766,6 +1880,20 @@
     <link rel="dns-prefetch" href="https://raw.githubusercontent.com">
 </head>
 <body>
+    <!-- Orientation Lock Overlay for Mobile Devices -->
+    <div id="orientation-lock-overlay" role="dialog" aria-modal="true" aria-labelledby="orientation-title" aria-describedby="orientation-message">
+        <div class="orientation-lock-content">
+            <div class="orientation-icon" aria-hidden="true">📱 ↻</div>
+            <h2 class="orientation-title" id="orientation-title">Rotate Your Device</h2>
+            <p class="orientation-message" id="orientation-message">
+                Please rotate your device to landscape mode for the best viewing experience.
+            </p>
+            <p class="orientation-platform-note">
+                NYU Monitor is optimized for landscape viewing on mobile devices
+            </p>
+        </div>
+    </div>
+
     <!-- Loading Overlay -->
     <div id="loadingOverlay" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.95); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 99999;">
         <div style="width: 60px; height: 60px; border: 5px solid #eee6f3; border-top-color: #57068c; border-radius: 0; animation: spin 1s linear infinite;"></div>
@@ -18178,5 +18306,124 @@
             console.error('Unhandled Promise Rejection:', e.reason);
         });
 </script>
+
+<!-- ============================================ -->
+<!-- MOBILE LANDSCAPE ORIENTATION LOCK SCRIPT    -->
+<!-- ============================================ -->
+<script>
+(function() {
+    'use strict';
+    
+    // Configuration
+    const MOBILE_BREAKPOINT = 1024; // Max width considered "mobile"
+    const DEBOUNCE_DELAY = 150; // Milliseconds to wait before handling resize
+    
+    // Cache DOM elements
+    const overlay = document.getElementById('orientation-lock-overlay');
+    const body = document.body;
+    
+    // Debounce function to prevent excessive orientation checks
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+    
+    // Check if device is mobile based on screen width
+    function isMobileDevice() {
+        return window.innerWidth <= MOBILE_BREAKPOINT;
+    }
+    
+    // Check if device is in portrait mode
+    function isPortrait() {
+        // Use screen.orientation API if available (more reliable)
+        if (window.screen && window.screen.orientation) {
+            const type = window.screen.orientation.type;
+            return type.includes('portrait');
+        }
+        
+        // Fallback to window dimensions
+        // Using innerWidth/innerHeight for consistency with CSS media queries
+        return window.innerHeight > window.innerWidth;
+    }
+    
+    // Update overlay visibility
+    function updateOrientationLock() {
+        const shouldShowOverlay = isMobileDevice() && isPortrait();
+        
+        if (shouldShowOverlay) {
+            // Show overlay and lock body
+            overlay.style.display = 'flex';
+            body.classList.add('orientation-locked');
+            
+            // Announce to screen readers (only once)
+            if (!overlay.hasAttribute('data-announced')) {
+                announceToScreenReader('Please rotate your device to landscape mode');
+                overlay.setAttribute('data-announced', 'true');
+            }
+        } else {
+            // Hide overlay and unlock body
+            overlay.style.display = 'none';
+            body.classList.remove('orientation-locked');
+            overlay.removeAttribute('data-announced');
+        }
+    }
+    
+    // Screen reader announcement
+    function announceToScreenReader(message) {
+        const announcement = document.createElement('div');
+        announcement.setAttribute('role', 'status');
+        announcement.setAttribute('aria-live', 'polite');
+        announcement.className = 'sr-only';
+        announcement.textContent = message;
+        announcement.style.cssText = 'position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;';
+        document.body.appendChild(announcement);
+        
+        // Remove after announcement
+        setTimeout(() => {
+            document.body.removeChild(announcement);
+        }, 1000);
+    }
+    
+    // Event handlers
+    const debouncedUpdate = debounce(updateOrientationLock, DEBOUNCE_DELAY);
+    
+    // Listen for orientation changes (multiple events for cross-browser support)
+    window.addEventListener('orientationchange', updateOrientationLock);
+    window.addEventListener('resize', debouncedUpdate);
+    
+    // Modern orientation API
+    if (window.screen && window.screen.orientation) {
+        window.screen.orientation.addEventListener('change', updateOrientationLock);
+    }
+    
+    // Initial check on page load
+    // Use setTimeout to ensure DOM is fully ready
+    setTimeout(updateOrientationLock, 100);
+    
+    // Also check when page becomes visible (handles app switching)
+    document.addEventListener('visibilitychange', function() {
+        if (!document.hidden) {
+            updateOrientationLock();
+        }
+    });
+    
+    // Handle page show event (back/forward cache)
+    window.addEventListener('pageshow', function(event) {
+        updateOrientationLock();
+    });
+    
+    // Expose function globally for manual triggering if needed
+    window.checkOrientation = updateOrientationLock;
+    
+})();
+</script>
+
 </body>
 </html>
