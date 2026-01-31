@@ -1854,15 +1854,22 @@
             /* All content in right section - divs, lists, etc */
             .chart-date-controls > div[style*="flex: 1"] div[style*="font-size: 0.85rem"] {
                 font-size: 0.48rem !important;  /* Methodology, explanations */
+                line-height: 1.3 !important;
             }
             .chart-date-controls > div[style*="flex: 1"] ul {
                 font-size: 0.48rem !important;
                 margin: 0.2rem 0 0 0.5rem !important;
                 padding: 0 !important;
             }
+            .chart-date-controls > div[style*="flex: 1"] ul[style*="margin: 0.3rem"] {
+                margin: 0.2rem 0 0 0.5rem !important;  /* Override specific inline margin */
+            }
             .chart-date-controls > div[style*="flex: 1"] li {
                 font-size: 0.48rem !important;
                 line-height: 1.3 !important;
+            }
+            .chart-date-controls > div[style*="flex: 1"] li strong {
+                font-size: 0.48rem !important;  /* Strong text inside list items */
             }
             .chart-date-controls > div[style*="flex: 1"] strong {
                 font-size: 0.5rem !important;
@@ -1870,6 +1877,10 @@
             .chart-date-controls > div[style*="flex: 1"] div[style*="margin-top"] {
                 margin-top: 0.3rem !important;
                 padding-top: 0.3rem !important;
+                font-size: 0.48rem !important;  /* Analyzed Systems section */
+            }
+            .chart-date-controls > div[style*="flex: 1"] div[style*="margin-top"] strong {
+                font-size: 0.5rem !important;  /* "Analyzed Systems:" label */
             }
             /* Specific targeting for all h4 headers in right sections */
             h4[style*="color: #b91c1c"],
@@ -1927,6 +1938,69 @@
             /* Chart titles with numbering (1., 2., 3., etc.) */
             .chart-title {
                 font-size: 0.7rem !important;
+            }
+            
+            /* Trade-off Detection and similar paragraphs in chart containers */
+            .chart-container > p[style*="font-size: 0.9rem"],
+            .chart-container p[style*="font-size: 0.9rem"] {
+                font-size: 0.5rem !important;
+                line-height: 1.3 !important;
+                margin-bottom: 0.5rem !important;
+            }
+            .chart-container > p strong,
+            .chart-container p strong {
+                font-size: 0.52rem !important;
+            }
+            
+            /* Date selection controls in Parallel Coordinates and similar charts */
+            div[style*="display: flex"] label[style*="font-size: 0.9rem"] {
+                font-size: 0.5rem !important;
+            }
+            div[style*="display: flex"] select[style*="font-size: 0.9rem"] {
+                font-size: 0.5rem !important;
+                padding: 0.3rem 0.4rem !important;
+                min-width: 60px !important;
+            }
+            div[style*="display: flex"] button[style*="font-size: 0.85rem"] {
+                font-size: 0.5rem !important;
+                padding: 0.25rem 0.4rem !important;
+            }
+            div[id*="Display"][style*="font-size: 0.9rem"] {
+                font-size: 0.5rem !important;
+            }
+            
+            /* Analysis Summary grids - dynamically generated stats */
+            div[style*="grid-template-columns"][style*="minmax(250px"] {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
+                gap: 0.5rem !important;
+            }
+            div[style*="grid-template-columns"] strong[style*="color: var(--un-blue)"],
+            div[style*="grid-template-columns"] strong[style*="color: var(--accent-red)"] {
+                font-size: 0.52rem !important;
+            }
+            div[style*="grid-template-columns"] span[style*="color: var(--text-secondary)"] {
+                font-size: 0.48rem !important;
+            }
+            
+            /* Example Strikes and Interpretation boxes */
+            div[style*="padding: 1rem"][style*="border: 3px"] {
+                padding: 0.5rem !important;
+            }
+            div[style*="padding: 1rem"] strong {
+                font-size: 0.52rem !important;
+            }
+            div[style*="padding: 1rem"] span[style*="font-size: 0.85rem"] {
+                font-size: 0.48rem !important;
+            }
+            
+            /* Pattern Recognition Analysis and similar dynamic content */
+            div[id*="Stats"] strong,
+            div[id*="statsContainer"] strong {
+                font-size: 0.52rem !important;
+            }
+            div[id*="Stats"] br + text,
+            div[id*="statsContainer"] text {
+                font-size: 0.5rem !important;
             }
             .chart-date-controls div[style*="font-size: 1.5rem"] {
                 font-size: 0.9rem !important;
