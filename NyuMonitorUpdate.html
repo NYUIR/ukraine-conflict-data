@@ -1922,7 +1922,7 @@
             
             /* Info card intro sections - section-subtitle and secondary-text */
             .section-subtitle {
-                font-size: 0.55rem !important;
+                font-size: 0.5rem !important;  /* Changed from 0.55rem to match secondary-text */
                 line-height: 1.3 !important;
             }
             .secondary-text,
@@ -1933,6 +1933,42 @@
             }
             .secondary-text strong {
                 font-size: 0.52rem !important;
+            }
+            
+            /* Live Alerts header container - reduce size for iPhone */
+            .alert-ticker-header {
+                min-height: 40px !important;
+                padding: 0.3rem 0.4rem !important;
+                max-width: 250px !important;  /* Constrain width so it doesn't overflow */
+            }
+            .alert-ticker-label {
+                font-size: 0.45rem !important;
+                margin-bottom: 0.1rem !important;
+            }
+            .alert-ticker-count {
+                font-size: 0.75rem !important;
+                margin-bottom: 0.05rem !important;
+            }
+            .alert-ticker-content {
+                font-size: 0.55rem !important;
+            }
+            .alert-ticker-regions {
+                font-size: 0.5rem !important;
+            }
+            .alert-ticker-loading {
+                font-size: 0.55rem !important;
+            }
+            
+            /* Parallel Coordinates chart - prevent overflow */
+            #complexityParallelChart {
+                width: 100% !important;
+                max-width: 100% !important;
+                overflow: hidden !important;
+                height: 300px !important;  /* Reduce height for iPhone */
+            }
+            #complexityParallelChart svg {
+                max-width: 100% !important;
+                overflow: visible !important;
             }
             
             /* Chart titles with numbering (1., 2., 3., etc.) */
