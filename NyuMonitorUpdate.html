@@ -1744,6 +1744,27 @@
             .section-title { font-size: 0.9rem !important; margin-bottom: 0.5rem; }
             .section-subtitle { font-size: 0.7rem !important; line-height: 1.4; margin-bottom: 0.5rem; }
             
+            /* Uniform text sizing throughout site */
+            p { font-size: 0.55rem !important; line-height: 1.4 !important; }
+            li { font-size: 0.55rem !important; line-height: 1.4 !important; }
+            ul, ol { font-size: 0.55rem !important; }
+            strong, b { font-size: inherit !important; }
+            em, i { font-size: inherit !important; }
+            
+            /* All chart containers and text */
+            .chart-container p { font-size: 0.55rem !important; }
+            .chart-container li { font-size: 0.55rem !important; }
+            .chart-container strong { font-size: 0.58rem !important; }
+            .chart-container label { font-size: 0.55rem !important; }
+            
+            /* Results and statistics text */
+            div[style*="padding"] p { font-size: 0.55rem !important; }
+            div[style*="padding"] span { font-size: inherit !important; }
+            
+            /* Table text uniformity */
+            table { font-size: 0.52rem !important; }
+            th, td { font-size: 0.52rem !important; }
+            
             .chart-container { padding: 0.6rem; margin-bottom: 0.75rem; }
             .chart-title { font-size: 0.75rem; margin-bottom: 0.5rem; padding-bottom: 0.3rem; }
             
@@ -1796,6 +1817,19 @@
                 min-width: 80px !important;
                 padding: 0.3rem !important;
             }
+            /* Individual ranking items - make all text smaller */
+            .chart-date-controls div[style*="min-width: 140px"] span[style*="font-size: 0.8rem"] {
+                font-size: 0.5rem !important;  /* Rank numbers (#1, #2, etc) */
+            }
+            .chart-date-controls div[style*="min-width: 140px"] span[style*="font-size: 0.75rem"] {
+                font-size: 0.48rem !important;  /* Dates */
+            }
+            .chart-date-controls div[style*="min-width: 140px"] span[style*="font-size: 0.85rem"] {
+                font-size: 0.52rem !important;  /* Hit counts */
+            }
+            .chart-date-controls div[style*="min-width: 140px"] div[style*="gap: 0.5rem"] {
+                gap: 0.25rem !important;  /* Reduce spacing between elements */
+            }
             .chart-date-controls div[style*="font-size: 1.5rem"] {
                 font-size: 0.9rem !important;
             }
@@ -1807,24 +1841,80 @@
             .stat-card { padding: 0.5rem; }
             .stat-value { font-size: 1.1rem; }
             .stat-label { font-size: 0.6rem; }
+            .stat-number { font-size: 1.1rem; }  /* Component stats */
             
-            .control-card { padding: 0.6rem; }
-            .control-label { font-size: 0.6rem; margin-bottom: 0.4rem; }
+            .control-card { padding: 0.5rem; }
+            .control-label { font-size: 0.55rem; margin-bottom: 0.3rem; }
             
-            .info-card, .info-card-tight { padding: 0.6rem; margin-bottom: 0.75rem; }
-            .info-box { padding: 0.5rem; }
-            .info-box-title { font-size: 0.75rem; margin-bottom: 0.4rem; }
-            .info-box-content { font-size: 0.65rem; line-height: 1.5; }
+            .info-card, .info-card-tight { padding: 0.5rem; margin-bottom: 0.5rem; }
+            .info-box { padding: 0.4rem; }
+            .info-box-title { font-size: 0.6rem; margin-bottom: 0.3rem; }
+            .info-box-content { font-size: 0.55rem; line-height: 1.4; }
             
-            button { padding: 0.35rem 0.5rem; font-size: 0.65rem; min-height: 28px; }
-            .filter-button { padding: 0.25rem 0.4rem; font-size: 0.6rem; min-height: 24px; }
-            .btn-primary, .btn-secondary { padding: 0.35rem 0.6rem; font-size: 0.65rem; }
+            /* Component Catalog - make everything smaller and more compact */
+            #componentsContainer { 
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)) !important; 
+                gap: 0.5rem !important; 
+                padding: 0.5rem !important; 
+            }
+            #componentsContainer > div { 
+                padding: 0.4rem !important; 
+            }
+            #componentsContainer img { 
+                max-height: 80px !important; 
+                width: auto !important; 
+            }
+            #componentsContainer h4 { 
+                font-size: 0.55rem !important; 
+                margin: 0.3rem 0 !important; 
+            }
+            #componentsContainer p { 
+                font-size: 0.48rem !important; 
+                line-height: 1.3 !important; 
+                margin: 0.2rem 0 !important; 
+            }
+            #componentsContainer strong { 
+                font-size: 0.5rem !important; 
+            }
+            #componentsPagination { 
+                padding: 0.5rem !important; 
+            }
+            #componentsPagination button { 
+                padding: 0.25rem 0.4rem !important; 
+                font-size: 0.5rem !important; 
+            }
             
-            input, select { padding: 0.35rem 0.5rem; font-size: 0.7rem; }
-            .full-width-select { font-size: 0.7rem; padding: 0.4rem; }
+            /* Component Modal */
+            #componentModal > div { 
+                margin: 20px auto !important; 
+                max-width: 95% !important; 
+            }
+            #componentModal h2 { 
+                font-size: 0.85rem !important; 
+            }
+            #componentModal p, #componentModal li { 
+                font-size: 0.55rem !important; 
+                line-height: 1.4 !important; 
+            }
+            #componentModal img { 
+                max-height: 120px !important; 
+            }
+            #modalComponentContent { 
+                font-size: 0.55rem !important; 
+            }
+            #modalComponentContent strong { 
+                font-size: 0.58rem !important; 
+            }
             
-            th { padding: 0.4rem 0.3rem; font-size: 0.55rem; }
-            td { padding: 0.35rem 0.3rem; font-size: 0.6rem; }
+            button { padding: 0.3rem 0.4rem; font-size: 0.55rem; min-height: 26px; }
+            .filter-button { padding: 0.2rem 0.3rem; font-size: 0.5rem; min-height: 22px; }
+            .btn-primary, .btn-secondary { padding: 0.3rem 0.5rem; font-size: 0.55rem; }
+            
+            input, select { padding: 0.3rem 0.4rem; font-size: 0.6rem; }
+            .full-width-select { font-size: 0.6rem; padding: 0.35rem; }
+            
+            th { padding: 0.35rem 0.25rem; font-size: 0.5rem; }
+            td { padding: 0.3rem 0.25rem; font-size: 0.52rem; }
             
             .grid-auto-fit, .grid-auto-fit-margin { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
             
@@ -1834,36 +1924,36 @@
             div[id*="Top10Container"] { grid-template-columns: repeat(5, 1fr) !important; gap: 0.25rem !important; }
             div[id*="Top10Container"] > div { padding: 0.2rem 0.3rem !important; font-size: 0.5rem !important; }
             
-            .image-container { padding: 0.5rem; }
-            .weapon-image { max-height: 150px; width: auto; }
-            .image-caption { font-size: 0.6rem; margin-top: 0.4rem; }
+            .image-container { padding: 0.4rem; }
+            .weapon-image { max-height: 120px; width: auto; }
+            .image-caption { font-size: 0.52rem; margin-top: 0.3rem; }
             
-            .warning-box { padding: 0.5rem; margin-top: 0.75rem; }
-            .warning-box-title { font-size: 0.75rem; }
-            .warning-box-content { font-size: 0.65rem; }
+            .warning-box { padding: 0.4rem; margin-top: 0.5rem; }
+            .warning-box-title { font-size: 0.6rem; }
+            .warning-box-content { font-size: 0.55rem; }
             
-            .placeholder-text { padding: 1rem 0.5rem; }
-            .placeholder-title { font-size: 0.8rem; }
-            .placeholder-text p { font-size: 0.65rem; }
+            .placeholder-text { padding: 0.75rem 0.4rem; }
+            .placeholder-title { font-size: 0.7rem; }
+            .placeholder-text p { font-size: 0.55rem; }
             
-            .stats-display { padding: 0.5rem; font-size: 0.65rem; }
+            .stats-display { padding: 0.4rem; font-size: 0.55rem; }
             
-            .regression-checkbox-item { padding: 0.4rem; margin-bottom: 0.4rem; }
-            .regression-checkbox-item input[type="checkbox"] { transform: scale(0.9); margin-right: 0.3rem; }
-            .regression-checkbox-item span { font-size: 0.65rem; }
+            .regression-checkbox-item { padding: 0.35rem; margin-bottom: 0.35rem; }
+            .regression-checkbox-item input[type="checkbox"] { transform: scale(0.85); margin-right: 0.25rem; }
+            .regression-checkbox-item span { font-size: 0.55rem; }
             
-            .sankey-node text { font-size: 8px !important; }
-            .network-label { font-size: 8px !important; }
-            .tooltip-advanced { font-size: 10px; padding: 8px; }
+            .sankey-node text { font-size: 7px !important; }
+            .network-label { font-size: 7px !important; }
+            .tooltip-advanced { font-size: 9px; padding: 6px; }
             
             #virtualScrollContainer { height: 250px !important; }
             
             #toast-container { top: 5px; right: 5px; left: auto; max-width: 200px; }
-            .toast { padding: 0.5rem; font-size: 0.7rem; }
+            .toast { padding: 0.4rem; font-size: 0.6rem; }
             
-            .loading-content { padding: 1rem; max-width: 70%; }
-            .loading-message { font-size: 0.85rem; }
-            .loading-progress { font-size: 0.7rem; }
+            .loading-content { padding: 0.75rem; max-width: 70%; }
+            .loading-message { font-size: 0.75rem; }
+            .loading-progress { font-size: 0.6rem; }
             .spinner { width: 35px; height: 35px; }
         }
         
