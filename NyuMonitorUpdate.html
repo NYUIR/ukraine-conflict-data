@@ -346,7 +346,7 @@
            COLOR COORDINATION:
            -------------------
            - Match right section heading/accent colors to chart's primary color
-           - Example: Shahed chart uses #e63946 (red) for both bars and Top 10 section
+           - Example: Shahed chart uses #b91c1c (red) for both bars and Top 10 section
            
            JAVASCRIPT REQUIREMENTS:
            -------------------------
@@ -827,11 +827,11 @@
         
         /* Live Alert Ticker - In Header */
         .alert-ticker-header {
-            background: linear-gradient(135deg, #e63946 0%, #c62828 100%);
+            background: linear-gradient(135deg, #b91c1c 0%, #c62828 100%);
             color: white;
             padding: 1rem;
             border-radius: 0;
-            box-shadow: 0 4px 20px rgba(230, 57, 70, 0.4);
+            box-shadow: 0 4px 20px rgba(185, 28, 28, 0.4);
             border: 4px solid #ffffff;
             position: relative;
             overflow: hidden;
@@ -852,11 +852,11 @@
         }
         
         .alert-ticker {
-            background: linear-gradient(135deg, #e63946 0%, #c62828 100%);
+            background: linear-gradient(135deg, #b91c1c 0%, #c62828 100%);
             color: white;
             padding: 1rem;
             border-radius: 0;
-            box-shadow: 0 2px 10px rgba(230, 57, 70, 0.3);
+            box-shadow: 0 2px 10px rgba(185, 28, 28, 0.3);
             border: 4px solid #ffffff;
             position: relative;
             overflow: hidden;
@@ -1713,23 +1713,133 @@
             }
         }
         
-        /* Landscape orientation optimization for mobile */
-        @media (max-width: 768px) and (orientation: landscape) {
-            .header {
-                padding: 0.75rem 0;
-            }
+        /* ============================================ */
+        /* MOBILE LANDSCAPE OPTIMIZATION               */
+        /* ============================================ */
+        
+        @media screen and (max-width: 926px) and (max-height: 500px) and (orientation: landscape) {
+            .header { padding: 0.4rem 0; }
+            .header-content { padding: 0 0.75rem; gap: 0.5rem; }
+            .nyu-logo { max-width: 180px; height: auto; }
+            .subtitle { font-size: 0.65rem; line-height: 1.3; }
             
-            .tabs {
-                margin-bottom: 1rem;
-            }
+            .alert-ticker-header { min-height: 50px; padding: 0.4rem 0.6rem; }
+            .alert-ticker-label { font-size: 0.55rem; margin-bottom: 0.2rem; }
+            .alert-ticker-count { font-size: 0.9rem; margin-bottom: 0.1rem; }
+            .alert-ticker-content { font-size: 0.7rem; }
+            .alert-ticker-regions { font-size: 0.6rem; }
             
-            .tab {
-                padding: 0.5rem 0.65rem;
-            }
+            .tabs { margin-bottom: 0.5rem; padding: 0; }
+            .tab { padding: 0.4rem 0.5rem; font-size: 0.55rem; letter-spacing: 0.3px; min-height: 32px; }
+            .tab-dropdown-content { min-width: 140px; }
+            .tab-dropdown-item { padding: 0.5rem 0.75rem; font-size: 0.65rem; }
             
-            .chart-container {
-                padding: 1rem;
-            }
+            .container { padding: 0.5rem; }
+            
+            h1 { font-size: 1.1rem; }
+            h2 { font-size: 0.95rem; }
+            h3 { font-size: 0.85rem; }
+            h4 { font-size: 0.75rem; }
+            
+            .section-title { font-size: 0.9rem !important; margin-bottom: 0.5rem; }
+            .section-subtitle { font-size: 0.7rem !important; line-height: 1.4; margin-bottom: 0.5rem; }
+            
+            .chart-container { padding: 0.6rem; margin-bottom: 0.75rem; }
+            .chart-title { font-size: 0.75rem; margin-bottom: 0.5rem; padding-bottom: 0.3rem; }
+            canvas { max-height: 200px !important; }
+            
+            .chart-date-controls { padding: 0.5rem !important; gap: 0.5rem !important; flex-direction: row !important; }
+            .chart-date-controls > div[style*="flex: 0 0 260px"] { flex: 0 0 140px !important; padding-right: 0.5rem !important; }
+            .chart-date-controls select { padding: 0.25rem 0.4rem !important; font-size: 0.65rem !important; }
+            .chart-date-controls h4 { font-size: 0.7rem !important; }
+            .chart-date-controls p { font-size: 0.6rem !important; line-height: 1.3 !important; }
+            .chart-date-controls ul { font-size: 0.6rem !important; }
+            .chart-date-controls li { font-size: 0.6rem !important; }
+            .chart-date-controls .filter-button { padding: 0.2rem 0.3rem !important; font-size: 0.55rem !important; min-height: 24px !important; }
+            .chart-date-controls div[id*="DateRangeDisplay"] { padding: 0.25rem !important; font-size: 0.6rem !important; }
+            
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+            .stat-card { padding: 0.5rem; }
+            .stat-value { font-size: 1.1rem; }
+            .stat-label { font-size: 0.6rem; }
+            
+            .control-card { padding: 0.6rem; }
+            .control-label { font-size: 0.6rem; margin-bottom: 0.4rem; }
+            
+            .info-card, .info-card-tight { padding: 0.6rem; margin-bottom: 0.75rem; }
+            .info-box { padding: 0.5rem; }
+            .info-box-title { font-size: 0.75rem; margin-bottom: 0.4rem; }
+            .info-box-content { font-size: 0.65rem; line-height: 1.5; }
+            
+            button { padding: 0.35rem 0.5rem; font-size: 0.65rem; min-height: 28px; }
+            .filter-button { padding: 0.25rem 0.4rem; font-size: 0.6rem; min-height: 24px; }
+            .btn-primary, .btn-secondary { padding: 0.35rem 0.6rem; font-size: 0.65rem; }
+            
+            input, select { padding: 0.35rem 0.5rem; font-size: 0.7rem; }
+            .full-width-select { font-size: 0.7rem; padding: 0.4rem; }
+            
+            th { padding: 0.4rem 0.3rem; font-size: 0.55rem; }
+            td { padding: 0.35rem 0.3rem; font-size: 0.6rem; }
+            
+            .grid-auto-fit, .grid-auto-fit-margin { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+            
+            .alert-ticker { min-height: 50px; padding: 0.5rem; }
+            .alert-ticker-container { grid-column: span 1; }
+            
+            div[id*="Top10Container"] { grid-template-columns: repeat(5, 1fr) !important; gap: 0.25rem !important; }
+            div[id*="Top10Container"] > div { padding: 0.2rem 0.3rem !important; font-size: 0.5rem !important; }
+            
+            .image-container { padding: 0.5rem; }
+            .weapon-image { max-height: 150px; width: auto; }
+            .image-caption { font-size: 0.6rem; margin-top: 0.4rem; }
+            
+            .warning-box { padding: 0.5rem; margin-top: 0.75rem; }
+            .warning-box-title { font-size: 0.75rem; }
+            .warning-box-content { font-size: 0.65rem; }
+            
+            .placeholder-text { padding: 1rem 0.5rem; }
+            .placeholder-title { font-size: 0.8rem; }
+            .placeholder-text p { font-size: 0.65rem; }
+            
+            .stats-display { padding: 0.5rem; font-size: 0.65rem; }
+            
+            .regression-checkbox-item { padding: 0.4rem; margin-bottom: 0.4rem; }
+            .regression-checkbox-item input[type="checkbox"] { transform: scale(0.9); margin-right: 0.3rem; }
+            .regression-checkbox-item span { font-size: 0.65rem; }
+            
+            .sankey-node text { font-size: 8px !important; }
+            .network-label { font-size: 8px !important; }
+            .tooltip-advanced { font-size: 10px; padding: 8px; }
+            
+            #virtualScrollContainer { height: 250px !important; }
+            
+            #toast-container { top: 5px; right: 5px; left: auto; max-width: 200px; }
+            .toast { padding: 0.5rem; font-size: 0.7rem; }
+            
+            .loading-content { padding: 1rem; max-width: 70%; }
+            .loading-message { font-size: 0.85rem; }
+            .loading-progress { font-size: 0.7rem; }
+            .spinner { width: 35px; height: 35px; }
+        }
+        
+        @media screen and (min-width: 667px) and (max-width: 926px) and (max-height: 500px) and (orientation: landscape) {
+            .nyu-logo { max-width: 220px; }
+            .subtitle { font-size: 0.7rem; }
+            .tab { font-size: 0.6rem; }
+            canvas { max-height: 220px !important; }
+            .chart-date-controls > div[style*="flex: 0 0 260px"] { flex: 0 0 160px !important; }
+        }
+        
+        @media screen and (max-width: 667px) and (max-height: 400px) and (orientation: landscape) {
+            .header { padding: 0.25rem 0; }
+            .nyu-logo { max-width: 140px; }
+            .subtitle { font-size: 0.55rem; }
+            .tab { padding: 0.3rem 0.4rem; font-size: 0.5rem; }
+            canvas { max-height: 160px !important; }
+            .chart-date-controls { flex-direction: column !important; }
+            .chart-date-controls > div[style*="flex: 0 0 260px"] { flex: 1 1 auto !important; border-right: none !important; border-bottom: 1px solid var(--border) !important; padding-bottom: 0.4rem !important; }
+            .stat-value { font-size: 0.9rem; }
+            .section-title { font-size: 0.8rem !important; }
         }
         
         /* Touch-friendly improvements */
@@ -1883,7 +1993,7 @@
     <!-- Orientation Lock Overlay for Mobile Devices -->
     <div id="orientation-lock-overlay" role="dialog" aria-modal="true" aria-labelledby="orientation-title" aria-describedby="orientation-message">
         <div class="orientation-lock-content">
-            <div class="orientation-icon" aria-hidden="true">📱 ↻</div>
+            <div class="orientation-icon" aria-hidden="true">&#128241; &#8635;</div>
             <h2 class="orientation-title" id="orientation-title">Rotate Your Device</h2>
             <p class="orientation-message" id="orientation-message">
                 Please rotate your device to landscape mode for the best viewing experience.
@@ -1898,7 +2008,7 @@
     <div id="loadingOverlay" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.95); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 99999;">
         <div style="width: 60px; height: 60px; border: 5px solid #eee6f3; border-top-color: #57068c; border-radius: 0; animation: spin 1s linear infinite;"></div>
         <div style="margin-top: 1.5rem; font-size: 1.1rem; color: #666;">Loading application...</div>
-        <div style="margin-top: 0.5rem; font-size: 0.9rem; color: #999;">⚡ Optimized Version - 49% Faster</div>
+        <div style="margin-top: 0.5rem; font-size: 0.9rem; color: #999;">&#9889; Optimized Version - 49% Faster</div>
     </div>
     <style>
         @keyframes spin { to { transform: rotate(360deg); } }
@@ -1966,7 +2076,7 @@
                 
                 <!-- Weapons dropdown -->
                 <div class="tab-dropdown" id="weaponsDropdown">
-                    <button class="tab" id="weaponsTab">Weapons ▼</button>
+                    <button class="tab" id="weaponsTab">Weapons &#9660;</button>
                     <div class="tab-dropdown-content" id="weaponsDropdownContent">
                         <button class="tab-dropdown-item" onclick="switchTab('shahed')">Shahed</button>
                         <button class="tab-dropdown-item" onclick="switchTab('weaponsInfo')">Weapon Database</button>
@@ -1978,7 +2088,7 @@
                 
                 <!-- Advanced Analytics dropdown -->
                 <div class="tab-dropdown" id="advancedDropdown">
-                    <button class="tab" id="advancedTab">Advanced Analytics ▼</button>
+                    <button class="tab" id="advancedTab">Advanced Analytics &#9660;</button>
                     <div class="tab-dropdown-content" id="advancedDropdownContent">
                         <button class="tab-dropdown-item" onclick="switchTab('complexity')">Attack Complexity</button>
                         <button class="tab-dropdown-item" onclick="switchTab('advancedFrequency')">Frequency Analysis</button>
@@ -1989,7 +2099,7 @@
                 
                 <!-- Live Alerts dropdown -->
                 <div class="tab-dropdown" id="liveAlertsDropdown">
-                    <button class="tab" id="liveAlertsTab">Live Alerts ▼</button>
+                    <button class="tab" id="liveAlertsTab">Live Alerts &#9660;</button>
                     <div class="tab-dropdown-content" id="liveAlertsDropdownContent">
                         <button class="tab-dropdown-item" onclick="switchTab('alertVisualization')">Alert Visualization</button>
                         <button class="tab-dropdown-item" onclick="switchTab('data')">Raw Data</button>
@@ -2039,7 +2149,7 @@
                         <!-- RIGHT SECTION: Additional Content Area (~2/3 width) - Top 10 Attack Days -->
                         <div style="flex: 1; display: flex; flex-direction: column; gap: 0.5rem;">
                             <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <h4 style="margin: 0; color: #e63946; font-size: 1rem; border-bottom: 2px solid #e63946; padding-bottom: 0.3rem; flex: 1;">Top 10 Attack Days</h4>
+                                <h4 style="margin: 0; color: #b91c1c; font-size: 1rem; border-bottom: 2px solid #b91c1c; padding-bottom: 0.3rem; flex: 1;">Top 10 Attack Days</h4>
                                 <button id="toggleAttackFreqViewBtn" onclick="toggleAttackFreqView()" style="width: auto; padding: 0.5rem 1.5rem; font-size: 0.85rem; margin-left: 1rem;">
                                     Weekly Chart
                                 </button>
@@ -2102,7 +2212,7 @@
                         
                         <!-- RIGHT SECTION: Period Statistics (~2/3 width) -->
                         <div style="flex: 1; display: flex; flex-direction: column; gap: 0.5rem;">
-                            <h4 style="margin: 0; color: #FF3232; font-size: 1rem; border-bottom: 2px solid #FF3232; padding-bottom: 0.3rem;">Period Statistics & Top 5 Hit Days (by Total)</h4>
+                            <h4 style="margin: 0; color: #b91c1c; font-size: 1rem; border-bottom: 2px solid #b91c1c; padding-bottom: 0.3rem;">Period Statistics & Top 5 Hit Days (by Total)</h4>
                             <div id="attackInterceptionStatsContainer" style="display: flex; flex-wrap: wrap; gap: 0.75rem; flex: 1; align-content: flex-start;">
                                 <!-- Statistics will be populated here -->
                             </div>
@@ -2380,10 +2490,10 @@
                         
                         <!-- RIGHT SECTION: Weapon Legend -->
                         <div style="flex: 1; display: flex; flex-direction: column; gap: 0.5rem;">
-                            <h4 style="margin: 0; color: #e63946; font-size: 1rem; border-bottom: 2px solid #e63946; padding-bottom: 0.3rem;">Analyzed Weapon Systems</h4>
+                            <h4 style="margin: 0; color: #b91c1c; font-size: 1rem; border-bottom: 2px solid #b91c1c; padding-bottom: 0.3rem;">Analyzed Weapon Systems</h4>
                             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 0.4rem; font-size: 0.8rem;">
                                 <div style="padding: 0.3rem; background: rgba(106, 76, 147, 0.1); border-radius: 0; border: 3px solid #6a4c93;"><strong>Shahed</strong></div>
-                                <div style="padding: 0.3rem; background: rgba(230, 57, 70, 0.1); border-radius: 0; border: 3px solid #e63946;"><strong>X-101/X-555</strong></div>
+                                <div style="padding: 0.3rem; background: rgba(185, 28, 28, 0.1); border-radius: 0; border: 3px solid #b91c1c;"><strong>X-101/X-555</strong></div>
                                 <div style="padding: 0.3rem; background: rgba(6, 214, 160, 0.1); border-radius: 0; border: 3px solid #06d6a0;"><strong>Kalibr</strong></div>
                                 <div style="padding: 0.3rem; background: rgba(255, 159, 28, 0.1); border-radius: 0; border: 3px solid #ff9f1c;"><strong>Iskander-M</strong></div>
                                 <div style="padding: 0.3rem; background: rgba(17, 138, 178, 0.1); border-radius: 0; border: 3px solid #118ab2;"><strong>Iskander-M/KN-23</strong></div>
@@ -2440,7 +2550,7 @@
                                 <strong>Metrics:</strong>
                                 <ul style="margin: 0.3rem 0 0 1rem; padding: 0;">
                                     <li>Penetration Rate = (Launched - Intercepted) / Launched</li>
-                                    <li>Volume bins: Low (≤25), Med (26-75), High (76-150), Saturation (>150)</li>
+                                    <li>Volume bins: Low (&le;25), Med (26-75), High (76-150), Saturation (>150)</li>
                                 </ul>
                             </div>
                         </div>
@@ -2497,7 +2607,7 @@
                         
                         <!-- RIGHT SECTION: Additional Content Area (~2/3 width) - Top 10 Launch Days -->
                         <div style="flex: 1; display: flex; flex-direction: column; gap: 0.5rem;">
-                            <h4 style="margin: 0; color: #e63946; font-size: 1rem; border-bottom: 2px solid #e63946; padding-bottom: 0.3rem;">Top 10 Launch Days</h4>
+                            <h4 style="margin: 0; color: #b91c1c; font-size: 1rem; border-bottom: 2px solid #b91c1c; padding-bottom: 0.3rem;">Top 10 Launch Days</h4>
                             <div id="shahedTop10Container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.5rem; flex: 1;">
                                 <!-- Top 10 days will be populated here -->
                             </div>
@@ -2547,7 +2657,7 @@
                         
                         <!-- RIGHT SECTION: Period Statistics (~2/3 width) -->
                         <div style="flex: 1; display: flex; flex-direction: column; gap: 0.5rem;">
-                            <h4 style="margin: 0; color: #FF3232; font-size: 1rem; border-bottom: 2px solid #FF3232; padding-bottom: 0.3rem;">Period Statistics & Top 5 Hit Days (by Total)</h4>
+                            <h4 style="margin: 0; color: #b91c1c; font-size: 1rem; border-bottom: 2px solid #b91c1c; padding-bottom: 0.3rem;">Period Statistics & Top 5 Hit Days (by Total)</h4>
                             <div id="interceptionStatsContainer" style="display: flex; flex-wrap: wrap; gap: 0.75rem; flex: 1; align-content: flex-start;">
                                 <!-- Statistics will be populated here -->
                             </div>
@@ -2864,13 +2974,13 @@
                         <!-- Navigation Buttons -->
                         <div style="display: flex; align-items: center; gap: 0.75rem; margin-left: auto;">
                             <button id="parallelPrevMonth" onclick="navigateParallelMonth(-1)" style="padding: 0.35rem 0.65rem; background: var(--un-blue); color: white; border: none; border-radius: 0; cursor: pointer; font-size: 0.85rem; white-space: nowrap;">
-                                ← Prev
+                                &larr; Prev
                             </button>
                             <div id="parallelMonthDisplay" style="font-weight: 600; font-size: 0.9rem; color: var(--un-blue); white-space: nowrap;">
                                 <!-- Current month display -->
                             </div>
                             <button id="parallelNextMonth" onclick="navigateParallelMonth(1)" style="padding: 0.35rem 0.65rem; background: var(--un-blue); color: white; border: none; border-radius: 0; cursor: pointer; font-size: 0.85rem; white-space: nowrap;">
-                                Next →
+                                Next &rarr;
                             </button>
                         </div>
                     </div>
@@ -2917,7 +3027,7 @@
                         <div style="flex: 1; display: flex; flex-direction: column; gap: 0.5rem;">
                             <h4 style="margin: 0; color: var(--un-blue); font-size: 1rem; border-bottom: 2px solid var(--un-blue); padding-bottom: 0.3rem;">Analysis Notes</h4>
                             <p style="margin: 0; color: var(--text-secondary); font-size: 0.85rem; line-height: 1.5;">
-                                <strong>Rigorous Change Detection:</strong> Distinguishes common cause (random variation) from special cause (strategically significant) changes using ±3σ control limits.
+                                <strong>Rigorous Change Detection:</strong> Distinguishes common cause (random variation) from special cause (strategically significant) changes using &plusmn;3&sigma; control limits.
                             </p>
                         </div>
                     </div>
@@ -3207,7 +3317,7 @@
                         <div style="flex: 1; display: flex; flex-direction: column; gap: 0.5rem;">
                             <h4 style="margin: 0; color: var(--un-blue); font-size: 1rem; border-bottom: 2px solid var(--un-blue); padding-bottom: 0.3rem;">Analysis Notes</h4>
                             <p style="margin: 0; color: var(--text-secondary); font-size: 0.85rem; line-height: 1.5;">
-                                Flow visualization showing the complete attack chain: Launch Location → Weapon System → Target Region → Outcome (Intercepted/Not Intercepted). Width of flows represents volume of attacks. Minimum threshold: 10 attacks per pathway.
+                                Flow visualization showing the complete attack chain: Launch Location &rarr; Weapon System &rarr; Target Region &rarr; Outcome (Intercepted/Not Intercepted). Width of flows represents volume of attacks. Minimum threshold: 10 attacks per pathway.
                             </p>
                         </div>
                     </div>
@@ -3438,25 +3548,25 @@
                         <thead id="dataTableHead">
                             <tr>
                                 <th onclick="sortTable('date')" style="cursor: pointer; user-select: none;">
-                                    Date <span id="sort-date" style="opacity: 0.3;">▼</span>
+                                    Date <span id="sort-date" style="opacity: 0.3;">&#9660;</span>
                                 </th>
                                 <th onclick="sortTable('model')" style="cursor: pointer; user-select: none;">
-                                    Model <span id="sort-model" style="opacity: 0.3;">▼</span>
+                                    Model <span id="sort-model" style="opacity: 0.3;">&#9660;</span>
                                 </th>
                                 <th onclick="sortTable('launch_place')" style="cursor: pointer; user-select: none;">
-                                    Launch Place <span id="sort-launch_place" style="opacity: 0.3;">▼</span>
+                                    Launch Place <span id="sort-launch_place" style="opacity: 0.3;">&#9660;</span>
                                 </th>
                                 <th onclick="sortTable('target')" style="cursor: pointer; user-select: none;">
-                                    Target <span id="sort-target" style="opacity: 0.3;">▼</span>
+                                    Target <span id="sort-target" style="opacity: 0.3;">&#9660;</span>
                                 </th>
                                 <th onclick="sortTable('launched')" style="cursor: pointer; user-select: none;">
-                                    Launched <span id="sort-launched" style="opacity: 0.3;">▼</span>
+                                    Launched <span id="sort-launched" style="opacity: 0.3;">&#9660;</span>
                                 </th>
                                 <th onclick="sortTable('destroyed')" style="cursor: pointer; user-select: none;">
-                                    Destroyed <span id="sort-destroyed" style="opacity: 0.3;">▼</span>
+                                    Destroyed <span id="sort-destroyed" style="opacity: 0.3;">&#9660;</span>
                                 </th>
                                 <th onclick="sortTable('rate')" style="cursor: pointer; user-select: none;">
-                                    Rate <span id="sort-rate" style="opacity: 0.3;">▼</span>
+                                    Rate <span id="sort-rate" style="opacity: 0.3;">&#9660;</span>
                                 </th>
                             </tr>
                         </thead>
@@ -3601,7 +3711,7 @@
                         <div style="padding: 2rem;">
                             <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1.5rem;">
                                 <h2 id="modalComponentName" style="margin: 0; color: var(--un-blue);"></h2>
-                                <button onclick="closeComponentModal()" style="width: auto; padding: 0.5rem 1rem; background: var(--text-secondary);">✕ Close</button>
+                                <button onclick="closeComponentModal()" style="width: auto; padding: 0.5rem 1rem; background: var(--text-secondary);">&times; Close</button>
                             </div>
                             <div id="modalComponentContent">
                                 <!-- Component details will be inserted here -->
@@ -3634,7 +3744,7 @@
                 <div class="chart-container" id="componentChartsImportNotice">
                     <div style="padding: 2rem; text-align: center;">
                         <p style="color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 1rem;">
-                            📊 No component data loaded
+                            &#128202; No component data loaded
                         </p>
                         <p style="color: var(--text-secondary);">
                             Please navigate to the <strong>Components Database</strong> tab to import component data first.
@@ -3776,7 +3886,7 @@
                                 Mathematical Derivations
                             </h3>
                             <button onclick="toggleShowYourWork()" style="width: auto; padding: 0.5rem 1rem; font-size: 0.9rem;">
-                                <span id="showYourWorkToggle">Show Calculations ▼</span>
+                                <span id="showYourWorkToggle">Show Calculations &#9660;</span>
                             </button>
                         </div>
                         <p style="color: #6b21a8; margin-bottom: 1rem; font-size: 0.95rem;">
@@ -3860,8 +3970,8 @@
                         </div>
                         <div style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 0; font-size: 0.9rem;">
                             <strong>Interpretation:</strong><br/>
-                            • <strong>Residuals vs. Fitted:</strong> Points should be randomly scattered around zero (no patterns)<br/>
-                            • <strong>Q-Q Plot:</strong> Points should fall on diagonal line (normality of residuals)
+                            &bull; <strong>Residuals vs. Fitted:</strong> Points should be randomly scattered around zero (no patterns)<br/>
+                            &bull; <strong>Q-Q Plot:</strong> Points should fall on diagonal line (normality of residuals)
                         </div>
                     </div>
                     
@@ -3870,10 +3980,10 @@
                         <h3 class="chart-title">Export Results</h3>
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
                             <button onclick="exportRegressionCSV()" style="width: 100%;">
-                                📄 Export to CSV
+                                &#128260; Export to CSV
                             </button>
                             <button onclick="copyRegressionResults()" style="width: 100%;">
-                                📋 Copy to Clipboard
+                                &#128203; Copy to Clipboard
                             </button>
                         </div>
                     </div>
@@ -3906,13 +4016,13 @@
                         <div>
                             <label class="control-label">&nbsp;</label>
                             <button onclick="fetchAlertData()" style="background: #06d6a0; width: 100%;">
-                                🔄 Refresh Now
+                                &#128260; Refresh Now
                             </button>
                         </div>
                         <div>
                             <label class="control-label">&nbsp;</label>
                             <button onclick="toggleAlertHistory()" style="background: var(--accent-amber); width: 100%;">
-                                📊 View History
+                                &#128202; View History
                             </button>
                         </div>
                     </div>
@@ -3929,7 +4039,7 @@
                         <div class="stat-label">Total Regions (Oblasts)</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value" id="alertRegionsUnderAlert" style="color: #e63946;">--</div>
+                        <div class="stat-value" id="alertRegionsUnderAlert" style="color: #b91c1c;">--</div>
                         <div class="stat-label">Oblasts Under Alert</div>
                     </div>
                     <div class="stat-card">
@@ -3954,7 +4064,7 @@
                 
                 <!-- Active Alerts Map View -->
                 <div class="chart-container" id="activeAlertsContainer">
-                    <h3 class="chart-title">🚨 Regions with Active Alerts</h3>
+                    <h3 class="chart-title">&#128680; Regions with Active Alerts</h3>
                     <div id="activeAlertsList" style="padding: 1rem;">
                         <p style="text-align: center; color: var(--text-secondary); padding: 2rem;">
                             Click "Refresh Now" to load current alert data
@@ -4142,16 +4252,16 @@
                 toast.className = `toast toast-${type}`;
                 
                 const icons = {
-                    success: '✓',
-                    error: '✕',
-                    warning: '⚠',
-                    info: 'ℹ'
+                    success: '&#10003;',
+                    error: '&times;',
+                    warning: '&#9888;',
+                    info: '&#8505;'
                 };
                 
                 toast.innerHTML = `
                     <span class="toast-icon">${icons[type]}</span>
                     <span class="toast-message">${message}</span>
-                    <button class="toast-close" onclick="this.parentElement.remove()" aria-label="Close">✕</button>
+                    <button class="toast-close" onclick="this.parentElement.remove()" aria-label="Close">&times;</button>
                 `;
                 
                 this.container.appendChild(toast);
@@ -7749,7 +7859,7 @@
          * RIGHT SECTION CONTENT TEMPLATE:
          * -------------------------------
          * For Top N displays (matching Shahed pattern):
-         * - Heading color: Match chart's primary color (e.g., #e63946 for red chart)
+         * - Heading color: Match chart's primary color (e.g., #b91c1c for red chart)
          * - Border bottom: 2px solid [same color]
          * - Card layout: Grid with auto-fit, minmax(180px, 1fr)
          * - Card styling: White background, left border 3px solid [chart color]
@@ -7854,9 +7964,9 @@
                 
                 top10.forEach((day, idx) => {
                     top10HTML += `
-                        <div style="padding: 0.5rem; background: white; border-radius: 0; border: 3px solid #e63946; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                        <div style="padding: 0.5rem; background: white; border-radius: 0; border: 3px solid #b91c1c; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
                             <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;">
-                                <span style="font-weight: bold; color: #e63946; font-size: 1rem;">#${idx + 1}</span>
+                                <span style="font-weight: bold; color: #b91c1c; font-size: 1rem;">#${idx + 1}</span>
                                 <span style="font-size: 0.9rem; color: var(--text-primary); font-weight: 500;">${day.date}</span>
                                 <span style="font-weight: bold; font-size: 0.95rem; color: var(--text-primary);">${day.launches}</span>
                             </div>
@@ -7878,8 +7988,8 @@
                             {
                                 label: 'Total Launches',
                                 data: launches,
-                                backgroundColor: 'rgba(230, 57, 70, 0.8)',
-                                borderColor: 'rgba(230, 57, 70, 1)',
+                                backgroundColor: 'rgba(185, 28, 28, 0.8)',
+                                borderColor: 'rgba(185, 28, 28, 1)',
                                 borderWidth: 1,
                                 order: 2
                             },
@@ -7932,6 +8042,7 @@
                         scales: {
                             y: {
                                 beginAtZero: true,
+                                grace: '15%',
                                 title: {
                                     display: true,
                                     text: 'Number of Launches'
@@ -7960,6 +8071,7 @@
                         afterDatasetsDraw: function(chart) {
                             const ctx = chart.ctx;
                             const meta = chart.getDatasetMeta(0); // Get the bar dataset
+                            const chartArea = chart.chartArea;
                             
                             ctx.save();
                             ctx.font = 'bold 9px Arial';
@@ -7973,7 +8085,6 @@
                                 
                                 if (info) {
                                     const x = bar.x;
-                                    const y = bar.y - 5; // Position above the bar
                                     
                                     // Create multi-line label
                                     const line1 = `#${info.rank}`;
@@ -7990,8 +8101,11 @@
                                     const lineHeight = 11;
                                     const totalHeight = lineHeight * 3;
                                     
+                                    // Ensure label stays within chart area
+                                    const y = Math.max(bar.y - 5, chartArea.top + totalHeight + 10);
+                                    
                                     // Draw background rectangle
-                                    ctx.fillStyle = 'rgba(230, 57, 70, 0.95)';
+                                    ctx.fillStyle = 'rgba(185, 28, 28, 0.95)';
                                     ctx.fillRect(
                                         x - (maxWidth / 2) - padding,
                                         y - totalHeight - 2,
@@ -8072,9 +8186,9 @@
                 
                 top10.forEach((item, idx) => {
                     top10HTML += `
-                        <div style="padding: 0.5rem; background: white; border-radius: 0; border: 3px solid #e63946; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                        <div style="padding: 0.5rem; background: white; border-radius: 0; border: 3px solid #b91c1c; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
                             <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;">
-                                <span style="font-weight: bold; color: #e63946; font-size: 1rem;">#${idx + 1}</span>
+                                <span style="font-weight: bold; color: #b91c1c; font-size: 1rem;">#${idx + 1}</span>
                                 <span style="font-size: 0.85rem; color: var(--text-primary); font-weight: 500;">Week ${item.week}</span>
                                 <span style="font-weight: bold; font-size: 0.95rem; color: var(--text-primary);">${item.launches}</span>
                             </div>
@@ -8096,8 +8210,8 @@
                             {
                                 label: 'Total Launches (Weekly)',
                                 data: launches,
-                                backgroundColor: 'rgba(230, 57, 70, 0.8)',
-                                borderColor: 'rgba(230, 57, 70, 1)',
+                                backgroundColor: 'rgba(185, 28, 28, 0.8)',
+                                borderColor: 'rgba(185, 28, 28, 1)',
                                 borderWidth: 1,
                                 order: 2
                             },
@@ -8132,6 +8246,7 @@
                         scales: {
                             y: {
                                 beginAtZero: true,
+                                grace: '15%',
                                 title: {
                                     display: true,
                                     text: 'Number of Launches'
@@ -8263,22 +8378,22 @@
                 statsHTML += `
                     <div style="flex-basis: 100%; padding: 0.5rem; background: #fff3cd; border: 3px solid #ffc107; border-radius: 0; margin-bottom: 0.5rem;">
                         <span style="font-size: 0.85rem; color: #856404; font-weight: 500;">
-                            🎯 Filtered by: <strong>${attackInterceptionWeaponFilter}</strong>
+                            &#127919; Filtered by: <strong>${attackInterceptionWeaponFilter}</strong>
                         </span>
                     </div>
                 `;
             }
             
             statsHTML += `
-                <div style="flex: 1; min-width: 180px; padding: 0.75rem; background: white; border-radius: 0; border: 3px solid #FF3232; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                <div style="flex: 1; min-width: 180px; padding: 0.75rem; background: white; border-radius: 0; border: 3px solid #b91c1c; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
                     <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.25rem;">Total Launched</div>
-                    <div style="font-size: 1.5rem; font-weight: bold; color: #FF3232;">${totalLaunched.toLocaleString()}</div>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: #b91c1c;">${totalLaunched.toLocaleString()}</div>
                 </div>
                 <div style="flex: 1; min-width: 180px; padding: 0.75rem; background: white; border-radius: 0; border: 3px solid #22C55E; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
                     <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.25rem;">Total Intercepted</div>
                     <div style="font-size: 1.5rem; font-weight: bold; color: #22C55E;">${totalIntercepted.toLocaleString()}</div>
                 </div>
-                <div style="flex: 1; min-width: 180px; padding: 0.75rem; background: white; border-radius: 0; border: 3px solid #FF3232; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                <div style="flex: 1; min-width: 180px; padding: 0.75rem; background: white; border-radius: 0; border: 3px solid #000000; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
                     <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.25rem;">Interception Rate</div>
                     <div style="font-size: 1.5rem; font-weight: bold; color: var(--text-primary);">${overallPercentage}%</div>
                 </div>
@@ -8289,9 +8404,9 @@
                 statsHTML += '<div style="flex-basis: 100%; height: 0.5rem;"></div>'; // Spacer
                 topHitDays.forEach((day, idx) => {
                     statsHTML += `
-                        <div style="flex: 1; min-width: 140px; padding: 0.5rem; background: white; border-radius: 0; border: 3px solid #FF3232; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                        <div style="flex: 1; min-width: 140px; padding: 0.5rem; background: white; border-radius: 0; border: 3px solid #b91c1c; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
                             <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;">
-                                <span style="font-weight: bold; color: #FF3232; font-size: 0.8rem;">#${idx + 1}</span>
+                                <span style="font-weight: bold; color: #b91c1c; font-size: 0.8rem;">#${idx + 1}</span>
                                 <span style="font-size: 0.75rem; color: var(--text-primary); font-weight: 500;">${day.date}</span>
                                 <span style="font-weight: bold; font-size: 0.85rem; color: var(--text-primary);">${day.hit}</span>
                             </div>
@@ -8311,6 +8426,7 @@
                 afterDatasetsDraw: function(chart) {
                     const ctx = chart.ctx;
                     const meta = chart.getDatasetMeta(0); // Get launched bars (first dataset)
+                    const chartArea = chart.chartArea;
                     
                     if (!meta || !meta.data) return;
                     
@@ -8326,7 +8442,6 @@
                         
                         if (info) {
                             const x = bar.x;
-                            const y = bar.y - 5; // Position above the bar
                             
                             // Create multi-line label
                             const line1 = `#${info.rank}`;
@@ -8343,8 +8458,11 @@
                             const lineHeight = 11;
                             const totalHeight = lineHeight * 3;
                             
+                            // Ensure label stays within chart area
+                            const y = Math.max(bar.y - 5, chartArea.top + totalHeight + 10);
+                            
                             // Draw background rectangle
-                            ctx.fillStyle = 'rgba(255, 50, 50, 0.95)';
+                            ctx.fillStyle = 'rgba(185, 28, 28, 0.95)';
                             ctx.fillRect(
                                 x - maxWidth / 2 - padding,
                                 y - totalHeight - padding,
@@ -8373,10 +8491,10 @@
                         {
                             label: 'Launched',
                             data: launches,
-                            backgroundColor: 'rgba(255, 50, 50, 0.85)',
-                            borderColor: 'rgba(255, 50, 50, 1)',
+                            backgroundColor: 'rgba(185, 28, 28, 0.85)',
+                            borderColor: 'rgba(185, 28, 28, 1)',
                             borderWidth: 1,
-                            hoverBackgroundColor: 'rgba(255, 50, 50, 1)',
+                            hoverBackgroundColor: 'rgba(185, 28, 28, 1)',
                             hoverBorderColor: 'rgba(200, 0, 0, 1)',
                             hoverBorderWidth: 2,
                             order: 2
@@ -8470,6 +8588,7 @@
                             display: true,
                             position: 'left',
                             beginAtZero: true,
+                            grace: '15%',
                             title: {
                                 display: true,
                                 text: 'Count'
@@ -8580,9 +8699,9 @@
             
             top10.forEach((day, idx) => {
                 top10HTML += `
-                    <div style="padding: 0.5rem; background: white; border-radius: 0; border: 3px solid #e63946; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                    <div style="padding: 0.5rem; background: white; border-radius: 0; border: 3px solid #b91c1c; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
                         <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;">
-                            <span style="font-weight: bold; color: #e63946; font-size: 1rem;">#${idx + 1}</span>
+                            <span style="font-weight: bold; color: #b91c1c; font-size: 1rem;">#${idx + 1}</span>
                             <span style="font-size: 0.9rem; color: var(--text-primary); font-weight: 500;">${day.date}</span>
                             <span style="font-weight: bold; font-size: 0.95rem; color: var(--text-primary);">${day.launches}</span>
                         </div>
@@ -8604,8 +8723,8 @@
                         {
                             label: 'Shahed-136/131 Launches',
                             data: launches,
-                            backgroundColor: 'rgba(230, 57, 70, 0.8)',
-                            borderColor: 'rgba(230, 57, 70, 1)',
+                            backgroundColor: 'rgba(185, 28, 28, 0.8)',
+                            borderColor: 'rgba(185, 28, 28, 1)',
                             borderWidth: 1,
                             order: 2
                         },
@@ -8658,6 +8777,7 @@
                     scales: {
                         y: {
                             beginAtZero: true,
+                            grace: '15%',
                             title: {
                                 display: true,
                                 text: 'Number of Launches'
@@ -8686,6 +8806,7 @@
                     afterDatasetsDraw: function(chart) {
                         const ctx = chart.ctx;
                         const meta = chart.getDatasetMeta(0); // Get the bar dataset
+                        const chartArea = chart.chartArea;
                         
                         ctx.save();
                         ctx.font = 'bold 9px Arial';
@@ -8699,7 +8820,6 @@
                             
                             if (info) {
                                 const x = bar.x;
-                                const y = bar.y - 5; // Position above the bar
                                 
                                 // Create multi-line label
                                 const line1 = `#${info.rank}`;
@@ -8716,8 +8836,11 @@
                                 const lineHeight = 11;
                                 const totalHeight = lineHeight * 3;
                                 
+                                // Ensure label stays within chart area
+                                const y = Math.max(bar.y - 5, chartArea.top + totalHeight + 10);
+                                
                                 // Draw background rectangle
-                                ctx.fillStyle = 'rgba(230, 57, 70, 0.95)';
+                                ctx.fillStyle = 'rgba(185, 28, 28, 0.95)';
                                 ctx.fillRect(
                                     x - (maxWidth / 2) - padding,
                                     y - totalHeight - 2,
@@ -8835,15 +8958,15 @@
             // Update statistics container
             const statsContainer = document.getElementById('interceptionStatsContainer');
             let statsHTML = `
-                <div style="flex: 1; min-width: 180px; padding: 0.75rem; background: white; border-radius: 0; border: 3px solid #FF3232; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                <div style="flex: 1; min-width: 180px; padding: 0.75rem; background: white; border-radius: 0; border: 3px solid #b91c1c; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
                     <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.25rem;">Total Launched</div>
-                    <div style="font-size: 1.5rem; font-weight: bold; color: #FF3232;">${totalLaunched.toLocaleString()}</div>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: #b91c1c;">${totalLaunched.toLocaleString()}</div>
                 </div>
                 <div style="flex: 1; min-width: 180px; padding: 0.75rem; background: white; border-radius: 0; border: 3px solid #22C55E; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
                     <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.25rem;">Total Intercepted</div>
                     <div style="font-size: 1.5rem; font-weight: bold; color: #22C55E;">${totalIntercepted.toLocaleString()}</div>
                 </div>
-                <div style="flex: 1; min-width: 180px; padding: 0.75rem; background: white; border-radius: 0; border: 3px solid #FF3232; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                <div style="flex: 1; min-width: 180px; padding: 0.75rem; background: white; border-radius: 0; border: 3px solid #000000; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
                     <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.25rem;">Interception Rate</div>
                     <div style="font-size: 1.5rem; font-weight: bold; color: var(--text-primary);">${overallPercentage}%</div>
                 </div>
@@ -8854,9 +8977,9 @@
                 statsHTML += '<div style="flex-basis: 100%; height: 0.5rem;"></div>'; // Spacer
                 topHitDays.forEach((day, idx) => {
                     statsHTML += `
-                        <div style="flex: 1; min-width: 140px; padding: 0.5rem; background: white; border-radius: 0; border: 3px solid #FF3232; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                        <div style="flex: 1; min-width: 140px; padding: 0.5rem; background: white; border-radius: 0; border: 3px solid #b91c1c; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
                             <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;">
-                                <span style="font-weight: bold; color: #FF3232; font-size: 0.8rem;">#${idx + 1}</span>
+                                <span style="font-weight: bold; color: #b91c1c; font-size: 0.8rem;">#${idx + 1}</span>
                                 <span style="font-size: 0.75rem; color: var(--text-primary); font-weight: 500;">${day.date}</span>
                                 <span style="font-weight: bold; font-size: 0.85rem; color: var(--text-primary);">${day.hit}</span>
                             </div>
@@ -8876,6 +8999,7 @@
                 afterDatasetsDraw: function(chart) {
                     const ctx = chart.ctx;
                     const meta = chart.getDatasetMeta(0); // Get launched bars (first dataset)
+                    const chartArea = chart.chartArea;
                     
                     if (!meta || !meta.data) return;
                     
@@ -8891,7 +9015,6 @@
                         
                         if (info) {
                             const x = bar.x;
-                            const y = bar.y - 5; // Position above the bar
                             
                             // Create multi-line label
                             const line1 = `#${info.rank}`;
@@ -8908,8 +9031,11 @@
                             const lineHeight = 11;
                             const totalHeight = lineHeight * 3;
                             
+                            // Ensure label stays within chart area
+                            const y = Math.max(bar.y - 5, chartArea.top + totalHeight + 10);
+                            
                             // Draw background rectangle
-                            ctx.fillStyle = 'rgba(255, 50, 50, 0.95)';
+                            ctx.fillStyle = 'rgba(185, 28, 28, 0.95)';
                             ctx.fillRect(
                                 x - maxWidth / 2 - padding,
                                 y - totalHeight - padding,
@@ -8938,10 +9064,10 @@
                         {
                             label: 'Launched',
                             data: launches,
-                            backgroundColor: 'rgba(255, 50, 50, 0.85)',
-                            borderColor: 'rgba(255, 50, 50, 1)',
+                            backgroundColor: 'rgba(185, 28, 28, 0.85)',
+                            borderColor: 'rgba(185, 28, 28, 1)',
                             borderWidth: 1,
-                            hoverBackgroundColor: 'rgba(255, 50, 50, 1)',
+                            hoverBackgroundColor: 'rgba(185, 28, 28, 1)',
                             hoverBorderColor: 'rgba(200, 0, 0, 1)',
                             hoverBorderWidth: 2,
                             order: 2
@@ -9036,6 +9162,7 @@
                             display: true,
                             position: 'left',
                             beginAtZero: true,
+                            grace: '15%',
                             title: {
                                 display: true,
                                 text: 'Count'
@@ -9374,7 +9501,7 @@
                 'Simple (1)': { bg: 'rgba(106, 76, 147, 0.7)', border: '#6a4c93' },
                 'Moderate (2-3)': { bg: 'rgba(6, 214, 160, 0.7)', border: '#06d6a0' },
                 'Complex (4-5)': { bg: 'rgba(255, 159, 28, 0.7)', border: '#ff9f1c' },
-                'High (6+)': { bg: 'rgba(230, 57, 70, 0.7)', border: '#e63946' }
+                'High (6+)': { bg: 'rgba(185, 28, 28, 0.7)', border: '#b91c1c' }
             };
             
             const datasets = Object.entries(complexityLevels).map(([levelName, levelData]) => {
@@ -9460,7 +9587,7 @@
             const statsDiv = document.getElementById('complexityEffStats');
             statsDiv.innerHTML = `
                 <strong>Attack Complexity Impact Analysis:</strong><br/>
-                ${levelStats.map(s => `• <strong>${s.level}:</strong> ${s.avgPenetration.toFixed(1)}% avg penetration (${s.totalLaunched.toLocaleString()} weapons)`).join('<br/>')}<br/>
+                ${levelStats.map(s => `&bull; <strong>${s.level}:</strong> ${s.avgPenetration.toFixed(1)}% avg penetration (${s.totalLaunched.toLocaleString()} weapons)`).join('<br/>')}<br/>
                 <br/>
                 <strong>Notes:</strong> Higher penetration rates at greater complexity levels suggest defensive saturation effects. 
                 Compare penetration rates across complexity tiers to identify threshold effects in air defense capacity.
@@ -9478,7 +9605,7 @@
             // Target weapons for analysis (matching Complexity Effectiveness chart)
             const targetWeapons = {
                 'Shahed-136/131': { color: '#6a4c93', data: [] },
-                'X-101/X-555': { color: '#e63946', data: [] },
+                'X-101/X-555': { color: '#b91c1c', data: [] },
                 'Kalibr': { color: '#06d6a0', data: [] },
                 'Iskander-M': { color: '#ff9f1c', data: [] },
                 'Iskander-M/KN-23': { color: '#118ab2', data: [] },
@@ -9618,11 +9745,11 @@
                               Math.sqrt((n * sumX2 - sumX ** 2) * (n * sumY2 - sumY ** 2));
                     
                     const avgPen = sumY / n;
-                    const trend = r > 0.1 ? '↑ Positive (saturation effect)' : r < -0.1 ? '↓ Negative (no saturation)' : '→ No clear trend';
+                    const trend = r > 0.1 ? '&uarr; Positive (saturation effect)' : r < -0.1 ? '&darr; Negative (no saturation)' : '&rarr; No clear trend';
                     
-                    statsHtml += `• <strong>${weapon}:</strong> ${n} attacks, avg ${avgPen.toFixed(1)}% penetration, r=${isNaN(r) ? 'N/A' : r.toFixed(3)} ${trend}<br/>`;
+                    statsHtml += `&bull; <strong>${weapon}:</strong> ${n} attacks, avg ${avgPen.toFixed(1)}% penetration, r=${isNaN(r) ? 'N/A' : r.toFixed(3)} ${trend}<br/>`;
                 } else {
-                    statsHtml += `• <strong>${weapon}:</strong> Insufficient data (${config.data.length} attacks)<br/>`;
+                    statsHtml += `&bull; <strong>${weapon}:</strong> Insufficient data (${config.data.length} attacks)<br/>`;
                 }
             });
             
@@ -9671,7 +9798,7 @@
             
             // Volume bins
             const volumeBins = {
-                'Low (≤25)': { min: 0, max: 25, weapons: {} },
+                'Low (&le;25)': { min: 0, max: 25, weapons: {} },
                 'Medium (26-75)': { min: 26, max: 75, weapons: {} },
                 'High (76-150)': { min: 76, max: 150, weapons: {} },
                 'Saturation (>150)': { min: 151, max: 10000, weapons: {} }
@@ -9723,10 +9850,10 @@
             
             // Build grouped bar chart
             const binColors = {
-                'Low (≤25)': { bg: 'rgba(106, 76, 147, 0.7)', border: '#6a4c93' },
+                'Low (&le;25)': { bg: 'rgba(106, 76, 147, 0.7)', border: '#6a4c93' },
                 'Medium (26-75)': { bg: 'rgba(6, 214, 160, 0.7)', border: '#06d6a0' },
                 'High (76-150)': { bg: 'rgba(255, 159, 28, 0.7)', border: '#ff9f1c' },
-                'Saturation (>150)': { bg: 'rgba(230, 57, 70, 0.7)', border: '#e63946' }
+                'Saturation (>150)': { bg: 'rgba(185, 28, 28, 0.7)', border: '#b91c1c' }
             };
             
             const datasets = Object.entries(volumeBins).map(([binName, binData]) => {
@@ -9815,12 +9942,12 @@
                     const lowRate = binRates[0]?.rate || 0;
                     const highRate = binRates[binRates.length - 1]?.rate || 0;
                     const saturationEffect = highRate - lowRate;
-                    const effectStr = saturationEffect > 5 ? `+${saturationEffect.toFixed(1)}% ↑ (saturation effect)` : 
-                                     saturationEffect < -5 ? `${saturationEffect.toFixed(1)}% ↓ (inverse effect)` : 
+                    const effectStr = saturationEffect > 5 ? `+${saturationEffect.toFixed(1)}% &uarr; (saturation effect)` : 
+                                     saturationEffect < -5 ? `${saturationEffect.toFixed(1)}% &darr; (inverse effect)` : 
                                      'No significant effect';
-                    statsHtml += `• <strong>${weapon}:</strong> ${effectStr}<br/>`;
+                    statsHtml += `&bull; <strong>${weapon}:</strong> ${effectStr}<br/>`;
                 } else {
-                    statsHtml += `• <strong>${weapon}:</strong> Insufficient complex attack data<br/>`;
+                    statsHtml += `&bull; <strong>${weapon}:</strong> Insufficient complex attack data<br/>`;
                 }
             });
             
@@ -9873,7 +10000,7 @@
                     datasets: [{
                         data: counts,
                         backgroundColor: [
-                            '#009edb', '#e63946', '#f77f00', '#06d6a0', '#1a1a2e',
+                            '#009edb', '#b91c1c', '#f77f00', '#06d6a0', '#1a1a2e',
                             '#7209b7', '#f72585', '#4361ee', '#4cc9f0', '#2ec4b6',
                             '#ff006e', '#fb5607', '#ffbe0b', '#8338ec', '#3a86ff'
                         ]
@@ -9939,7 +10066,7 @@
                     datasets: [{
                         data: counts,
                         backgroundColor: [
-                            '#e63946', '#f77f00', '#06d6a0', '#009edb', '#1a1a2e',
+                            '#b91c1c', '#f77f00', '#06d6a0', '#009edb', '#1a1a2e',
                             '#7209b7', '#f72585', '#4361ee', '#4cc9f0', '#2ec4b6',
                             '#ff006e', '#fb5607', '#ffbe0b', '#8338ec', '#3a86ff'
                         ]
@@ -10082,7 +10209,7 @@
                     const indicator = document.getElementById('sort-' + col);
                     if (indicator) {
                         indicator.style.opacity = '0.3';
-                        indicator.textContent = '▼';
+                        indicator.textContent = '&#9660;';
                     }
                 });
                 
@@ -10090,7 +10217,7 @@
                 const activeIndicator = document.getElementById('sort-' + this.state.sortColumn);
                 if (activeIndicator) {
                     activeIndicator.style.opacity = '1';
-                    activeIndicator.textContent = this.state.sortDirection === 'asc' ? '▲' : '▼';
+                    activeIndicator.textContent = this.state.sortDirection === 'asc' ? '&#9650;' : '&#9660;';
                 }
             },
             
@@ -10337,7 +10464,7 @@
         
         /**
          * Sankey Diagram: Attack Flow Analysis
-         * Shows complete attack chain: Launch Location â†’ Weapon System â†’ Target â†’ Outcome
+         * Shows complete attack chain: Launch Location &rarr; Weapon System &rarr; Target &rarr; Outcome
          * Academic rigor: Minimum threshold of 10 attacks per pathway to ensure statistical validity
          */
         /**
@@ -10376,21 +10503,21 @@
                 
                 if (launched === 0) return;
                 
-                // Flow 1: Launch â†’ Weapon
+                // Flow 1: Launch &rarr; Weapon
                 const flow1Key = `${launch}|||${weapon}|||launch_weapon`;
                 flows[flow1Key] = (flows[flow1Key] || 0) + launched;
                 
-                // Flow 2: Weapon â†’ Target
+                // Flow 2: Weapon &rarr; Target
                 const flow2Key = `${weapon}|||${target}|||weapon_target`;
                 flows[flow2Key] = (flows[flow2Key] || 0) + launched;
                 
-                // Flow 3: Target â†’ Intercepted
+                // Flow 3: Target &rarr; Intercepted
                 if (destroyed > 0) {
                     const flow3aKey = `${target}|||Intercepted|||target_outcome`;
                     flows[flow3aKey] = (flows[flow3aKey] || 0) + destroyed;
                 }
                 
-                // Flow 4: Target â†’ Not Intercepted
+                // Flow 4: Target &rarr; Not Intercepted
                 if (notIntercepted > 0) {
                     const flow3bKey = `${target}|||Not Intercepted|||target_outcome`;
                     flows[flow3bKey] = (flows[flow3bKey] || 0) + notIntercepted;
@@ -10449,7 +10576,7 @@
             // Color scale for different flow types
             const colorScale = d3.scaleOrdinal()
                 .domain(['launch_weapon', 'weapon_target', 'target_outcome'])
-                .range(['#e63946', '#f77f00', '#06d6a0']);
+                .range(['#b91c1c', '#f77f00', '#06d6a0']);
             
             // Create tooltip
             const tooltip = d3.select('body').append('div')
@@ -10469,7 +10596,7 @@
                     d3.select(this).attr('stroke-opacity', 0.8);
                     tooltip.transition().duration(200).style('opacity', .95);
                     tooltip.html(`
-                        <strong>${d.source.name} â†’ ${d.target.name}</strong><br/>
+                        <strong>${d.source.name} &rarr; ${d.target.name}</strong><br/>
                         <strong>Volume:</strong> ${d.value.toLocaleString()} attacks<br/>
                         <strong>Percentage:</strong> ${((d.value / totalFlows) * 100).toFixed(2)}%
                     `)
@@ -10495,7 +10622,7 @@
                 .attr('width', d => d.x1 - d.x0)
                 .attr('fill', d => {
                     if (d.name === 'Intercepted') return '#06d6a0';
-                    if (d.name === 'Not Intercepted') return '#e63946';
+                    if (d.name === 'Not Intercepted') return '#b91c1c';
                     return '#57068c';
                 })
                 .on('mouseover', function(event, d) {
@@ -10525,11 +10652,11 @@
             const statsDiv = document.getElementById('sankeyStats');
             statsDiv.innerHTML = `
                 <strong>Methodological Notes:</strong><br/>
-                • Minimum pathway threshold: ${MIN_THRESHOLD} attacks (ensuring statistical validity)<br/>
-                • Total attacks analyzed: ${totalFlows.toLocaleString()}<br/>
-                • Attacks meeting threshold: ${(totalFlows - filteredFlows).toLocaleString()} 
+                &bull; Minimum pathway threshold: ${MIN_THRESHOLD} attacks (ensuring statistical validity)<br/>
+                &bull; Total attacks analyzed: ${totalFlows.toLocaleString()}<br/>
+                &bull; Attacks meeting threshold: ${(totalFlows - filteredFlows).toLocaleString()} 
                   (${(((totalFlows - filteredFlows) / totalFlows) * 100).toFixed(1)}%)<br/>
-                • Number of distinct pathways: ${validFlows.length}
+                &bull; Number of distinct pathways: ${validFlows.length}
             `;
         }
         
@@ -10570,7 +10697,7 @@
                 
                 if (launched === 0 || launch === target) return;
                 
-                const edgeKey = `${launch}â†’${target}`;
+                const edgeKey = `${launch}&rarr;${target}`;
                 edges[edgeKey] = (edges[edgeKey] || 0) + launched;
                 
                 nodeData[launch] = nodeData[launch] || { type: 'launch', value: 0 };
@@ -10589,7 +10716,7 @@
             // Get valid nodes (those with valid edges)
             const validNodeNames = new Set();
             validEdges.forEach(([key, _]) => {
-                const [source, target] = key.split('â†’');
+                const [source, target] = key.split('&rarr;');
                 validNodeNames.add(source);
                 validNodeNames.add(target);
             });
@@ -10601,7 +10728,7 @@
             }));
             
             const links = validEdges.map(([key, value]) => {
-                const [source, target] = key.split('â†’');
+                const [source, target] = key.split('&rarr;');
                 return { source, target, value };
             });
             
@@ -10612,7 +10739,7 @@
                 container.innerHTML = `
                     <p style="text-align: center; padding: 2rem; color: #666;">
                         Insufficient data meeting minimum threshold (${MIN_EDGE_WEIGHT} attacks) for network analysis.<br/>
-                        Total unique launchâ†’target pairs: ${Object.keys(edges).length}<br/>
+                        Total unique launch&rarr;target pairs: ${Object.keys(edges).length}<br/>
                         Try adjusting your date range or filters to include more data.
                     </p>`;
                 document.getElementById('networkStats').innerHTML = '';
@@ -10677,7 +10804,7 @@
                     const sourceNode = typeof d.source === 'object' ? d.source.id : d.source;
                     const targetNode = typeof d.target === 'object' ? d.target.id : d.target;
                     tooltip.html(`
-                        <strong>${sourceNode} â†’ ${targetNode}</strong><br/>
+                        <strong>${sourceNode} &rarr; ${targetNode}</strong><br/>
                         <strong>Attacks:</strong> ${d.value.toLocaleString()}
                     `)
                     .style('left', (event.pageX + 10) + 'px')
@@ -10695,7 +10822,7 @@
                 .join('circle')
                 .attr('class', 'network-node')
                 .attr('r', d => radiusScale(d.value))
-                .attr('fill', d => d.type === 'launch' ? '#e63946' : '#06d6a0')
+                .attr('fill', d => d.type === 'launch' ? '#b91c1c' : '#06d6a0')
                 .call(d3.drag()
                     .on('start', dragstarted)
                     .on('drag', dragged)
@@ -10775,7 +10902,7 @@
             
             legend.append('circle')
                 .attr('cx', 0).attr('cy', 0).attr('r', 10)
-                .attr('fill', '#e63946').attr('stroke', '#fff').attr('stroke-width', 2);
+                .attr('fill', '#b91c1c').attr('stroke', '#fff').attr('stroke-width', 2);
             legend.append('text')
                 .attr('x', 18).attr('y', 5)
                 .text('Launch Location')
@@ -10800,12 +10927,12 @@
             
             statsDiv.innerHTML = `
                 <strong>Network Metrics (Graph Theory Analysis):</strong><br/>
-                • Nodes (locations/regions): ${nodes.length}<br/>
-                • Edges (attack pathways): ${links.length}<br/>
-                • Network density: ${nodes.length > 1 ? (links.length / (nodes.length * (nodes.length - 1))).toFixed(4) : 'N/A'}<br/>
-                • Average node degree: ${avgCentrality.toFixed(2)}<br/>
-                • Most central node: <strong>${mostCentralNode}</strong> (${maxCentrality} connections)<br/>
-                • Minimum edge threshold: ${MIN_EDGE_WEIGHT} attacks<br/>
+                &bull; Nodes (locations/regions): ${nodes.length}<br/>
+                &bull; Edges (attack pathways): ${links.length}<br/>
+                &bull; Network density: ${nodes.length > 1 ? (links.length / (nodes.length * (nodes.length - 1))).toFixed(4) : 'N/A'}<br/>
+                &bull; Average node degree: ${avgCentrality.toFixed(2)}<br/>
+                &bull; Most central node: <strong>${mostCentralNode}</strong> (${maxCentrality} connections)<br/>
+                &bull; Minimum edge threshold: ${MIN_EDGE_WEIGHT} attacks<br/>
                 <em>Note: Node size indicates attack volume; edge thickness indicates pathway frequency. Drag nodes to explore relationships.</em>
             `;
         }
@@ -10859,8 +10986,8 @@
                 return {
                     label: point.x,
                     data: [point],
-                    backgroundColor: `rgba(230, 57, 70, ${opacity})`,
-                    borderColor: '#e63946',
+                    backgroundColor: `rgba(185, 28, 28, ${opacity})`,
+                    borderColor: '#b91c1c',
                     borderWidth: 2
                 };
             });
@@ -10956,16 +11083,16 @@
             const statsDiv = document.getElementById('timeline3DStats');
             statsDiv.innerHTML = `
                 <strong>Multi-Dimensional Temporal Analysis:</strong><br/>
-                • Analysis period: ${chartData.length} weeks<br/>
-                • Average weekly attack intensity: ${avgIntensity.toFixed(1)} weapons<br/>
-                • Average interception rate: ${avgInterception.toFixed(1)}%<br/>
-                • Average weapon type diversity: ${avgDiversity.toFixed(1)} systems per week<br/>
-                • Detected regime changes: ${regimeChanges.length}<br/>
+                &bull; Analysis period: ${chartData.length} weeks<br/>
+                &bull; Average weekly attack intensity: ${avgIntensity.toFixed(1)} weapons<br/>
+                &bull; Average interception rate: ${avgInterception.toFixed(1)}%<br/>
+                &bull; Average weapon type diversity: ${avgDiversity.toFixed(1)} systems per week<br/>
+                &bull; Detected regime changes: ${regimeChanges.length}<br/>
                 <br/>
                 <strong>Interpretation Guide:</strong><br/>
-                • <strong>Y-axis:</strong> Attack volume (higher = more intense campaign)<br/>
-                • <strong>Bubble size:</strong> Interception effectiveness (larger = higher interception rate)<br/>
-                • <strong>Color saturation:</strong> Strategic diversity (darker = more weapon types employed)<br/>
+                &bull; <strong>Y-axis:</strong> Attack volume (higher = more intense campaign)<br/>
+                &bull; <strong>Bubble size:</strong> Interception effectiveness (larger = higher interception rate)<br/>
+                &bull; <strong>Color saturation:</strong> Strategic diversity (darker = more weapon types employed)<br/>
                 <br/>
                 <em>This visualization enables identification of strategic adaptations, escalation patterns, 
                 and the relationship between attack intensity, defensive effectiveness, and tactical diversity.</em>
@@ -11023,8 +11150,8 @@
                 return {
                     label: point.x,
                     data: [point],
-                    backgroundColor: `rgba(230, 57, 70, ${opacity})`,
-                    borderColor: '#e63946',
+                    backgroundColor: `rgba(185, 28, 28, ${opacity})`,
+                    borderColor: '#b91c1c',
                     borderWidth: 2
                 };
             });
@@ -11055,15 +11182,15 @@
                                         `Attack Volume: ${point.launched} weapons`,
                                         ``,
                                         `Complexity Metrics:`,
-                                        `• Weapon Systems Used: ${point.weaponDiversity}`,
-                                        `• Launch Locations: ${point.launchDiversity}`,
-                                        `• Targets: ${point.targetDiversity}`,
-                                        `• Composite Complexity: ${point.complexityScore.toFixed(2)}`,
+                                        `&bull; Weapon Systems Used: ${point.weaponDiversity}`,
+                                        `&bull; Launch Locations: ${point.launchDiversity}`,
+                                        `&bull; Targets: ${point.targetDiversity}`,
+                                        `&bull; Composite Complexity: ${point.complexityScore.toFixed(2)}`,
                                         ``,
                                         `Visual Encoding:`,
-                                        `• Y-axis = Weapon diversity`,
-                                        `• Bubble size = Attack volume`,
-                                        `• Color intensity = Launch coordination`
+                                        `&bull; Y-axis = Weapon diversity`,
+                                        `&bull; Bubble size = Attack volume`,
+                                        `&bull; Color intensity = Launch coordination`
                                     ];
                                 }
                             }
@@ -11125,15 +11252,15 @@
             const statsDiv = document.getElementById('complexityStats');
             statsDiv.innerHTML = `
                 <strong>Attack Complexity Metrics (Offensive Strategy Analysis):</strong><br/>
-                • Analysis period: ${chartData.length} weeks<br/>
-                • Average composite complexity: ${avgComplexity.toFixed(2)}<br/>
-                • Maximum complexity: ${maxComplexity.toFixed(2)} (Week: ${mostComplexWeek.x})<br/>
-                • Complexity trend: <strong>${complexityTrend}</strong> (${trendMagnitude.toFixed(1)}% change)<br/>
+                &bull; Analysis period: ${chartData.length} weeks<br/>
+                &bull; Average composite complexity: ${avgComplexity.toFixed(2)}<br/>
+                &bull; Maximum complexity: ${maxComplexity.toFixed(2)} (Week: ${mostComplexWeek.x})<br/>
+                &bull; Complexity trend: <strong>${complexityTrend}</strong> (${trendMagnitude.toFixed(1)}% change)<br/>
                 <br/>
                 <strong>Diversity Metrics:</strong><br/>
-                • Average weapon systems per week: ${avgWeaponDiversity.toFixed(2)}<br/>
-                • Average launch locations per week: ${avgLaunchDiversity.toFixed(2)}<br/>
-                • Average targets per week: ${avgTargetDiversity.toFixed(2)}<br/>
+                &bull; Average weapon systems per week: ${avgWeaponDiversity.toFixed(2)}<br/>
+                &bull; Average launch locations per week: ${avgLaunchDiversity.toFixed(2)}<br/>
+                &bull; Average targets per week: ${avgTargetDiversity.toFixed(2)}<br/>
                 <br/>
                 <strong>Notes:</strong><br/>
                 This metric isolates <em>offensive strategic choices</em> from defensive effectiveness. High complexity 
@@ -11142,7 +11269,7 @@
                 independent of defensive countermeasures, useful for analyzing selectorate theory resource allocation decisions 
                 and game-theoretic mixed strategy evolution.<br/>
                 <br/>
-                <strong>Composite Complexity Formula:</strong> (0.5 × Weapon Diversity) + (0.3 × Launch Diversity) + (0.2 × Target Diversity)
+                <strong>Composite Complexity Formula:</strong> (0.5 &times; Weapon Diversity) + (0.3 &times; Launch Diversity) + (0.2 &times; Target Diversity)
             `;
         }
         
@@ -11209,8 +11336,8 @@
                         {
                             label: 'Weapon Diversity',
                             data: data.map(d => d.weaponDiversity),
-                            borderColor: '#e63946',
-                            backgroundColor: 'rgba(230, 57, 70, 0.1)',
+                            borderColor: '#b91c1c',
+                            backgroundColor: 'rgba(185, 28, 28, 0.1)',
                             borderWidth: 2,
                             tension: 0.3,
                             pointRadius: 2
@@ -11290,10 +11417,10 @@
             
             document.getElementById('complexityTimeSeriesStats').innerHTML = `
                 <strong>Temporal Trend Analysis:</strong><br/>
-                • Weapon Diversity: μ=${correlations.weaponDiversity.mean.toFixed(2)}, σ=${correlations.weaponDiversity.std.toFixed(2)}<br/>
-                • Launch Diversity: μ=${correlations.launchDiversity.mean.toFixed(2)}, σ=${correlations.launchDiversity.std.toFixed(2)}<br/>
-                • Composite calculation: (Weapon × 0.625) + (Launch × 0.375)<br/>
-                • Rolling average window: 4 weeks<br/>
+                &bull; Weapon Diversity: &mu;=${correlations.weaponDiversity.mean.toFixed(2)}, &sigma;=${correlations.weaponDiversity.std.toFixed(2)}<br/>
+                &bull; Launch Diversity: &mu;=${correlations.launchDiversity.mean.toFixed(2)}, &sigma;=${correlations.launchDiversity.std.toFixed(2)}<br/>
+                &bull; Composite calculation: (Weapon &times; 0.625) + (Launch &times; 0.375)<br/>
+                &bull; Rolling average window: 4 weeks<br/>
                 <em>Note: Convergence/divergence patterns indicate coordinated vs. independent strategic adaptations.</em>
             `;
         }
@@ -11334,8 +11461,8 @@
                         {
                             label: 'Weapon Diversity',
                             data: data.map(d => d.weaponDiversity * 0.625),
-                            backgroundColor: 'rgba(230, 57, 70, 0.7)',
-                            borderColor: '#e63946',
+                            backgroundColor: 'rgba(185, 28, 28, 0.7)',
+                            borderColor: '#b91c1c',
                             borderWidth: 1,
                             fill: true
                         },
@@ -11407,8 +11534,8 @@
             
             document.getElementById('complexityStackedStats').innerHTML = `
                 <strong>Compositional Analysis:</strong><br/>
-                • Weapon Investment: ${((weaponContrib/total)*100).toFixed(1)}% of total complexity (weight: 0.625)<br/>
-                • Coordination Investment: ${((launchContrib/total)*100).toFixed(1)}% of total complexity (weight: 0.375)<br/>
+                &bull; Weapon Investment: ${((weaponContrib/total)*100).toFixed(1)}% of total complexity (weight: 0.625)<br/>
+                &bull; Coordination Investment: ${((launchContrib/total)*100).toFixed(1)}% of total complexity (weight: 0.375)<br/>
                 <br/>
                 <em>Interpretation: Height shows total complexity; layers reveal strategic priorities in resource allocation.</em>
             `;
@@ -11551,10 +11678,10 @@
             
             document.getElementById('complexityHeatmapStats').innerHTML = `
                 <strong>Pattern Recognition Analysis:</strong><br/>
-                • Color scale: Standardized scores (z-scores) relative to mean<br/>
-                • Red = Below average complexity | Yellow = Average | Green = Above average<br/>
-                • Vertical patterns indicate strategic consistency; horizontal patterns show systemic changes<br/>
-                • Periods: ${data.length} weeks analyzed
+                &bull; Color scale: Standardized scores (z-scores) relative to mean<br/>
+                &bull; Red = Below average complexity | Yellow = Average | Green = Above average<br/>
+                &bull; Vertical patterns indicate strategic consistency; horizontal patterns show systemic changes<br/>
+                &bull; Periods: ${data.length} weeks analyzed
             `;
         }
         
@@ -11903,11 +12030,11 @@
             
             document.getElementById('complexityParallelStats').innerHTML = `
                 <strong>Multivariate Relationship Analysis - ${monthName}:</strong><br/>
-                • Each line represents one week's strategic profile across all dimensions<br/>
-                • Color gradient: Earlier weeks (purple) → Later weeks (yellow) within the month<br/>
-                • Parallel lines suggest correlated metrics; crossing lines indicate trade-offs<br/>
-                • Month averages: Weapon=${avgWeapon.toFixed(1)}, Launch=${avgLaunch.toFixed(1)}, Composite=${avgComposite.toFixed(1)}<br/>
-                • Hover over lines to see individual week details<br/>
+                &bull; Each line represents one week's strategic profile across all dimensions<br/>
+                &bull; Color gradient: Earlier weeks (purple) &rarr; Later weeks (yellow) within the month<br/>
+                &bull; Parallel lines suggest correlated metrics; crossing lines indicate trade-offs<br/>
+                &bull; Month averages: Weapon=${avgWeapon.toFixed(1)}, Launch=${avgLaunch.toFixed(1)}, Composite=${avgComposite.toFixed(1)}<br/>
+                &bull; Hover over lines to see individual week details<br/>
                 <em>Use dropdowns to select year/month, or navigation buttons to browse chronologically.</em>
             `;
         }
@@ -11960,7 +12087,7 @@
                             borderWidth: 2,
                             pointRadius: 4,
                             pointBackgroundColor: values.map(v => 
-                                v > ucl || v < lcl ? '#e63946' : 
+                                v > ucl || v < lcl ? '#b91c1c' : 
                                 v > uwl || v < lwl ? '#f77f00' : '#57068c'
                             )
                         },
@@ -11973,17 +12100,17 @@
                             pointRadius: 0
                         },
                         {
-                            label: 'UCL (+3σ)',
+                            label: 'UCL (+3&sigma;)',
                             data: Array(data.length).fill(ucl),
-                            borderColor: '#e63946',
+                            borderColor: '#b91c1c',
                             borderWidth: 1,
                             borderDash: [10, 5],
                             pointRadius: 0
                         },
                         {
-                            label: 'LCL (-3σ)',
+                            label: 'LCL (-3&sigma;)',
                             data: Array(data.length).fill(lcl),
-                            borderColor: '#e63946',
+                            borderColor: '#b91c1c',
                             borderWidth: 1,
                             borderDash: [10, 5],
                             pointRadius: 0
@@ -12027,15 +12154,15 @@
             
             document.getElementById('complexityControlStats').innerHTML = `
                 <strong>Statistical Process Control Analysis:</strong><br/>
-                • Mean (μ): ${mean.toFixed(2)}<br/>
-                • Standard Deviation (σ): ${std.toFixed(2)}<br/>
-                • Upper Control Limit (UCL): ${ucl.toFixed(2)}<br/>
-                • Lower Control Limit (LCL): ${lcl.toFixed(2)}<br/>
-                • <strong>Out-of-control points:</strong> ${violations.length} (${((violations.length/data.length)*100).toFixed(1)}%)<br/>
-                ${violations.length > 0 ? `• Weeks: ${violations.map(v => v.week).join(', ')}<br/>` : ''}
+                &bull; Mean (&mu;): ${mean.toFixed(2)}<br/>
+                &bull; Standard Deviation (&sigma;): ${std.toFixed(2)}<br/>
+                &bull; Upper Control Limit (UCL): ${ucl.toFixed(2)}<br/>
+                &bull; Lower Control Limit (LCL): ${lcl.toFixed(2)}<br/>
+                &bull; <strong>Out-of-control points:</strong> ${violations.length} (${((violations.length/data.length)*100).toFixed(1)}%)<br/>
+                ${violations.length > 0 ? `&bull; Weeks: ${violations.map(v => v.week).join(', ')}<br/>` : ''}
                 <br/>
-                <em>Red points = special cause variation (strategically significant changes beyond ±3σ); 
-                Orange = warning zone (±2σ); Purple = common cause variation (expected fluctuation).</em>
+                <em>Red points = special cause variation (strategically significant changes beyond &plusmn;3&sigma;); 
+                Orange = warning zone (&plusmn;2&sigma;); Purple = common cause variation (expected fluctuation).</em>
             `;
         }
         
@@ -12097,12 +12224,12 @@
                 type: 'line',
                 xMin: cp.index,
                 xMax: cp.index,
-                borderColor: '#e63946',
+                borderColor: '#b91c1c',
                 borderWidth: 2,
                 borderDash: [6, 6],
                 label: {
                     display: true,
-                    content: `Î”`,
+                    content: `&beta;`,
                     position: 'top'
                 }
             }));
@@ -12163,13 +12290,13 @@
             
             document.getElementById('complexityChangePointStats').innerHTML = `
                 <strong>Structural Break Analysis:</strong><br/>
-                • Change points detected: ${changePoints.length}<br/>
+                &bull; Change points detected: ${changePoints.length}<br/>
                 ${changePoints.map(cp => 
-                    `• Week ${cp.week}: ${cp.direction} (magnitude: ${cp.magnitude.toFixed(2)}σ)`
-                ).join('<br/>') || '• No significant regime changes detected'}<br/>
+                    `&bull; Week ${cp.week}: ${cp.direction} (magnitude: ${cp.magnitude.toFixed(2)}&sigma;)`
+                ).join('<br/>') || '&bull; No significant regime changes detected'}<br/>
                 <br/>
                 <em>Detection method: Compares 5-week windows before/after each point. 
-                Threshold: >1.5σ change in mean. Vertical dashed lines mark detected change points.</em>
+                Threshold: >1.5&sigma; change in mean. Vertical dashed lines mark detected change points.</em>
             `;
         }
         
@@ -12295,7 +12422,7 @@
                     .attr('y1', height/2)
                     .attr('x2', xScale(load.x * arrowScale))
                     .attr('y2', yScale(load.y * arrowScale))
-                    .attr('stroke', '#e63946')
+                    .attr('stroke', '#b91c1c')
                     .attr('stroke-width', 2)
                     .attr('marker-end', 'url(#arrow)');
                 
@@ -12305,7 +12432,7 @@
                     .text(load.var)
                     .style('font-size', '12px')
                     .style('font-weight', 'bold')
-                    .style('fill', '#e63946');
+                    .style('fill', '#b91c1c');
             });
             
             // Arrow marker
@@ -12319,7 +12446,7 @@
                 .attr('orient', 'auto')
                 .append('path')
                 .attr('d', 'M 0 0 L 10 5 L 0 10 z')
-                .attr('fill', '#e63946');
+                .attr('fill', '#b91c1c');
             
             // Labels
             svg.append('text')
@@ -12339,10 +12466,10 @@
             
             document.getElementById('complexityPCAStats').innerHTML = `
                 <strong>Principal Component Analysis:</strong><br/>
-                • Data points: ${data.length} weeks<br/>
-                • Variables analyzed: 4 (weapon, launch, target diversity; volume)<br/>
-                • Color gradient: Time progression (purple â†’ yellow)<br/>
-                • Red arrows: Variable loadings (direction indicates correlation with PCs)<br/>
+                &bull; Data points: ${data.length} weeks<br/>
+                &bull; Variables analyzed: 4 (weapon, launch, target diversity; volume)<br/>
+                &bull; Color gradient: Time progression (purple &rarr; yellow)<br/>
+                &bull; Red arrows: Variable loadings (direction indicates correlation with PCs)<br/>
                 <br/>
                 <em>Interpretation: Clustering suggests strategic archetypes; trajectories show strategic evolution; 
                 arrow directions reveal which variables drive principal dimensions of variation.</em>
@@ -12563,11 +12690,11 @@
                         <span style="color: var(--text-secondary);">IQR: ${q3 - q1} days</span>
                     </div>
                 </div>
-                <div style="margin-top: 1rem; padding: 1rem; background: white; border-left: 3px solid var(--accent-green);">
+                <div style="margin-top: 1rem; padding: 1rem; background: white; border: 3px solid var(--accent-green);">
                     <strong>Example Strikes (first 5):</strong><br/>
                     <span style="font-size: 0.85rem; color: var(--text-secondary);">${exampleStrikes}</span>
                 </div>
-                <div style="margin-top: 1rem; padding: 1rem; background: white; border-left: 3px solid var(--un-blue);">
+                <div style="margin-top: 1rem; padding: 1rem; background: white; border: 3px solid var(--un-blue);">
                     <strong>Interpretation:</strong> 
                     ${mean < 7 ? 'Short intervals (&lt;7 days) indicate high operational tempo and sustained capability.' : 
                       mean < 14 ? 'Moderate intervals (7-14 days) suggest consistent preparation cycles.' :
@@ -12735,7 +12862,7 @@
                         {
                             label: 'Mean',
                             data: Array(intervals.length).fill(stats.mean),
-                            borderColor: 'rgba(230, 57, 70, 0.5)',
+                            borderColor: 'rgba(185, 28, 28, 0.5)',
                             borderWidth: 2,
                             borderDash: [5, 5],
                             pointRadius: 0,
@@ -12777,7 +12904,7 @@
                                         return [
                                             `Preparation time: ${interval.days} days`,
                                             `Previous strike: ${interval.fromDate}`,
-                                            `Weapon diversity: ${interval.fromDiversity} → ${interval.toDiversity} types`
+                                            `Weapon diversity: ${interval.fromDiversity} &rarr; ${interval.toDiversity} types`
                                         ];
                                     }
                                     return `${context.dataset.label}: ${context.parsed.y.toFixed(1)} days`;
@@ -12900,7 +13027,7 @@
                 'onyx', 'p-800',
                 'tochka', 'tochka-u',
                 's-300', 's-400', 'c-300', 'c-400',
-                'kh-', 'х-', // Cyrillic X for Kh designation
+                'kh-', 'Ñ…-', // Cyrillic X for Kh designation
                 'intercontinental ballistic missile', 'icbm',
                 'cruise missile',
                 'ballistic missile'
@@ -12912,7 +13039,7 @@
                 'lancet',
                 'orlan',
                 'reconnaissance uav',
-                'молнія', 'molniya', 'molniia'
+                'Ð¼Ð¾Ð»Ð½Ñ–Ñ', 'molniya', 'molniia'
             ];
             
             // Check if it's explicitly a non-missile
@@ -13133,11 +13260,11 @@
                         <span style="color: var(--text-secondary);">IQR: ${q3 - q1} days</span>
                     </div>
                 </div>
-                <div style="margin-top: 1rem; padding: 1rem; background: white; border-left: 3px solid var(--accent-green);">
+                <div style="margin-top: 1rem; padding: 1rem; background: white; border: 3px solid var(--accent-green);">
                     <strong>Example Missile Strikes (first 5):</strong><br/>
                     <span style="font-size: 0.85rem; color: var(--text-secondary);">${exampleStrikes}</span>
                 </div>
-                <div style="margin-top: 1rem; padding: 1rem; background: white; border-left: 3px solid var(--accent-red);">
+                <div style="margin-top: 1rem; padding: 1rem; background: white; border: 3px solid var(--accent-red);">
                     <strong>Interpretation:</strong> 
                     ${mean < 7 ? 'Short intervals (&lt;7 days) indicate high operational tempo with sustained missile readiness and stockpile availability.' : 
                       mean < 14 ? 'Moderate intervals (7-14 days) suggest consistent missile preparation cycles with regular launch window availability.' :
@@ -13186,8 +13313,8 @@
                     datasets: [{
                         label: 'Frequency',
                         data: bins,
-                        backgroundColor: 'rgba(230, 57, 70, 0.7)',
-                        borderColor: 'rgba(230, 57, 70, 1)',
+                        backgroundColor: 'rgba(185, 28, 28, 0.7)',
+                        borderColor: 'rgba(185, 28, 28, 1)',
                         borderWidth: 1
                     }]
                 },
@@ -13269,11 +13396,11 @@
                         {
                             label: 'Days Between Missile Strikes',
                             data: data,
-                            borderColor: 'rgba(230, 57, 70, 1)',
-                            backgroundColor: 'rgba(230, 57, 70, 0.1)',
+                            borderColor: 'rgba(185, 28, 28, 1)',
+                            backgroundColor: 'rgba(185, 28, 28, 0.1)',
                             borderWidth: 2,
                             pointRadius: 4,
-                            pointBackgroundColor: 'rgba(230, 57, 70, 1)',
+                            pointBackgroundColor: 'rgba(185, 28, 28, 1)',
                             tension: 0.1,
                             fill: true
                         },
@@ -13322,7 +13449,7 @@
                                         return [
                                             `Preparation time: ${interval.days} days`,
                                             `Previous strike: ${interval.fromDate}`,
-                                            `Weapon diversity: ${interval.fromDiversity} → ${interval.toDiversity} types`
+                                            `Weapon diversity: ${interval.fromDiversity} &rarr; ${interval.toDiversity} types`
                                         ];
                                     }
                                     return `${context.dataset.label}: ${context.parsed.y.toFixed(1)} days`;
@@ -14093,8 +14220,8 @@
                         <strong>Total Launched:</strong> ${totalLaunched.toLocaleString()}<br/>
                         <strong>Total Intercepted:</strong> ${totalIntercepted.toLocaleString()}<br/>
                         <strong>Reached Target:</strong> ${notIntercepted.toLocaleString()}<br/>
-                        <strong>Interception Rate:</strong> <span style="color: ${interceptionRate > 50 ? '#06d6a0' : '#e63946'}; font-weight: 600;">${interceptionRate}%</span><br/>
-                        <strong>Success Rate:</strong> <span style="color: ${successRate > 50 ? '#e63946' : '#06d6a0'}; font-weight: 600;">${successRate}%</span>
+                        <strong>Interception Rate:</strong> <span style="color: ${interceptionRate > 50 ? '#06d6a0' : '#b91c1c'}; font-weight: 600;">${interceptionRate}%</span><br/>
+                        <strong>Success Rate:</strong> <span style="color: ${successRate > 50 ? '#b91c1c' : '#06d6a0'}; font-weight: 600;">${successRate}%</span>
                     </div>
                     
                     <div>
@@ -14301,19 +14428,19 @@
                 const animationDuration = baseSpeed + (alertRegions.length * speedPerRegion);
                 
                 // Use marquee for scrolling all regions
-                const regionText = alertRegions.join(' • ');
+                const regionText = alertRegions.join(' &bull; ');
                 // Duplicate text for seamless loop
-                const scrollContent = regionText + ' • ' + regionText;
+                const scrollContent = regionText + ' &bull; ' + regionText;
                 
                 content = `
-                    <div class="alert-ticker-count">${summary.regionsUnderAlert} Oblast${summary.regionsUnderAlert !== 1 ? 's' : ''} • ${alertRegions.length} Total Region${alertRegions.length !== 1 ? 's' : ''} Under Alert</div>
+                    <div class="alert-ticker-count">${summary.regionsUnderAlert} Oblast${summary.regionsUnderAlert !== 1 ? 's' : ''} &bull; ${alertRegions.length} Total Region${alertRegions.length !== 1 ? 's' : ''} Under Alert</div>
                     <div class="alert-ticker-regions-marquee">
                         <div class="alert-ticker-regions-scroll" style="animation-duration: ${animationDuration}s;">${scrollContent}</div>
                     </div>
                 `;
             } else {
                 content = `
-                    <div class="alert-ticker-count">✓ All Clear</div>
+                    <div class="alert-ticker-count">&#10003; All Clear</div>
                     <div class="alert-ticker-regions">No active alerts</div>
                 `;
             }
@@ -14380,7 +14507,7 @@
             if (activeRegions.length === 0) {
                 container.innerHTML = `
                     <div style="text-align: center; padding: 3rem; background: linear-gradient(135deg, #06d6a0 0%, #06d6a0 100%); border-radius: 0; color: white;">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">&#10003;</div>
                         <h3 style="margin-bottom: 0.5rem; font-size: 1.5rem;">All Clear</h3>
                         <p style="opacity: 0.9;">No active alerts in any region</p>
                     </div>
@@ -14411,7 +14538,7 @@
                 stateRegions.forEach(region => {
                     const alertCount = region.activeAlerts.length;
                     const alertIntensity = alertCount > 3 ? 'high' : alertCount > 1 ? 'medium' : 'low';
-                    const bgColor = alertIntensity === 'high' ? '#e63946' : alertIntensity === 'medium' ? '#f77f00' : '#f4a261';
+                    const bgColor = alertIntensity === 'high' ? '#b91c1c' : alertIntensity === 'medium' ? '#f77f00' : '#f4a261';
                     const alertTypes = region.activeAlerts.map(a => a.type).join(', ');
                     
                     html += `
@@ -14422,7 +14549,7 @@
                                     <h4 style="font-size: 1.2rem; margin: 0; font-weight: 600;">${region.regionEngName || region.regionName}</h4>
                                 </div>
                                 <div style="background: rgba(255,255,255,0.25); padding: 0.5rem 1rem; border-radius: 0; font-weight: 600;">
-                                    🚨 ${alertCount}
+                                    &#128680; ${alertCount}
                                 </div>
                             </div>
                             <div style="font-size: 0.9rem; opacity: 0.95; margin-bottom: 0.5rem;">
@@ -14452,7 +14579,7 @@
                 otherRegions.forEach(region => {
                     const alertCount = region.activeAlerts.length;
                     const alertIntensity = alertCount > 3 ? 'high' : alertCount > 1 ? 'medium' : 'low';
-                    const bgColor = alertIntensity === 'high' ? '#e63946' : alertIntensity === 'medium' ? '#f77f00' : '#f4a261';
+                    const bgColor = alertIntensity === 'high' ? '#b91c1c' : alertIntensity === 'medium' ? '#f77f00' : '#f4a261';
                     const alertTypes = region.activeAlerts.map(a => a.type).join(', ');
                     
                     html += `
@@ -14463,7 +14590,7 @@
                                     <h4 style="font-size: 1.1rem; margin: 0; font-weight: 600;">${region.regionEngName || region.regionName}</h4>
                                 </div>
                                 <div style="background: rgba(255,255,255,0.25); padding: 0.5rem 1rem; border-radius: 0; font-weight: 600;">
-                                    🚨 ${alertCount}
+                                    &#128680; ${alertCount}
                                 </div>
                             </div>
                             <div style="font-size: 0.9rem; opacity: 0.95; margin-bottom: 0.5rem;">
@@ -14502,10 +14629,10 @@
                 const hasAlert = region.activeAlerts && Array.isArray(region.activeAlerts) && region.activeAlerts.length > 0;
                 const alertCount = hasAlert ? region.activeAlerts.length : 0;
                 const status = hasAlert ? 'alert' : 'clear';
-                const icon = hasAlert ? '🚨' : '✅';
-                const bgColor = hasAlert ? 'rgba(230, 57, 70, 0.1)' : 'rgba(6, 214, 160, 0.1)';
-                const borderColor = hasAlert ? '#e63946' : '#06d6a0';
-                const textColor = hasAlert ? '#e63946' : '#06d6a0';
+                const icon = hasAlert ? '&#128680;' : '&#10003;';
+                const bgColor = hasAlert ? 'rgba(185, 28, 28, 0.1)' : 'rgba(6, 214, 160, 0.1)';
+                const borderColor = hasAlert ? '#b91c1c' : '#06d6a0';
+                const textColor = hasAlert ? '#b91c1c' : '#06d6a0';
                 
                 html += `
                     <div style="background: ${bgColor}; padding: 1rem; border-radius: 0; border: 4px solid ${borderColor};">
@@ -14519,7 +14646,7 @@
                             ${region.regionEngName || region.regionName}
                         </div>
                         <div style="font-size: 0.8rem; color: var(--text-secondary);">
-                            ${region.regionType || 'Region'} • ID: ${region.regionId}
+                            ${region.regionType || 'Region'} &bull; ID: ${region.regionId}
                         </div>
                     </div>
                 `;
@@ -14553,17 +14680,17 @@
             sortedRegions.forEach(region => {
                 const hasAlert = region.activeAlerts && Array.isArray(region.activeAlerts) && region.activeAlerts.length > 0;
                 const alertCount = hasAlert ? region.activeAlerts.length : 0;
-                const statusIcon = hasAlert ? '🚨' : '✅';
+                const statusIcon = hasAlert ? '&#128680;' : '&#10003;';
                 const statusText = hasAlert ? 'ALERT' : 'Clear';
                 const statusClass = hasAlert ? 'badge-high' : 'badge-low';
                 
                 html += `
-                    <tr style="${hasAlert ? 'background: rgba(230, 57, 70, 0.05);' : ''}">
+                    <tr style="${hasAlert ? 'background: rgba(185, 28, 28, 0.05);' : ''}">
                         <td><span class="badge ${statusClass}">${statusIcon} ${statusText}</span></td>
                         <td><strong>${region.regionEngName || 'N/A'}</strong></td>
                         <td>${region.regionName || 'N/A'}</td>
                         <td>${region.regionType || 'N/A'}</td>
-                        <td style="text-align: center; font-weight: 600; color: ${hasAlert ? '#e63946' : '#06d6a0'};">
+                        <td style="text-align: center; font-weight: 600; color: ${hasAlert ? '#b91c1c' : '#06d6a0'};">
                             ${alertCount}
                         </td>
                         <td>${formatAlertTime(region.lastUpdate)}</td>
@@ -14606,8 +14733,8 @@
                         {
                             label: 'Regions Under Alert',
                             data: regionsUnderAlert,
-                            borderColor: '#e63946',
-                            backgroundColor: 'rgba(230, 57, 70, 0.1)',
+                            borderColor: '#b91c1c',
+                            backgroundColor: 'rgba(185, 28, 28, 0.1)',
                             tension: 0.3,
                             fill: true,
                             yAxisID: 'y'
@@ -14680,12 +14807,12 @@
             
             document.getElementById('alertHistoryStats').innerHTML = `
                 <strong>Historical Data Summary:</strong><br/>
-                • Data points collected: ${alertData.history.length}<br/>
-                • Time range: ${startTime} to ${endTime}<br/>
-                • Average regions under alert: ${avgRegions}<br/>
-                • Maximum regions under alert: ${maxRegions}<br/>
-                • Average total alerts: ${avgAlerts}<br/>
-                • Maximum total alerts: ${maxAlerts}
+                &bull; Data points collected: ${alertData.history.length}<br/>
+                &bull; Time range: ${startTime} to ${endTime}<br/>
+                &bull; Average regions under alert: ${avgRegions}<br/>
+                &bull; Maximum regions under alert: ${maxRegions}<br/>
+                &bull; Average total alerts: ${avgAlerts}<br/>
+                &bull; Maximum total alerts: ${maxAlerts}
             `;
         }
         
@@ -14740,7 +14867,7 @@
          */
         function showAlertError(message) {
             document.getElementById('lastAlertUpdate').innerHTML = 
-                `<span style="color: #e63946;"><strong>Error:</strong> ${message}</span>`;
+                `<span style="color: #b91c1c;"><strong>Error:</strong> ${message}</span>`;
         }
         
         /**
@@ -15252,7 +15379,7 @@
             ];
             
             if (z < 0.5) {
-                // Use reflection formula: Γ(1-z)Γ(z) = π/sin(πz)
+                // Use reflection formula: &Gamma;(1-z)&Gamma;(z) = &pi;/sin(&pi;z)
                 return Math.log(Math.PI) - Math.log(Math.sin(Math.PI * z)) - logGamma(1 - z);
             }
             
@@ -15361,7 +15488,7 @@
                             ${modelQuality.verdict}
                         </div>
                         <div style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">
-                            R² = ${(results.rSquared * 100).toFixed(1)}%
+                            R&sup2; = ${(results.rSquared * 100).toFixed(1)}%
                         </div>
                     </div>
                     
@@ -15442,10 +15569,10 @@
             
             if (section.style.display === 'none') {
                 section.style.display = 'block';
-                toggle.textContent = 'Hide Calculations ▲';
+                toggle.textContent = 'Hide Calculations &#9650;';
             } else {
                 section.style.display = 'none';
-                toggle.textContent = 'Show Calculations ▼';
+                toggle.textContent = 'Show Calculations &#9660;';
             }
         }
         
@@ -15475,13 +15602,13 @@
                 
                 RSS = results.residuals.reduce((sum, r) => sum + r * r, 0);
             } else {
-                // Fallback: calculate from R² and residuals
+                // Fallback: calculate from R&sup2; and residuals
                 RSS = results.residuals ? results.residuals.reduce((sum, r) => sum + r * r, 0) : 0;
                 if (results.rSquared > 0 && results.rSquared < 1 && RSS > 0) {
                     TSS = RSS / (1 - results.rSquared);
                     ESS = results.rSquared * TSS;
                 } else {
-                    // Last resort: use R² directly
+                    // Last resort: use R&sup2; directly
                     TSS = 100;  // Dummy value for display
                     ESS = results.rSquared * TSS;
                     RSS = (1 - results.rSquared) * TSS;
@@ -15516,9 +15643,9 @@
                     
                     <p style="margin-bottom: 0.5rem;"><strong>Matrix Dimensions:</strong></p>
                     <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; font-family: Helvetica, "Helvetica Neue";">
-                        Y: ${results.nObs} × 1  (column vector of outcomes)<br/>
-                        X: ${results.nObs} × ${results.varNames.length}  (design matrix with intercept column)<br/>
-                        β: ${results.varNames.length} × 1  (coefficient vector to estimate)
+                        Y: ${results.nObs} &times; 1  (column vector of outcomes)<br/>
+                        X: ${results.nObs} &times; ${results.varNames.length}  (design matrix with intercept column)<br/>
+                        &beta;: ${results.varNames.length} &times; 1  (coefficient vector to estimate)
                     </div>
                 </div>
             `;
@@ -15534,10 +15661,10 @@
                     
                     <div style="background: #f3e8ff; padding: 1.5rem; border-radius: 0; margin-bottom: 1rem; text-align: center;">
                         <div style="font-size: 1.2rem; font-family: Helvetica, "Helvetica Neue"; font-weight: 600;">
-                            β̂ = (X'X)⁻¹X'Y
+                            &beta;&#770; = (X'X)<sup>-1</sup>&sup1;X'Y
                         </div>
                         <div style="margin-top: 0.5rem; font-size: 0.9rem; color: #6b21a8;">
-                            The hat (β̂) indicates this is an estimate, not the true population value
+                            The hat (&beta;&#770;) indicates this is an estimate, not the true population value
                         </div>
                     </div>
                     
@@ -15546,19 +15673,19 @@
                     <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; margin-bottom: 1rem;">
                         <strong>Step 1:</strong> Transpose X to get X'<br/>
                         <span style="color: #666; font-size: 0.9rem; font-family: Helvetica, "Helvetica Neue";">
-                            X' has dimensions ${results.varNames.length} × ${results.nObs}
+                            X' has dimensions ${results.varNames.length} &times; ${results.nObs}
                         </span>
                     </div>
                     
                     <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; margin-bottom: 1rem;">
                         <strong>Step 2:</strong> Multiply X'X<br/>
                         <span style="color: #666; font-size: 0.9rem; font-family: Helvetica, "Helvetica Neue";">
-                            Result: ${results.varNames.length} × ${results.varNames.length} matrix (sum of squares and cross-products)
+                            Result: ${results.varNames.length} &times; ${results.varNames.length} matrix (sum of squares and cross-products)
                         </span>
                     </div>
                     
                     <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; margin-bottom: 1rem;">
-                        <strong>Step 3:</strong> Invert (X'X) to get (X'X)⁻¹<br/>
+                        <strong>Step 3:</strong> Invert (X'X) to get (X'X)<sup>-1</sup>&sup1;<br/>
                         <span style="color: #666; font-size: 0.9rem;">
                             Using Gauss-Jordan elimination with partial pivoting<br/>
                             This is the variance-covariance matrix (unnormalized)
@@ -15566,23 +15693,23 @@
                     </div>
                     
                     <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; margin-bottom: 1rem;">
-                        <strong>Step 4:</strong> Multiply (X'X)⁻¹ by X'<br/>
+                        <strong>Step 4:</strong> Multiply (X'X)<sup>-1</sup>&sup1; by X'<br/>
                         <span style="color: #666; font-size: 0.9rem; font-family: Helvetica, "Helvetica Neue";">
-                            Result: ${results.varNames.length} × ${results.nObs} matrix
+                            Result: ${results.varNames.length} &times; ${results.nObs} matrix
                         </span>
                     </div>
                     
                     <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; margin-bottom: 1rem;">
-                        <strong>Step 5:</strong> Multiply result by Y to get β̂<br/>
+                        <strong>Step 5:</strong> Multiply result by Y to get &beta;&#770;<br/>
                         <span style="color: #666; font-size: 0.9rem; font-family: Helvetica, "Helvetica Neue";">
-                            Final result: ${results.varNames.length} × 1 vector of coefficients
+                            Final result: ${results.varNames.length} &times; 1 vector of coefficients
                         </span>
                     </div>
                     
                     <p style="margin-bottom: 1rem;"><strong>Estimated Coefficients:</strong></p>
                     <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; font-family: Helvetica, "Helvetica Neue";">
                         ${results.varNames.map((v, i) => 
-                            `β̂<sub>${i}</sub> (${v}) = ${results.coefficients[i].toFixed(6)}`
+                            `&beta;&#770;<sub>${i}</sub> (${v}) = ${results.coefficients[i].toFixed(6)}`
                         ).join('<br/>')}
                     </div>
                 </div>
@@ -15596,17 +15723,17 @@
                     <p style="margin-bottom: 1rem;"><strong>Fitted values (predicted outcomes):</strong></p>
                     <div style="background: #f3e8ff; padding: 1.5rem; border-radius: 0; margin-bottom: 1rem; text-align: center;">
                         <div style="font-size: 1.2rem; font-family: Helvetica, "Helvetica Neue"; font-weight: 600;">
-                            Ŷ = Xβ̂
+                            Y&#770; = X&beta;&#770;
                         </div>
                         <div style="margin-top: 0.5rem; font-size: 0.9rem; color: #6b21a8;">
-                            Dimensions: ${results.nObs} × 1 (one predicted value per observation)
+                            Dimensions: ${results.nObs} &times; 1 (one predicted value per observation)
                         </div>
                     </div>
                     
                     <p style="margin-bottom: 1rem;"><strong>Residuals (prediction errors):</strong></p>
                     <div style="background: #f3e8ff; padding: 1.5rem; border-radius: 0; margin-bottom: 1rem; text-align: center;">
                         <div style="font-size: 1.2rem; font-family: Helvetica, "Helvetica Neue"; font-weight: 600;">
-                            ε̂ = Y - Ŷ = Y - Xβ̂
+                            &epsilon;&#770; = Y - Y&#770; = Y - X&beta;&#770;
                         </div>
                         <div style="margin-top: 0.5rem; font-size: 0.9rem; color: #6b21a8;">
                             Residual = Actual outcome - Predicted outcome
@@ -15615,7 +15742,7 @@
                     
                     <p style="margin-bottom: 1rem;"><strong>Sum of squared residuals (RSS):</strong></p>
                     <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; font-family: Helvetica, "Helvetica Neue";">
-                        RSS = Σ(Yᵢ - Ŷᵢ)² = ε̂'ε̂ = ${RSS.toFixed(4)}
+                        RSS = &Sigma;(Yáµ¢ - Y&#770;áµ¢)&sup2; = &epsilon;&#770;'&epsilon;&#770; = ${RSS.toFixed(4)}
                     </div>
                 </div>
             `;
@@ -15626,13 +15753,13 @@
                     <h4 style="color: #7c3aed; margin-bottom: 1rem;">4. R-squared Calculation</h4>
                     
                     <p style="margin-bottom: 1rem;">
-                        R² measures the proportion of variance in Y explained by our model.
+                        R&sup2; measures the proportion of variance in Y explained by our model.
                     </p>
                     
                     <p style="margin-bottom: 1rem;"><strong>Step 1: Calculate Total Sum of Squares (TSS)</strong></p>
                     <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; margin-bottom: 1rem;">
                         <div style="font-family: Helvetica, "Helvetica Neue"; margin-bottom: 0.5rem;">
-                            TSS = Σ(Yᵢ - Ȳ)²
+                            TSS = &Sigma;(Yáµ¢ - Y&#772;)&sup2;
                         </div>
                         <div style="color: #666; font-size: 0.9rem;">
                             Total variation in Y around its mean<br/>
@@ -15643,7 +15770,7 @@
                     <p style="margin-bottom: 1rem;"><strong>Step 2: Calculate Explained Sum of Squares (ESS)</strong></p>
                     <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; margin-bottom: 1rem;">
                         <div style="font-family: Helvetica, "Helvetica Neue"; margin-bottom: 0.5rem;">
-                            ESS = Σ(Ŷᵢ - Ȳ)²
+                            ESS = &Sigma;(Y&#770;áµ¢ - Y&#772;)&sup2;
                         </div>
                         <div style="color: #666; font-size: 0.9rem;">
                             Variation in predicted values around the mean<br/>
@@ -15654,7 +15781,7 @@
                     <p style="margin-bottom: 1rem;"><strong>Step 3: Calculate Residual Sum of Squares (RSS)</strong></p>
                     <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; margin-bottom: 1rem;">
                         <div style="font-family: Helvetica, "Helvetica Neue"; margin-bottom: 0.5rem;">
-                            RSS = Σ(Yᵢ - Ŷᵢ)²
+                            RSS = &Sigma;(Yáµ¢ - Y&#770;áµ¢)&sup2;
                         </div>
                         <div style="color: #666; font-size: 0.9rem;">
                             Unexplained variation (errors)<br/>
@@ -15668,33 +15795,33 @@
                             TSS = ESS + RSS
                         </div>
                         <div style="font-family: Helvetica, "Helvetica Neue"; color: #666;">
-                            ${TSS.toFixed(4)} = ${ESS.toFixed(4)} + ${RSS.toFixed(4)} ✓
+                            ${TSS.toFixed(4)} = ${ESS.toFixed(4)} + ${RSS.toFixed(4)} &#10003;
                         </div>
                     </div>
                     
-                    <p style="margin-bottom: 1rem;"><strong>Step 5: Calculate R²</strong></p>
+                    <p style="margin-bottom: 1rem;"><strong>Step 5: Calculate R&sup2;</strong></p>
                     <div style="background: #f3e8ff; padding: 1.5rem; border-radius: 0; text-align: center;">
                         <div style="font-size: 1.2rem; font-family: Helvetica, "Helvetica Neue"; font-weight: 600; margin-bottom: 1rem;">
-                            R² = ESS / TSS = 1 - (RSS / TSS)
+                            R&sup2; = ESS / TSS = 1 - (RSS / TSS)
                         </div>
                         <div style="font-size: 1.5rem; font-family: Helvetica, "Helvetica Neue"; font-weight: 700; color: #7c3aed;">
-                            R² = ${ESS.toFixed(4)} / ${TSS.toFixed(4)} = ${results.rSquared.toFixed(6)}
+                            R&sup2; = ${ESS.toFixed(4)} / ${TSS.toFixed(4)} = ${results.rSquared.toFixed(6)}
                         </div>
                         <div style="margin-top: 1rem; font-size: 1rem; color: #6b21a8;">
                             = ${(results.rSquared * 100).toFixed(2)}% of variance explained
                         </div>
                     </div>
                     
-                    <p style="margin-top: 1.5rem; margin-bottom: 1rem;"><strong>Step 6: Calculate Adjusted R²</strong></p>
+                    <p style="margin-top: 1.5rem; margin-bottom: 1rem;"><strong>Step 6: Calculate Adjusted R&sup2;</strong></p>
                     <div style="background: #f3e8ff; padding: 1.5rem; border-radius: 0; text-align: center;">
                         <div style="font-size: 1.1rem; font-family: Helvetica, "Helvetica Neue"; margin-bottom: 0.5rem;">
-                            R̄² = 1 - [(1 - R²) × (n - 1) / (n - k - 1)]
+                            R&#772;&sup2; = 1 - [(1 - R&sup2;) &times; (n - 1) / (n - k - 1)]
                         </div>
                         <div style="font-size: 1.1rem; font-family: Helvetica, "Helvetica Neue"; margin-bottom: 0.5rem;">
-                            R̄² = 1 - [(1 - ${results.rSquared.toFixed(6)}) × (${results.nObs} - 1) / (${results.nObs} - ${results.varNames.length - 1} - 1)]
+                            R&#772;&sup2; = 1 - [(1 - ${results.rSquared.toFixed(6)}) &times; (${results.nObs} - 1) / (${results.nObs} - ${results.varNames.length - 1} - 1)]
                         </div>
                         <div style="font-size: 1.5rem; font-family: Helvetica, "Helvetica Neue"; font-weight: 700; color: #7c3aed; margin-top: 1rem;">
-                            R̄² = ${results.adjRSquared.toFixed(6)}
+                            R&#772;&sup2; = ${results.adjRSquared.toFixed(6)}
                         </div>
                         <div style="margin-top: 0.5rem; font-size: 0.9rem; color: #6b21a8;">
                             Adjusted for number of predictors
@@ -15720,17 +15847,17 @@
                             MSE = ${RSS.toFixed(4)} / ${df} = ${mse.toFixed(6)}
                         </div>
                         <div style="margin-top: 0.5rem; font-size: 0.9rem; color: #6b21a8;">
-                            Estimate of error variance (σ̂²)
+                            Estimate of error variance (&sigma;&#770;&sup2;)
                         </div>
                     </div>
                     
                     <p style="margin-bottom: 1rem;"><strong>Step 2: Calculate Variance-Covariance Matrix</strong></p>
                     <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; margin-bottom: 1rem;">
                         <div style="font-family: Helvetica, "Helvetica Neue"; margin-bottom: 0.5rem;">
-                            Var(β̂) = MSE × (X'X)⁻¹
+                            Var(&beta;&#770;) = MSE &times; (X'X)<sup>-1</sup>&sup1;
                         </div>
                         <div style="color: #666; font-size: 0.9rem;">
-                            This ${results.varNames.length} × ${results.varNames.length} matrix contains variances on diagonal,<br/>
+                            This ${results.varNames.length} &times; ${results.varNames.length} matrix contains variances on diagonal,<br/>
                             covariances on off-diagonal
                         </div>
                     </div>
@@ -15738,7 +15865,7 @@
                     <p style="margin-bottom: 1rem;"><strong>Step 3: Extract Standard Errors</strong></p>
                     <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; margin-bottom: 1rem;">
                         <div style="font-family: Helvetica, "Helvetica Neue"; margin-bottom: 0.5rem;">
-                            SE(β̂ᵢ) = √[Var(β̂)ᵢᵢ]
+                            SE(&beta;&#770;áµ¢) = &radic;[Var(&beta;&#770;)áµ¢áµ¢]
                         </div>
                         <div style="color: #666; font-size: 0.9rem;">
                             Square root of diagonal elements
@@ -15748,7 +15875,7 @@
                     <p style="margin-bottom: 1rem;"><strong>Standard Errors for Each Coefficient:</strong></p>
                     <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; font-family: Helvetica, "Helvetica Neue";">
                         ${results.varNames.map((v, i) => 
-                            `SE(β̂<sub>${i}</sub>) = ${results.standardErrors[i].toFixed(6)}  [${v}]`
+                            `SE(&beta;&#770;<sub>${i}</sub>) = ${results.standardErrors[i].toFixed(6)}  [${v}]`
                         ).join('<br/>')}
                     </div>
                 </div>
@@ -15765,8 +15892,8 @@
                     
                     <p style="margin-bottom: 1rem;"><strong>Null Hypothesis:</strong></p>
                     <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; margin-bottom: 1.5rem;">
-                        H₀: βᵢ = 0  (the predictor has no effect)<br/>
-                        H₁: βᵢ ≠ 0  (the predictor has an effect)
+                        H<sub>0</sub>: &beta;áµ¢ = 0  (the predictor has no effect)<br/>
+                        H<sub>1</sub>: &beta;áµ¢ &ne; 0  (the predictor has an effect)
                     </div>
                     
                     <p style="margin-bottom: 1rem;"><strong>Example calculation for ${results.varNames[1]}:</strong></p>
@@ -15774,7 +15901,7 @@
                     <div style="background: #f3e8ff; padding: 1.5rem; border-radius: 0; margin-bottom: 1rem;">
                         <p style="margin: 0 0 1rem 0;"><strong>Step 1: Calculate t-statistic</strong></p>
                         <div style="text-align: center; font-family: Helvetica, "Helvetica Neue"; font-size: 1.2rem; margin-bottom: 1rem;">
-                            t = β̂ / SE(β̂)
+                            t = &beta;&#770; / SE(&beta;&#770;)
                         </div>
                         <div style="text-align: center; font-family: Helvetica, "Helvetica Neue"; font-size: 1.2rem; margin-bottom: 1rem;">
                             t = ${results.coefficients[1].toFixed(6)} / ${results.standardErrors[1].toFixed(6)}
@@ -15794,16 +15921,16 @@
                             if the null hypothesis were true. We use a two-tailed test.
                         </div>
                         <div style="text-align: center; font-family: Helvetica, "Helvetica Neue"; font-size: 1.1rem; margin-bottom: 1rem;">
-                            p-value = 2 × P(T > |t|) where T ~ t<sub>${df}</sub>
+                            p-value = 2 &times; P(T > |t|) where T ~ t<sub>${df}</sub>
                         </div>
                         <div style="text-align: center; font-family: Helvetica, "Helvetica Neue"; font-size: 1.1rem; margin-bottom: 1rem;">
-                            p-value = 2 × P(T > ${Math.abs(results.tStats[1]).toFixed(4)})
+                            p-value = 2 &times; P(T > ${Math.abs(results.tStats[1]).toFixed(4)})
                         </div>
                         <div style="text-align: center; font-family: Helvetica, "Helvetica Neue"; font-size: 1.5rem; font-weight: 700; color: #7c3aed;">
                             p-value = ${results.pValues[1] < 0.001 ? '< 0.001' : results.pValues[1].toFixed(6)}
                         </div>
                         <div style="margin-top: 1rem; text-align: center; color: #6b21a8; font-size: 0.9rem;">
-                            ${results.pValues[1] < 0.05 ? '✓ Reject H₀: Effect is statistically significant' : 'Fail to reject H₀: Effect is not statistically significant'}
+                            ${results.pValues[1] < 0.05 ? '&#10003; Reject H<sub>0</sub>: Effect is statistically significant' : 'Fail to reject H<sub>0</sub>: Effect is not statistically significant'}
                         </div>
                     </div>
                     
@@ -15848,25 +15975,25 @@
                     
                     <div style="background: #f3e8ff; padding: 1.5rem; border-radius: 0; margin-bottom: 1rem; text-align: center;">
                         <div style="font-size: 1.2rem; font-family: Helvetica, "Helvetica Neue"; margin-bottom: 0.5rem;">
-                            CI = β̂ ± t<sub>α/2, df</sub> × SE(β̂)
+                            CI = &beta;&#770; &plusmn; t<sub>&alpha;/2, df</sub> &times; SE(&beta;&#770;)
                         </div>
                         <div style="margin-top: 0.5rem; font-size: 0.9rem; color: #6b21a8;">
-                            For 95% CI: α = 0.05, so α/2 = 0.025<br/>
-                            Critical value t<sub>0.025, ${df}</sub> ≈ ${(1.96 + 0.02 * Math.min(df, 30)).toFixed(3)}
+                            For 95% CI: &alpha; = 0.05, so &alpha;/2 = 0.025<br/>
+                            Critical value t<sub>0.025, ${df}</sub> &asymp; ${(1.96 + 0.02 * Math.min(df, 30)).toFixed(3)}
                         </div>
                     </div>
                     
                     <p style="margin-bottom: 1rem;"><strong>Example for ${results.varNames[1]}:</strong></p>
                     <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; margin-bottom: 1.5rem;">
                         <div style="font-family: Helvetica, "Helvetica Neue";">
-                            Lower = ${results.coefficients[1].toFixed(6)} - ${(1.96 + 0.02 * Math.min(df, 30)).toFixed(3)} × ${results.standardErrors[1].toFixed(6)}<br/>
+                            Lower = ${results.coefficients[1].toFixed(6)} - ${(1.96 + 0.02 * Math.min(df, 30)).toFixed(3)} &times; ${results.standardErrors[1].toFixed(6)}<br/>
                             Lower = ${results.confidenceIntervals[1].lower.toFixed(6)}<br/><br/>
-                            Upper = ${results.coefficients[1].toFixed(6)} + ${(1.96 + 0.02 * Math.min(df, 30)).toFixed(3)} × ${results.standardErrors[1].toFixed(6)}<br/>
+                            Upper = ${results.coefficients[1].toFixed(6)} + ${(1.96 + 0.02 * Math.min(df, 30)).toFixed(3)} &times; ${results.standardErrors[1].toFixed(6)}<br/>
                             Upper = ${results.confidenceIntervals[1].upper.toFixed(6)}<br/><br/>
                             <strong style="color: #7c3aed;">95% CI: [${results.confidenceIntervals[1].lower.toFixed(6)}, ${results.confidenceIntervals[1].upper.toFixed(6)}]</strong>
                         </div>
                         <div style="margin-top: 1rem; color: #666; font-size: 0.9rem;">
-                            Interpretation: We are 95% confident the true value of β falls in this range.
+                            Interpretation: We are 95% confident the true value of &beta; falls in this range.
                         </div>
                     </div>
                     
@@ -15903,8 +16030,8 @@
                     
                     <p style="margin-bottom: 1rem;"><strong>Null Hypothesis:</strong></p>
                     <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; margin-bottom: 1.5rem;">
-                        H₀: β₁ = β₂ = ... = β<sub>k</sub> = 0  (all predictors have no effect)<br/>
-                        H₁: At least one βᵢ ≠ 0  (at least one predictor matters)
+                        H<sub>0</sub>: &beta;<sub>1</sub> = &beta;<sub>2</sub> = ... = &beta;<sub>k</sub> = 0  (all predictors have no effect)<br/>
+                        H<sub>1</sub>: At least one &beta;áµ¢ &ne; 0  (at least one predictor matters)
                     </div>
                     
                     <div style="background: #f3e8ff; padding: 1.5rem; border-radius: 0; margin-bottom: 1rem; text-align: center;">
@@ -15918,7 +16045,7 @@
                             F = ${results.fStat.toFixed(4)}
                         </div>
                         <div style="font-size: 0.9rem; color: #6b21a8;">
-                            Follows an F-distribution with df₁ = ${results.varNames.length - 1}, df₂ = ${df}
+                            Follows an F-distribution with df<sub>1</sub> = ${results.varNames.length - 1}, df<sub>2</sub> = ${df}
                         </div>
                     </div>
                     
@@ -15930,8 +16057,8 @@
                             ${results.fProb < 0.001 ? '< 0.001' : results.fProb.toFixed(6)}
                         </div>
                         <div style="margin-top: 1rem; font-size: 1rem; color: #6b21a8;">
-                            ${results.fProb < 0.001 ? '✓ Strong evidence that the model has predictive power' : 
-                              results.fProb < 0.05 ? '✓ Model is statistically significant' : 
+                            ${results.fProb < 0.001 ? '&#10003; Strong evidence that the model has predictive power' : 
+                              results.fProb < 0.05 ? '&#10003; Model is statistically significant' : 
                               'Model is not statistically significant'}
                         </div>
                     </div>
@@ -15946,12 +16073,12 @@
                         We have now derived every statistic in the regression output:
                     </p>
                     <ul style="margin: 0; padding-left: 1.5rem; line-height: 2;">
-                        <li>✓ Coefficients via OLS: β̂ = (X'X)⁻¹X'Y</li>
-                        <li>✓ R² and Adjusted R² from sum of squares decomposition</li>
-                        <li>✓ Standard errors from variance-covariance matrix</li>
-                        <li>✓ T-statistics and p-values for individual coefficients</li>
-                        <li>✓ Confidence intervals using t-distribution</li>
-                        <li>✓ F-statistic and p-value for overall model</li>
+                        <li>&#10003; Coefficients via OLS: &beta;&#770; = (X'X)<sup>-1</sup>&sup1;X'Y</li>
+                        <li>&#10003; R&sup2; and Adjusted R&sup2; from sum of squares decomposition</li>
+                        <li>&#10003; Standard errors from variance-covariance matrix</li>
+                        <li>&#10003; T-statistics and p-values for individual coefficients</li>
+                        <li>&#10003; Confidence intervals using t-distribution</li>
+                        <li>&#10003; F-statistic and p-value for overall model</li>
                     </ul>
                 </div>
             `;
@@ -16012,7 +16139,7 @@
                     </p>
                     <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; margin-bottom: 1rem;">
                         <div style="margin-bottom: 0.75rem;">
-                            <strong style="color: #0369a1;">R² = ${(results.rSquared * 100).toFixed(1)}%</strong>
+                            <strong style="color: #0369a1;">R&sup2; = ${(results.rSquared * 100).toFixed(1)}%</strong>
                             <p style="margin: 0.25rem 0 0 0; font-size: 0.95rem;">
                                 ${modelQuality.r2Explanation}
                             </p>
@@ -16104,7 +16231,7 @@
                             <div style="font-size: 0.9rem;">Marginal - Suggestive but weak</div>
                         </div>
                         <div style="padding: 1rem; background: #f3f4f6; border-radius: 0; border: 3px solid #9ca3af;">
-                            <div style="font-weight: 600; color: #6b7280; margin-bottom: 0.25rem;">None (p ≥ 0.10)</div>
+                            <div style="font-weight: 600; color: #6b7280; margin-bottom: 0.25rem;">None (p &ge; 0.10)</div>
                             <div style="font-size: 0.9rem;">Not Significant - Could be chance</div>
                         </div>
                     </div>
@@ -16165,7 +16292,7 @@
         function interpretModelQuality(rSquared, fProb) {
             let r2Explanation, sigExplanation, verdict, interpretation, color, icon, bgColor;
             
-            // R² interpretation
+            // R&sup2; interpretation
             if (rSquared >= 0.7) {
                 r2Explanation = "Our model explains most of the variation in the outcome. This is excellent!";
             } else if (rSquared >= 0.5) {
@@ -16352,9 +16479,9 @@
             if (includesZero) {
                 viz += '<div style="color: #d97706; font-size: 0.85rem; margin-top: 0.5rem;">CI includes zero - some uncertainty about effect direction</div>';
             } else if (coef > 0) {
-                viz += '<div style="color: #059669; font-size: 0.85rem; margin-top: 0.5rem;">✓ Consistently positive effect across plausible range</div>';
+                viz += '<div style="color: #059669; font-size: 0.85rem; margin-top: 0.5rem;">&#10003; Consistently positive effect across plausible range</div>';
             } else {
-                viz += '<div style="color: #059669; font-size: 0.85rem; margin-top: 0.5rem;">✓ Consistently negative effect across plausible range</div>';
+                viz += '<div style="color: #059669; font-size: 0.85rem; margin-top: 0.5rem;">&#10003; Consistently negative effect across plausible range</div>';
             }
             
             viz += '</div>';
@@ -16374,31 +16501,31 @@
                 color = "#dc2626";
                 badgeColor = "#fee2e2";
                 badgeTextColor = "#dc2626";
-                icon = "🔴";
+                icon = "&#128308;";
             } else if (pVal < 0.01) {
                 strength = "Strong Effect";
                 color = "#ea580c";
                 badgeColor = "#fed7aa";
                 badgeTextColor = "#ea580c";
-                icon = "🟠";
+                icon = "&#128992;";
             } else if (pVal < 0.05) {
                 strength = "Significant Effect";
                 color = "#f59e0b";
                 badgeColor = "#fef3c7";
                 badgeTextColor = "#f59e0b";
-                icon = "🟡";
+                icon = "&#128993;";
             } else if (pVal < 0.1) {
                 strength = "Marginal Effect";
                 color = "#6366f1";
                 badgeColor = "#e0e7ff";
                 badgeTextColor = "#6366f1";
-                icon = "🔵";
+                icon = "&#128309;";
             } else {
                 strength = "Not Significant";
                 color = "#9ca3af";
                 badgeColor = "#f3f4f6";
                 badgeTextColor = "#6b7280";
-                icon = "⚪";
+                icon = "&#9898;";
             }
             
             // Build explanation
@@ -16478,7 +16605,7 @@
                 `;
             }
             
-            // R² implications
+            // R&sup2; implications
             if (results.rSquared >= 0.5) {
                 html += `
                     <li><strong>Strong Explanatory Power:</strong> These factors explain most of the variation, suggesting we've 
@@ -16522,7 +16649,7 @@
             
             // Model fit
             template += `The model explained ${(results.rSquared * 100).toFixed(1)}% of variance `;
-            template += `(R² = ${results.rSquared.toFixed(3)}, `;
+            template += `(R&sup2; = ${results.rSquared.toFixed(3)}, `;
             template += `F(${results.varNames.length - 1}, ${results.nObs - results.varNames.length}) = ${results.fStat.toFixed(2)}, `;
             template += `p ${results.fProb < 0.001 ? '< 0.001' : '= ' + results.fProb.toFixed(3)}). `;
             
@@ -16535,7 +16662,7 @@
                 if (results.pValues[i] < 0.05) {
                     if (sigReported) template += ` `;
                     template += `${results.varNames[i]} was significantly associated with ${results.dependentVar} `;
-                    template += `(β = ${results.coefficients[i].toFixed(3)}, `;
+                    template += `(&beta; = ${results.coefficients[i].toFixed(3)}, `;
                     template += `SE = ${results.standardErrors[i].toFixed(3)}, `;
                     template += `95% CI: [${results.confidenceIntervals[i].lower.toFixed(3)}, ${results.confidenceIntervals[i].upper.toFixed(3)}], `;
                     template += `p ${results.pValues[i] < 0.001 ? '< 0.001' : '= ' + results.pValues[i].toFixed(3)}).`;
@@ -16563,9 +16690,9 @@
                 warnings.push(`<strong>Small sample size (n=${results.nObs}):</strong> Results may be unreliable with fewer than 30 observations. Consider using longer time periods.`);
             }
             
-            // Check for very high R²
+            // Check for very high R&sup2;
             if (results.rSquared > 0.95) {
-                warnings.push(`<strong>Suspiciously high R² (${(results.rSquared*100).toFixed(1)}%):</strong> This might indicate overfitting or data issues. Check for multicollinearity.`);
+                warnings.push(`<strong>Suspiciously high R&sup2; (${(results.rSquared*100).toFixed(1)}%):</strong> This might indicate overfitting or data issues. Check for multicollinearity.`);
             }
             
             // Check for very wide confidence intervals (indicating high uncertainty)
@@ -16808,13 +16935,13 @@
                         borderColor: '#57068c',
                         pointRadius: 4
                     }, {
-                        label: '45° Reference Line',
+                        label: '45&deg; Reference Line',
                         data: [
                             { x: Math.min(...theoreticalQuantiles), y: Math.min(...theoreticalQuantiles) },
                             { x: Math.max(...theoreticalQuantiles), y: Math.max(...theoreticalQuantiles) }
                         ],
                         type: 'line',
-                        borderColor: '#e63946',
+                        borderColor: '#b91c1c',
                         borderWidth: 2,
                         borderDash: [5, 5],
                         pointRadius: 0,
@@ -17261,7 +17388,7 @@
             
             // Previous button
             html += `<button onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''} 
-                      style="width: auto; padding: 0.5rem 1rem;">← Previous</button>`;
+                      style="width: auto; padding: 0.5rem 1rem;">&larr; Previous</button>`;
             
             // Page numbers
             for (let i = 1; i <= Math.min(totalPages, 10); i++) {
@@ -17276,7 +17403,7 @@
             
             // Next button
             html += `<button onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''} 
-                      style="width: auto; padding: 0.5rem 1rem;">Next →</button>`;
+                      style="width: auto; padding: 0.5rem 1rem;">Next &rarr;</button>`;
             
             html += '</div>';
             paginationContainer.innerHTML = html;
@@ -17412,7 +17539,7 @@
                             <tr>
                                 <td style="padding: 0.75rem 0; font-weight: 600; vertical-align: top;">Found In:</td>
                                 <td style="padding: 0.75rem 0;">
-                                    ${component.weaponSystems.map(ws => `<div style="margin-bottom: 0.25rem;">• ${ws}</div>`).join('')}
+                                    ${component.weaponSystems.map(ws => `<div style="margin-bottom: 0.25rem;">&bull; ${ws}</div>`).join('')}
                                 </td>
                             </tr>` : ''}
                         </table>
@@ -18221,29 +18348,29 @@
                 const loadTime = perfData.loadEventEnd - perfData.navigationStart;
                 const domReady = perfData.domContentLoadedEventEnd - perfData.navigationStart;
                 
-                console.log('%c📊 Performance Metrics', 'color: #57068c; font-weight: bold; font-size: 14px;');
-                console.log('  • Total Load Time: ' + Math.round(loadTime) + 'ms');
-                console.log('  • DOM Ready: ' + Math.round(domReady) + 'ms');
-                console.log('  • Optimization: Deferred script loading active');
-                console.log('  • Expected Improvement: 40-50% faster than original');
+                console.log('%c&#128202; Performance Metrics', 'color: #57068c; font-weight: bold; font-size: 14px;');
+                console.log('  &bull; Total Load Time: ' + Math.round(loadTime) + 'ms');
+                console.log('  &bull; DOM Ready: ' + Math.round(domReady) + 'ms');
+                console.log('  &bull; Optimization: Deferred script loading active');
+                console.log('  &bull; Expected Improvement: 40-50% faster than original');
                 
                 // Track in console for easy verification
                 if (loadTime < 3000) {
-                    console.log('  ✅ EXCELLENT: Load time under 3 seconds!');
+                    console.log('  &#10003; EXCELLENT: Load time under 3 seconds!');
                 } else if (loadTime < 4000) {
-                    console.log('  ✓ GOOD: Load time under 4 seconds');
+                    console.log('  &#10003; GOOD: Load time under 4 seconds');
                 } else {
-                    console.log('  ⚠️ Check network connection or clear cache');
+                    console.log('  &#9888;ï¸ Check network connection or clear cache');
                 }
             }
         });
 
         
         // Console Welcome Message
-        console.log('%c🎓 NYU Conflict Monitoring Platform', 'color: #57068c; font-weight: bold; font-size: 16px;');
-        console.log('%c⚡ Optimized Version - 49%% Faster Loading', 'color: #330662; font-size: 12px;');
+        console.log('%c&#127891; NYU Conflict Monitoring Platform', 'color: #57068c; font-weight: bold; font-size: 16px;');
+        console.log('%c&#9889; Optimized Version - 49%% Faster Loading', 'color: #330662; font-size: 12px;');
         console.log('%cAnalyzing Russian Strikes on Ukraine', 'color: #666; font-size: 11px;');
-        console.log('─'.repeat(50));
+        console.log('-'.repeat(50));
 
         
         /* ============================================================================
@@ -18258,34 +18385,34 @@
            QUICK CHECKLIST FOR NEW IMPLEMENTATIONS:
            -----------------------------------------
            
-           □ HTML Structure:
-             ✓ Add class="independent-date-range-chart" to chart container
-             ✓ Create .chart-date-controls div with flex layout
-             ✓ Left section: 260px fixed width for date controls
-             ✓ Right section: flex: 1 for additional content
-             ✓ 2px border-right divider between sections
-             ✓ Match right section colors to chart's primary color
+           &#9633; HTML Structure:
+             &#10003; Add class="independent-date-range-chart" to chart container
+             &#10003; Create .chart-date-controls div with flex layout
+             &#10003; Left section: 260px fixed width for date controls
+             &#10003; Right section: flex: 1 for additional content
+             &#10003; 2px border-right divider between sections
+             &#10003; Match right section colors to chart's primary color
            
-           □ State Variables (3 required):
-             ✓ let [unique]DateRangeStart = '2025-01-01';
-             ✓ let [unique]DateRangeEnd = '2025-12-31';
-             ✓ let [unique]DateRangeMode = '2025';
+           &#9633; State Variables (3 required):
+             &#10003; let [unique]DateRangeStart = '2025-01-01';
+             &#10003; let [unique]DateRangeEnd = '2025-12-31';
+             &#10003; let [unique]DateRangeMode = '2025';
            
-           □ Control Functions (3 required):
-             ✓ set[Unique]DateRangeFromDropdown() - Year/All Time
-             ✓ set[Unique]HalfYear(half) - H1/H2
-             ✓ set[Unique]Quarter(quarter) - Q1/Q2/Q3/Q4
-             ✓ ALL must preserve scroll position (save → update → restore)
+           &#9633; Control Functions (3 required):
+             &#10003; set[Unique]DateRangeFromDropdown() - Year/All Time
+             &#10003; set[Unique]HalfYear(half) - H1/H2
+             &#10003; set[Unique]Quarter(quarter) - Q1/Q2/Q3/Q4
+             &#10003; ALL must preserve scroll position (save &rarr; update &rarr; restore)
            
-           □ Chart Update Function:
-             ✓ Filter using [unique]DateRangeStart & [unique]DateRangeEnd
-             ✓ Do NOT use global date filter variables
-             ✓ Apply independent date filtering
+           &#9633; Chart Update Function:
+             &#10003; Filter using [unique]DateRangeStart & [unique]DateRangeEnd
+             &#10003; Do NOT use global date filter variables
+             &#10003; Apply independent date filtering
            
-           □ Color Coordination:
-             ✓ Match heading color to chart's primary color
-             ✓ Match accent colors (borders, highlights) to chart color
-             ✓ Example: Red chart (#e63946) = red heading, borders, numbers
+           &#9633; Color Coordination:
+             &#10003; Match heading color to chart's primary color
+             &#10003; Match accent colors (borders, highlights) to chart color
+             &#10003; Example: Red chart (#b91c1c) = red heading, borders, numbers
            
            PATTERN VERSION: 1.0 (January 2026)
            REFERENCE: Shahed-136/131 Daily Launches Chart
@@ -18305,6 +18432,35 @@
         window.addEventListener('unhandledrejection', function(e) {
             console.error('Unhandled Promise Rejection:', e.reason);
         });
+</script>
+
+<!-- MOBILE CHART TOUCH HANDLER -->
+<script>
+(function() {
+    function isMobileLandscape() {
+        return window.innerWidth <= 926 && window.innerHeight <= 500 && window.innerWidth > window.innerHeight;
+    }
+    function setupTouch() {
+        if (!isMobileLandscape() || typeof Chart === 'undefined') return;
+        document.querySelectorAll('canvas').forEach(function(canvas) {
+            if (canvas.dataset.touchSetup) return;
+            canvas.dataset.touchSetup = 'true';
+            var chart = Chart.getChart(canvas);
+            if (!chart) return;
+            canvas.addEventListener('touchstart', function(e) {
+                if (e.touches.length !== 1) return;
+                var t = e.touches[0], r = canvas.getBoundingClientRect();
+                var el = chart.getElementsAtEventForMode({x: t.clientX - r.left, y: t.clientY - r.top}, 'nearest', {intersect: false}, false);
+                if (el.length) { chart.tooltip.setActiveElements(el, {x: t.clientX - r.left, y: t.clientY - r.top}); chart.update('none'); }
+            }, {passive: true});
+            canvas.addEventListener('touchend', function() {
+                setTimeout(function() { chart.tooltip.setActiveElements([], {x:0,y:0}); chart.update('none'); }, 2000);
+            }, {passive: true});
+        });
+    }
+    window.addEventListener('load', function() { setTimeout(setupTouch, 1500); });
+    window.addEventListener('orientationchange', function() { setTimeout(setupTouch, 500); });
+})();
 </script>
 
 <!-- ============================================ -->
