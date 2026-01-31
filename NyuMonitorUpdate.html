@@ -1975,21 +1975,32 @@
                 font-size: 0.55rem !important;
             }
             
-            /* Parallel Coordinates chart - prevent overflow */
+            /* Parallel Coordinates chart - prevent overflow and force left alignment */
             #complexityParallelChart {
                 width: 100% !important;
                 max-width: 100% !important;
-                margin: 0 !important;  /* No auto margins - keep left-aligned */
+                margin: 0 !important;
+                padding: 0 !important;
                 overflow-x: hidden !important;
                 overflow-y: visible !important;
                 height: 300px !important;
-                padding: 0 !important;
                 box-sizing: border-box !important;
+                position: relative !important;
             }
             #complexityParallelChart svg {
-                max-width: 98% !important;  /* Slightly reduce to prevent overflow */
+                max-width: 96% !important;  /* Reduce more to prevent overflow */
+                width: 96% !important;  /* Explicit width */
                 height: 300px !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                position: relative !important;
+                left: 0 !important;  /* Force to left edge */
+                transform: translateX(0) !important;  /* Ensure no transform offset */
                 overflow: visible !important;
+            }
+            #complexityParallelChart .plotly {
+                margin: 0 !important;
+                padding: 0 !important;
             }
             
             /* Chart titles with numbering (1., 2., 3., etc.) */
