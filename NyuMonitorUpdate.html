@@ -234,16 +234,6 @@
             z-index: 0;
         }
         
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--un-blue), var(--accent-red));
-        }
-        
         .stat-value {
             font-family: Helvetica, "Helvetica Neue";
             font-size: 3rem;
@@ -4024,7 +4014,7 @@
             <!-- Methodology Tab -->
             <div id="methodology" class="tab-content">
                 <div class="info-card">
-                    <h2 class="section-title">Methodology</h2>
+                    <h2 class="section-title">Methodology Under Development</h2>
                     <p class="section-subtitle">
                         Documentation of data collection, processing, and analytical methodologies employed in this platform.
                     </p>
@@ -4035,13 +4025,13 @@
                     <h3 class="chart-title">Data Collection &amp; Sources</h3>
                     <div style="padding: 1.5rem; line-height: 1.8;">
                         <p style="margin-bottom: 1.5rem;">
-                            The NYU Conflict Monitor aggregates data from official Ukrainian government sources, primarily the Ukrainian Air Force Command's official communications and the General Staff of the Armed Forces of Ukraine. These sources provide authoritative reporting on aerial attacks, including weapon types, quantities launched, interception results, and geographic information.
+                            The NYU Conflict Monitor aggregates strike data from the Petro Ivaniuk dataset and verifies it against official Ukrainian government sources, including official communications from the Ukrainian Air Force Command and the General Staff of the Armed Forces of Ukraine. These sources provide authoritative reporting on aerial attacks, including weapon types, quantities launched, interception results, and geographic information.
                         </p>
                         <p style="margin-bottom: 1.5rem;">
                             <strong>Primary Data Fields:</strong> Each strike event is recorded with the following attributes: attack initiation time (<code>time_start</code>), attack conclusion time (<code>time_end</code>), weapon system model, launch location, target designation, quantities launched, quantities intercepted, and affected regions. When available, detailed breakdowns of interception methods and impact locations are also captured.
                         </p>
                         <p>
-                            <strong>Data Refresh:</strong> The underlying dataset is updated as new official reports become available, typically within 24-48 hours of attack events. Historical data may be revised when Ukrainian authorities issue corrections or additional details.
+                            <strong>Data Refresh:</strong> The underlying dataset is updated as new official reports become available. Historical data may be revised when Ukrainian authorities issue corrections or additional details.
                         </p>
                     </div>
                 </div>
@@ -4078,12 +4068,12 @@
                                 Implications for Data Comparison
                             </p>
                             <p style="color: #15803d;">
-                                When comparing NYU Conflict Monitor data with other sources, researchers should expect a <strong>systematic one-day offset</strong> for the majority of strike events. Our data points will consistently appear one day earlier than sources using report-date attribution. This is not a data error but a methodological difference in temporal assignment.
+                                When comparing NYU Conflict Monitor data with other sources, researchers should expect a systematic one-day offset for the majority of strike events. Our data points will consistently appear one day earlier than sources using report-date attribution. This is not a data error but a methodological difference in temporal assignment.
                             </p>
                         </div>
                         
                         <p>
-                            <strong>Rationale for Our Approach:</strong> For analyses grounded in game theory and strategic decision-making frameworks, the attack initiation time more accurately reflects the timing of Russian strategic choices. The launch time represents when the decision to strike was operationalized, which is the analytically relevant moment for studying offensive behavior, deterrence dynamics, and strategic timing patterns. The report publication time, by contrast, reflects Ukrainian information processing and communication cycles rather than Russian decision-making.
+                            <strong>Rationale for Our Approach:</strong> This site is the public facing visualization of the dataset this project is separately conducting research on for game theoretic and strategic decision-making analysis. For these purposes, the attack initiation time more accurately reflects the timing of Russian strategic choices. The launch time represents when the decision to strike was operationalized, which is the analytically relevant moment for studying offensive behavior, deterrence dynamics, and strategic timing patterns. The report publication time reflects Ukrainian information processing and communication cycles rather than Russian decision-making.
                         </p>
                     </div>
                 </div>
@@ -4108,7 +4098,7 @@
                             Interception percentages are calculated as: <em>Interception Rate = (Destroyed ÷ Launched) × 100</em>. The "destroyed" count includes weapons reported as shot down by air defense systems as well as those neutralized by electronic warfare (jammed or lost). Weapons categorized as "not reaching goal" or "still attacking" at report time are handled according to subsequent official updates when available.
                         </p>
                         
-                        <h4 style="color: var(--un-blue); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);">Attack Complexity Tiers</h4>
+                        <h4 style="color: var(--un-blue); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);">Attack Complexity Tiers (Under Development)</h4>
                         <p style="margin-bottom: 1.5rem;">
                             The Attack Complexity Analysis module classifies strikes by the number of distinct weapon systems employed simultaneously. Complexity tiers are defined as:
                         </p>
@@ -4146,7 +4136,7 @@
                         
                         <h4 style="color: var(--un-blue); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);">Components Intelligence Database</h4>
                         <p>
-                            The Components Database draws exclusively from publicly verified sources including Ukrainian government intelligence releases (GUR), internationally recognized think tank analyses, and official sanctions documentation. Component identification relies on photographic evidence from recovered weapons systems published by Ukrainian authorities and verified open-source intelligence.
+                            The Components Database draws exclusively from our custom scraping tool that collects and stores public reports from ГУР on foreign components. Component identification relies on photographic evidence from recovered weapons systems published by Ukrainian authorities and verified open-source intelligence.
                         </p>
                     </div>
                 </div>
@@ -4223,24 +4213,10 @@
                         <div>
                             <label class="control-label">Auto-Refresh</label>
                             <select id="alertRefreshInterval" onchange="updateAlertRefreshInterval()">
-                                <option value="0">Manual Only</option>
-                                <option value="30">Every 30 seconds</option>
                                 <option value="60" selected>Every 1 minute</option>
                                 <option value="120">Every 2 minutes</option>
                                 <option value="300">Every 5 minutes</option>
                             </select>
-                        </div>
-                        <div>
-                            <label class="control-label">&nbsp;</label>
-                            <button onclick="fetchAlertData()" style="background: #06d6a0; width: 100%;">
-                                &#128260; Refresh Now
-                            </button>
-                        </div>
-                        <div>
-                            <label class="control-label">&nbsp;</label>
-                            <button onclick="toggleAlertHistory()" style="background: var(--accent-amber); width: 100%;">
-                                &#128202; View History
-                            </button>
                         </div>
                     </div>
                     <div style="margin-top: 1rem; padding: 0.75rem; background: #f8f9fa; border-radius: 0; text-align: center; font-size: 0.9rem;">
@@ -4251,40 +4227,35 @@
                 
                 <!-- Alert Summary Statistics -->
                 <div class="stats-grid" style="margin-bottom: 2rem;">
-                    <div class="stat-card">
+                    <div class="stat-card" style="border: 3px solid var(--un-blue);">
                         <div class="stat-value" id="alertTotalRegions">--</div>
                         <div class="stat-label">Total Regions (Oblasts)</div>
                     </div>
-                    <div class="stat-card">
+                    <div class="stat-card" style="border: 3px solid #b91c1c;">
                         <div class="stat-value" id="alertRegionsUnderAlert" style="color: #b91c1c;">--</div>
                         <div class="stat-label">Oblasts Under Alert</div>
                     </div>
-                    <div class="stat-card">
+                    <div class="stat-card" style="border: 3px solid #06d6a0;">
                         <div class="stat-value" id="alertRegionsClear" style="color: #06d6a0;">--</div>
                         <div class="stat-label">Oblasts Clear</div>
                     </div>
-                    <div class="stat-card">
+                    <div class="stat-card" style="border: 3px solid var(--accent-amber);">
                         <div class="stat-value" id="alertTotalActiveAlerts">--</div>
                         <div class="stat-label">Total Active Alerts (All Levels)</div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="alertPercentageUnderAlert">--%</div>
+                    <div class="stat-card" style="border: 3px solid #f77f00;">
+                        <div class="stat-value" id="alertPercentageUnderAlert" style="color: #f77f00;">--%</div>
                         <div class="stat-label">% Oblasts Under Alert</div>
                     </div>
                 </div>
                 
-                <div style="background: #e8f4f8; padding: 1rem; border-radius: 0; margin-bottom: 2rem; border: 4px solid var(--un-blue);">
-                    <p style="margin: 0; font-size: 0.9rem; color: var(--text-secondary);">
-                        <strong>Note:</strong> Summary statistics show main regions (oblasts/states). The "All Regions Status" section below includes districts and communities for detailed monitoring.
-                    </p>
-                </div>
                 
                 <!-- Active Alerts Map View -->
                 <div class="chart-container" id="activeAlertsContainer">
                     <h3 class="chart-title">&#128680; Regions with Active Alerts</h3>
                     <div id="activeAlertsList" style="padding: 1rem;">
                         <p style="text-align: center; color: var(--text-secondary); padding: 2rem;">
-                            Click "Refresh Now" to load current alert data
+                            Loading alert data automatically...
                         </p>
                     </div>
                 </div>
@@ -4294,20 +4265,8 @@
                     <h3 class="chart-title">All Regions Status Overview</h3>
                     <div id="allRegionsStatus" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; padding: 1rem;">
                         <p style="text-align: center; color: var(--text-secondary); padding: 2rem; grid-column: 1 / -1;">
-                            Click "Refresh Now" to load current alert data
+                            Loading alert data automatically...
                         </p>
-                    </div>
-                </div>
-                
-                <!-- Alert History (hidden by default) -->
-                <div class="chart-container" id="alertHistoryContainer" style="display: none;">
-                    <h3 class="chart-title">Alert History Timeline</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9rem;">
-                        Historical alert data collected during this session. Export data for long-term analysis.
-                    </p>
-                    <canvas id="alertHistoryChart"></canvas>
-                    <div id="alertHistoryStats" style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 0; font-size: 0.9rem;">
-                        No historical data collected yet. Data collection begins when auto-refresh is enabled.
                     </div>
                 </div>
                 
@@ -4319,18 +4278,17 @@
                     <table id="alertDataTable">
                         <thead>
                             <tr>
-                                <th>Status</th>
-                                <th>Region (English)</th>
-                                <th>Region (Ukrainian)</th>
-                                <th>Region Type</th>
-                                <th>Active Alerts</th>
+                                <th>Region</th>
+                                <th>Alert Status</th>
+                                <th>Alert Type</th>
+                                <th>Changed At</th>
                                 <th>Last Update</th>
                             </tr>
                         </thead>
                         <tbody id="alertTableBody">
                             <tr>
-                                <td colspan="6" style="text-align: center; color: var(--text-secondary); padding: 2rem;">
-                                    No alert data loaded. Click "Refresh Now" to load current data.
+                                <td colspan="5" style="text-align: center; color: var(--text-secondary); padding: 2rem;">
+                                    Loading alert data automatically...
                                 </td>
                             </tr>
                         </tbody>
@@ -15208,11 +15166,6 @@
             
             // Update data table
             updateAlertTable();
-            
-            // Update history chart if visible
-            if (document.getElementById('alertHistoryContainer').style.display !== 'none') {
-                updateAlertHistoryChart();
-            }
         }
         
         /**
@@ -15259,7 +15212,7 @@
                 stateRegions.forEach(region => {
                     const alertCount = region.activeAlerts.length;
                     const alertIntensity = alertCount > 3 ? 'high' : alertCount > 1 ? 'medium' : 'low';
-                    const bgColor = alertIntensity === 'high' ? '#b91c1c' : alertIntensity === 'medium' ? '#f77f00' : '#f4a261';
+                    const bgColor = alertIntensity === 'high' ? '#b91c1c' : alertIntensity === 'medium' ? '#f77f00' : '#f59e0b';
                     const alertTypes = region.activeAlerts.map(a => a.type).join(', ');
                     
                     html += `
@@ -15300,7 +15253,7 @@
                 otherRegions.forEach(region => {
                     const alertCount = region.activeAlerts.length;
                     const alertIntensity = alertCount > 3 ? 'high' : alertCount > 1 ? 'medium' : 'low';
-                    const bgColor = alertIntensity === 'high' ? '#b91c1c' : alertIntensity === 'medium' ? '#f77f00' : '#f4a261';
+                    const bgColor = alertIntensity === 'high' ? '#b91c1c' : alertIntensity === 'medium' ? '#f77f00' : '#f59e0b';
                     const alertTypes = region.activeAlerts.map(a => a.type).join(', ');
                     
                     html += `
@@ -15425,117 +15378,6 @@
         /**
          * Update the alert history chart
          */
-        function updateAlertHistoryChart() {
-            if (alertData.history.length < 2) {
-                document.getElementById('alertHistoryStats').innerHTML = 
-                    'Insufficient data for chart. Minimum 2 data points required. Current: ' + alertData.history.length;
-                return;
-            }
-            
-            const ctx = document.getElementById('alertHistoryChart');
-            
-            const labels = alertData.history.map(h => {
-                const time = new Date(h.timestamp);
-                return time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-            });
-            
-            const regionsUnderAlert = alertData.history.map(h => h.summary.regionsUnderAlert);
-            const totalAlerts = alertData.history.map(h => h.summary.totalActiveAlerts);
-            
-            if (charts.alertHistory) {
-                charts.alertHistory.destroy();
-            }
-            
-            charts.alertHistory = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [
-                        {
-                            label: 'Regions Under Alert',
-                            data: regionsUnderAlert,
-                            borderColor: '#b91c1c',
-                            backgroundColor: 'rgba(185, 28, 28, 0.1)',
-                            tension: 0.3,
-                            fill: true,
-                            yAxisID: 'y'
-                        },
-                        {
-                            label: 'Total Active Alerts',
-                            data: totalAlerts,
-                            borderColor: '#f77f00',
-                            backgroundColor: 'rgba(247, 127, 0, 0.1)',
-                            tension: 0.3,
-                            fill: true,
-                            yAxisID: 'y1'
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    interaction: {
-                        mode: 'index',
-                        intersect: false
-                    },
-                    plugins: {
-                        legend: {
-                            position: 'top'
-                        },
-                        tooltip: {
-                            mode: 'index',
-                            intersect: false
-                        }
-                    },
-                    scales: {
-                        y: {
-                            type: 'linear',
-                            display: true,
-                            position: 'left',
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Regions Under Alert',
-                                font: { size: 13, weight: 'bold' }
-                            }
-                        },
-                        y1: {
-                            type: 'linear',
-                            display: true,
-                            position: 'right',
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Total Active Alerts',
-                                font: { size: 13, weight: 'bold' }
-                            },
-                            grid: {
-                                drawOnChartArea: false
-                            }
-                        }
-                    }
-                }
-            });
-            
-            // Update statistics
-            const avgRegions = (regionsUnderAlert.reduce((a, b) => a + b, 0) / regionsUnderAlert.length).toFixed(1);
-            const maxRegions = Math.max(...regionsUnderAlert);
-            const avgAlerts = (totalAlerts.reduce((a, b) => a + b, 0) / totalAlerts.length).toFixed(1);
-            const maxAlerts = Math.max(...totalAlerts);
-            
-            const startTime = new Date(alertData.history[0].timestamp).toLocaleString();
-            const endTime = new Date(alertData.history[alertData.history.length - 1].timestamp).toLocaleString();
-            
-            document.getElementById('alertHistoryStats').innerHTML = `
-                <strong>Historical Data Summary:</strong><br/>
-                &bull; Data points collected: ${alertData.history.length}<br/>
-                &bull; Time range: ${startTime} to ${endTime}<br/>
-                &bull; Average regions under alert: ${avgRegions}<br/>
-                &bull; Maximum regions under alert: ${maxRegions}<br/>
-                &bull; Average total alerts: ${avgAlerts}<br/>
-                &bull; Maximum total alerts: ${maxAlerts}
-            `;
-        }
         
         /**
          * Format alert timestamp for display
@@ -15617,16 +15459,6 @@
         /**
          * Toggle alert history visibility
          */
-        function toggleAlertHistory() {
-            const container = document.getElementById('alertHistoryContainer');
-            
-            if (container.style.display === 'none') {
-                container.style.display = 'block';
-                updateAlertHistoryChart();
-            } else {
-                container.style.display = 'none';
-            }
-        }
         
         /**
          * Export alert data to JSON file
