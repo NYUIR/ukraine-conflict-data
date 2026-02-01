@@ -1028,43 +1028,6 @@
             z-index: 1000;
         }
         
-        /* Regression checkbox item styling */
-        .regression-checkbox-item {
-            margin-bottom: 1rem;
-            padding: 0.75rem;
-            background: white;
-            border-radius: 0;
-            border: 2px solid #e0e0e0;
-            transition: all 0.2s ease;
-        }
-        
-        .regression-checkbox-item:hover {
-            background: #f0f0ff;
-            border-color: var(--un-blue);
-            box-shadow: 0 2px 8px rgba(87, 6, 140, 0.1);
-        }
-        
-        .regression-checkbox-item:last-child {
-            margin-bottom: 0;
-        }
-        
-        .regression-checkbox-item label {
-            display: block;
-            cursor: pointer;
-            margin: 0;
-        }
-        
-        .regression-checkbox-item input[type="checkbox"] {
-            margin-right: 0.75rem;
-            cursor: pointer;
-            transform: scale(1.2);
-        }
-        
-        .regression-checkbox-item span {
-            font-size: 1rem;
-            vertical-align: middle;
-        }
-        
         /* ==================== */
         /* UTILITY CLASSES      */
         /* ==================== */
@@ -1551,21 +1514,6 @@
             .placeholder-title {
                 font-size: 1.1rem;
             }
-            
-            /* Regression checkbox items */
-            .regression-checkbox-item {
-                padding: 0.65rem;
-                margin-bottom: 0.75rem;
-            }
-            
-            .regression-checkbox-item input[type="checkbox"] {
-                transform: scale(1.1);
-                margin-right: 0.5rem;
-            }
-            
-            .regression-checkbox-item span {
-                font-size: 0.9rem;
-            }
         }
         
         /* Small Mobile Phones */
@@ -1683,15 +1631,6 @@
             .info-box-title,
             .warning-box-title {
                 font-size: 1rem;
-            }
-            
-            /* Regression checkboxes */
-            .regression-checkbox-item {
-                padding: 0.5rem;
-            }
-            
-            .regression-checkbox-item span {
-                font-size: 0.85rem;
             }
             
             /* Loading */
@@ -2178,10 +2117,6 @@
             
             .stats-display { padding: 0.4rem; font-size: 0.55rem; }
             
-            .regression-checkbox-item { padding: 0.35rem; margin-bottom: 0.35rem; }
-            .regression-checkbox-item input[type="checkbox"] { transform: scale(0.85); margin-right: 0.25rem; }
-            .regression-checkbox-item span { font-size: 0.55rem; }
-            
             .sankey-node text { font-size: 7px !important; }
             .network-label { font-size: 7px !important; }
             .tooltip-advanced { font-size: 9px; padding: 6px; }
@@ -2447,7 +2382,14 @@
             
             <!-- Tabs -->
             <div class="tabs">
-                <button class="tab active" onclick="switchTab('overview')">Overview</button>
+                <!-- Overview dropdown -->
+                <div class="tab-dropdown" id="overviewDropdown">
+                    <button class="tab active" id="overviewTab">Overview &#9660;</button>
+                    <div class="tab-dropdown-content" id="overviewDropdownContent">
+                        <button class="tab-dropdown-item" onclick="switchTab('overview')">Overview</button>
+                        <button class="tab-dropdown-item" onclick="switchTab('methodology')">Methodology</button>
+                    </div>
+                </div>
                 
                 <!-- Weapons dropdown -->
                 <div class="tab-dropdown" id="weaponsDropdown">
@@ -2466,8 +2408,8 @@
                     <button class="tab" id="advancedTab">Advanced Analytics &#9660;</button>
                     <div class="tab-dropdown-content" id="advancedDropdownContent">
                         <button class="tab-dropdown-item" onclick="switchTab('complexity')">Attack Complexity</button>
+                        <button class="tab-dropdown-item" onclick="switchTab('strikeTiming')">Strike Timing</button>
                         <button class="tab-dropdown-item" onclick="switchTab('advancedFrequency')">Frequency Analysis</button>
-                        <button class="tab-dropdown-item" onclick="switchTab('regression')">Regression Analysis</button>
                         <button class="tab-dropdown-item" onclick="switchTab('geographic')">Geographic</button>
                     </div>
                 </div>
@@ -2639,11 +2581,11 @@
                             <div style="display: flex; justify-content: space-between; align-items: center;">
                                 <h4 style="margin: 0; color: var(--un-blue); font-size: 1rem; border-bottom: 2px solid var(--un-blue); padding-bottom: 0.3rem; flex: 1;">Analysis Notes</h4>
                                 <button id="toggleWeaponViewBtn" onclick="toggleWeaponView()" style="width: auto; padding: 0.5rem 1.5rem; font-size: 0.85rem; margin-left: 1rem;">
-                                    Exclude Shahed-136
+                                    All Systems
                                 </button>
                             </div>
                             <p style="margin: 0; color: var(--text-secondary); font-size: 0.85rem; line-height: 1.5;">
-                                Most frequently deployed weapon systems ranked by launch volume. Toggle to exclude/include Shahed-136/131 drones.
+                                Most frequently deployed weapon systems ranked by launch volume. Toggle to exclude/include Shahed-136/131 drones and other UAVs.
                             </p>
                         </div>
                     </div>
@@ -3094,7 +3036,7 @@
                 
                 <!-- Specific Target Regions - INDEPENDENT DATE RANGE CHART -->
                 <div class="chart-container independent-date-range-chart">
-                    <h3 class="chart-title">Specific Target Regions</h3>
+                    <h3 class="chart-title">Specific Target Regions (Under Development)</h3>
                     
                     <!-- Embedded Date Range Controls (Independent from toolbar filters) -->
                     <div class="chart-date-controls" style="display: flex; gap: 1.5rem; padding: 1rem; background: #f8f9fa; border-radius: 0; margin-bottom: 1rem; border: 1px solid var(--border);">
@@ -3131,7 +3073,7 @@
                         <div style="flex: 1; display: flex; flex-direction: column; gap: 0.5rem;">
                             <h4 style="margin: 0; color: var(--un-blue); font-size: 1rem; border-bottom: 2px solid var(--un-blue); padding-bottom: 0.3rem;">Analysis Notes</h4>
                             <p style="margin: 0; color: var(--text-secondary); font-size: 0.85rem; line-height: 1.5;">
-                                Regional targeting patterns revealing strategic priorities and areas under sustained offensive pressure.
+                                Regional targeting patterns revealing strategic priorities and areas under sustained offensive pressure. Section currently under development to enhance filtering of data and location specification. Check back soon for updates!
                             </p>
                         </div>
                     </div>
@@ -3212,114 +3154,11 @@
                     <div id="complexityTimeSeriesStats" style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 0; font-size: 0.9rem;"></div>
                 </div>
                 
-                <!-- Option 2: Stacked Area Chart - INDEPENDENT DATE RANGE CHART -->
-                <div class="chart-container independent-date-range-chart">
-                    <h3 class="chart-title">2. Complexity Decomposition (Stacked Area)</h3>
-                    
-                    <!-- Embedded Date Range Controls (Independent from toolbar filters) -->
-                    <div class="chart-date-controls" style="display: flex; gap: 1.5rem; padding: 1rem; background: #f8f9fa; border-radius: 0; margin-bottom: 1rem; border: 1px solid var(--border);">
-                        <!-- LEFT SECTION: Date Selection Controls (~1/3 width) -->
-                        <div style="flex: 0 0 260px; display: flex; flex-direction: column; gap: 0.5rem; border-right: 2px solid var(--border); padding-right: 1.5rem;">
-                            <select id="stackedYearSelect" onchange="setStackedDateRangeFromDropdown()" style="padding: 0.5rem 0.8rem; border: 1px solid var(--border); border-radius: 0; font-weight: 500; font-size: 0.9rem;">
-                                <option value="all">All Time</option>
-                                <option value="2026">2026</option>
-                                <option value="2025" selected>2025</option>
-                                <option value="2024">2024</option>
-                                <option value="2023">2023</option>
-                                <option value="2022">2022</option>
-                            </select>
-                            
-                            <!-- H1/H2 and Q1-Q4 buttons -->
-                            <div style="display: flex; flex-direction: column; gap: 0.4rem;">
-                                <div style="display: flex; gap: 0.5rem;">
-                                    <button onclick="setStackedHalfYear('H1')" class="filter-button" style="flex: 1; padding: 0.4rem 0.6rem; font-size: 0.85rem;">H1</button>
-                                    <button onclick="setStackedHalfYear('H2')" class="filter-button" style="flex: 1; padding: 0.4rem 0.6rem; font-size: 0.85rem;">H2</button>
-                                </div>
-                                <div style="display: flex; gap: 0.5rem;">
-                                    <button onclick="setStackedQuarter('Q1')" class="filter-button" style="flex: 1; padding: 0.4rem 0.6rem; font-size: 0.85rem;">Q1</button>
-                                    <button onclick="setStackedQuarter('Q2')" class="filter-button" style="flex: 1; padding: 0.4rem 0.6rem; font-size: 0.85rem;">Q2</button>
-                                    <button onclick="setStackedQuarter('Q3')" class="filter-button" style="flex: 1; padding: 0.4rem 0.6rem; font-size: 0.85rem;">Q3</button>
-                                    <button onclick="setStackedQuarter('Q4')" class="filter-button" style="flex: 1; padding: 0.4rem 0.6rem; font-size: 0.85rem;">Q4</button>
-                                </div>
-                            </div>
-                            
-                            <!-- Display Indicator -->
-                            <div id="stackedDateRangeDisplay" style="padding: 0.5rem; background: white; border: 1px solid var(--border); border-radius: 0; font-size: 0.85rem; color: var(--text-secondary); text-align: center;">
-                                <strong style="color: var(--text-primary);">2025</strong>
-                            </div>
-                        </div>
-                        
-                        <!-- RIGHT SECTION: Notes & Analysis Context (~2/3 width) -->
-                        <div style="flex: 1; display: flex; flex-direction: column; gap: 0.5rem;">
-                            <h4 style="margin: 0; color: var(--un-blue); font-size: 1rem; border-bottom: 2px solid var(--un-blue); padding-bottom: 0.3rem;">Analysis Notes</h4>
-                            <div style="flex: 1; display: flex; flex-direction: column; gap: 0.75rem;">
-                                <p style="margin: 0; color: var(--text-secondary); font-size: 0.85rem; line-height: 1.5;">
-                                    <strong>Purpose:</strong> Shows compositional breakdown revealing which dimension drives complexity changes.
-                                </p>
-                                <p style="margin: 0; color: var(--text-secondary); font-size: 0.85rem; line-height: 1.5;">
-                                    <strong>Insights:</strong> Analyzes resource allocation priorities and strategic investment patterns.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <canvas id="complexityStackedChart" style="width: 100%; height: 450px;"></canvas>
-                    
-                    <!-- Compositional Analysis Stats (below chart) -->
-                    <div id="complexityStackedStats" style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 0; font-size: 0.9rem;"></div>
-                </div>
                 
-                <!-- Option 3: Heatmap Matrix - INDEPENDENT DATE RANGE CHART -->
-                <div class="chart-container independent-date-range-chart">
-                    <h3 class="chart-title">3. Pattern Recognition Heatmap</h3>
-                    
-                    <!-- Embedded Date Range Controls (Independent from toolbar filters) -->
-                    <div class="chart-date-controls" style="display: flex; gap: 1.5rem; padding: 1rem; background: #f8f9fa; border-radius: 0; margin-bottom: 1rem; border: 1px solid var(--border);">
-                        <!-- LEFT SECTION: Date Selection Controls (~1/3 width) -->
-                        <div style="flex: 0 0 260px; display: flex; flex-direction: column; gap: 0.5rem; border-right: 2px solid var(--border); padding-right: 1.5rem;">
-                            <select id="heatmapYearSelect" onchange="setHeatmapDateRangeFromDropdown()" style="padding: 0.5rem 0.8rem; border: 1px solid var(--border); border-radius: 0; font-weight: 500; font-size: 0.9rem;">
-                                <option value="all">All Time</option>
-                                <option value="2026">2026</option>
-                                <option value="2025" selected>2025</option>
-                                <option value="2024">2024</option>
-                                <option value="2023">2023</option>
-                                <option value="2022">2022</option>
-                            </select>
-                            
-                            <div style="display: flex; flex-direction: column; gap: 0.4rem;">
-                                <div style="display: flex; gap: 0.5rem;">
-                                    <button onclick="setHeatmapHalfYear('H1')" class="filter-button" style="flex: 1; padding: 0.4rem 0.6rem; font-size: 0.85rem;">H1</button>
-                                    <button onclick="setHeatmapHalfYear('H2')" class="filter-button" style="flex: 1; padding: 0.4rem 0.6rem; font-size: 0.85rem;">H2</button>
-                                </div>
-                                <div style="display: flex; gap: 0.5rem;">
-                                    <button onclick="setHeatmapQuarter('Q1')" class="filter-button" style="flex: 1; padding: 0.4rem 0.6rem; font-size: 0.85rem;">Q1</button>
-                                    <button onclick="setHeatmapQuarter('Q2')" class="filter-button" style="flex: 1; padding: 0.4rem 0.6rem; font-size: 0.85rem;">Q2</button>
-                                    <button onclick="setHeatmapQuarter('Q3')" class="filter-button" style="flex: 1; padding: 0.4rem 0.6rem; font-size: 0.85rem;">Q3</button>
-                                    <button onclick="setHeatmapQuarter('Q4')" class="filter-button" style="flex: 1; padding: 0.4rem 0.6rem; font-size: 0.85rem;">Q4</button>
-                                </div>
-                            </div>
-                            
-                            <div id="heatmapDateRangeDisplay" style="padding: 0.5rem; background: white; border: 1px solid var(--border); border-radius: 0; font-size: 0.85rem; color: var(--text-secondary); text-align: center;">
-                                <strong style="color: var(--text-primary);">2025</strong>
-                            </div>
-                        </div>
-                        
-                        <!-- RIGHT SECTION: Analysis Context (~2/3 width) -->
-                        <div style="flex: 1; display: flex; flex-direction: column; gap: 0.5rem;">
-                            <h4 style="margin: 0; color: var(--un-blue); font-size: 1rem; border-bottom: 2px solid var(--un-blue); padding-bottom: 0.3rem;">Analysis Notes</h4>
-                            <p style="margin: 0; color: var(--text-secondary); font-size: 0.85rem; line-height: 1.5;">
-                                <strong>Strategic Phase Identification:</strong> Matrix visualization showing standardized complexity scores across time.
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div id="complexityHeatmapChart" style="width: 100%; height: 400px;"></div>
-                    <div id="complexityHeatmapStats" style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 0; font-size: 0.9rem;"></div>
-                </div>
                 
                 <!-- Option 4: Parallel Coordinates -->
                 <div class="chart-container">
-                    <h3 class="chart-title">4. Multivariate Relationship Analysis (Parallel Coordinates)</h3>
+                    <h3 class="chart-title">2. Multivariate Relationship Analysis (Parallel Coordinates)</h3>
                     <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9rem;">
                         <strong>Trade-off Detection:</strong> Each line represents one week's strategic profile. 
                         Identifies constraints, trade-offs, and strategic archetypes in resource allocation.
@@ -3365,7 +3204,7 @@
                 
                 <!-- Option 5: Control Chart - INDEPENDENT DATE RANGE CHART -->
                 <div class="chart-container independent-date-range-chart">
-                    <h3 class="chart-title">5. Statistical Process Control Chart</h3>
+                    <h3 class="chart-title">3. Statistical Process Control Chart</h3>
                     
                     <!-- Embedded Date Range Controls (Independent from toolbar filters) -->
                     <div class="chart-date-controls" style="display: flex; gap: 1.5rem; padding: 1rem; background: #f8f9fa; border-radius: 0; margin-bottom: 1rem; border: 1px solid var(--border);">
@@ -3413,7 +3252,7 @@
                 
                 <!-- Option 6: Change Point Detection - INDEPENDENT DATE RANGE CHART -->
                 <div class="chart-container independent-date-range-chart">
-                    <h3 class="chart-title">6. Bayesian Change Point Detection</h3>
+                    <h3 class="chart-title">4. Bayesian Change Point Detection</h3>
                     
                     <!-- Embedded Date Range Controls (Independent from toolbar filters) -->
                     <div class="chart-date-controls" style="display: flex; gap: 1.5rem; padding: 1rem; background: #f8f9fa; border-radius: 0; margin-bottom: 1rem; border: 1px solid var(--border);">
@@ -3461,7 +3300,7 @@
                 
                 <!-- Option 7: PCA Biplot - INDEPENDENT DATE RANGE CHART -->
                 <div class="chart-container independent-date-range-chart">
-                    <h3 class="chart-title">7. Principal Component Analysis (PCA Biplot)</h3>
+                    <h3 class="chart-title">5. Principal Component Analysis (PCA Biplot)</h3>
                     
                     <!-- Embedded Date Range Controls (Independent from toolbar filters) -->
                     <div class="chart-date-controls" style="display: flex; gap: 1.5rem; padding: 1rem; background: #f8f9fa; border-radius: 0; margin-bottom: 1rem; border: 1px solid var(--border);">
@@ -3507,9 +3346,23 @@
                     <div id="complexityPCAStats" style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 0; font-size: 0.9rem;"></div>
                 </div>
                 
+            </div>
+            
+            <div id="strikeTiming" class="tab-content">
+                <!-- Introduction -->
+                <div class="info-card">
+                    <h2 class="section-title">Strike Timing Analysis</h2>
+                    <p class="section-subtitle">
+                        Temporal patterns in attack intervals revealing operational tempo, strategic pacing, and campaign intensity dynamics.
+                    </p>
+                    <p class="secondary-text" style="font-size: 0.95rem; margin-top: 1rem;">
+                        <strong>Focus Areas:</strong> Inter-strike intervals for complex multi-weapon attacks, complex missile-only strikes, and strategic cruise missile campaigns. Analysis identifies operational rhythms, surge capacity, and strategic timing patterns.
+                    </p>
+                </div>
+                
                 <!-- Option 8: Time Between Complex Strikes - INDEPENDENT DATE RANGE CHART -->
                 <div class="chart-container independent-date-range-chart">
-                    <h3 class="chart-title">8. Time Between Complex Strikes</h3>
+                    <h3 class="chart-title">Time Between Complex Strikes</h3>
                     
                     <!-- Embedded Date Range Controls (Independent from toolbar filters) -->
                     <div class="chart-date-controls" style="display: flex; gap: 1.5rem; padding: 1rem; background: #f8f9fa; border-radius: 0; margin-bottom: 1rem; border: 1px solid var(--border);">
@@ -3581,7 +3434,7 @@
                 
                 <!-- Option 9: Time Between Complex Missile Strikes - INDEPENDENT DATE RANGE CHART -->
                 <div class="chart-container independent-date-range-chart">
-                    <h3 class="chart-title">9. Time Between Complex Missile Strikes</h3>
+                    <h3 class="chart-title">Time Between Complex Missile Strikes</h3>
                     
                     <!-- Embedded Date Range Controls (Independent from toolbar filters) -->
                     <div class="chart-date-controls" style="display: flex; gap: 1.5rem; padding: 1rem; background: #f8f9fa; border-radius: 0; margin-bottom: 1rem; border: 1px solid var(--border);">
@@ -3653,7 +3506,7 @@
                 
                 <!-- Option 10: Time Between Kh-101/Kh-555 Strategic Strikes - INDEPENDENT DATE RANGE CHART -->
                 <div class="chart-container independent-date-range-chart">
-                    <h3 class="chart-title">10. Time Between Kh-101/Kh-555 Strategic Strikes</h3>
+                    <h3 class="chart-title">Time Between Kh-101/Kh-555 Strategic Strikes</h3>
                     
                     <!-- Embedded Date Range Controls -->
                     <div class="chart-date-controls" style="display: flex; gap: 1.5rem; padding: 1rem; background: #f8f9fa; border-radius: 0; margin-bottom: 1rem; border: 1px solid var(--border);">
@@ -3823,7 +3676,7 @@
                 
                 <!-- 3D Timeline Visualization - INDEPENDENT DATE RANGE CHART -->
                 <div class="chart-container independent-date-range-chart">
-                    <h3 class="chart-title">Multi-Dimensional Temporal Analysis</h3>
+                    <h3 class="chart-title">Strategic Intensity and Coordination Timeline</h3>
                     
                     <!-- Embedded Date Range Controls (Independent from toolbar filters) -->
                     <div class="chart-date-controls" style="display: flex; gap: 1.5rem; padding: 1rem; background: #f8f9fa; border-radius: 0; margin-bottom: 1rem; border: 1px solid var(--border);">
@@ -4168,6 +4021,138 @@
                 </div>
             </div>
             
+            <!-- Methodology Tab -->
+            <div id="methodology" class="tab-content">
+                <div class="info-card">
+                    <h2 class="section-title">Methodology</h2>
+                    <p class="section-subtitle">
+                        Documentation of data collection, processing, and analytical methodologies employed in this platform.
+                    </p>
+                </div>
+                
+                <!-- Data Collection Methodology -->
+                <div class="chart-container">
+                    <h3 class="chart-title">Data Collection &amp; Sources</h3>
+                    <div style="padding: 1.5rem; line-height: 1.8;">
+                        <p style="margin-bottom: 1.5rem;">
+                            The NYU Conflict Monitor aggregates data from official Ukrainian government sources, primarily the Ukrainian Air Force Command's official communications and the General Staff of the Armed Forces of Ukraine. These sources provide authoritative reporting on aerial attacks, including weapon types, quantities launched, interception results, and geographic information.
+                        </p>
+                        <p style="margin-bottom: 1.5rem;">
+                            <strong>Primary Data Fields:</strong> Each strike event is recorded with the following attributes: attack initiation time (<code>time_start</code>), attack conclusion time (<code>time_end</code>), weapon system model, launch location, target designation, quantities launched, quantities intercepted, and affected regions. When available, detailed breakdowns of interception methods and impact locations are also captured.
+                        </p>
+                        <p>
+                            <strong>Data Refresh:</strong> The underlying dataset is updated as new official reports become available, typically within 24-48 hours of attack events. Historical data may be revised when Ukrainian authorities issue corrections or additional details.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Date Attribution Methodology -->
+                <div class="chart-container" style="border-left: 4px solid #b91c1c;">
+                    <h3 class="chart-title" style="color: #b91c1c;">Date Attribution for Overnight Attacks</h3>
+                    <div style="padding: 1.5rem; line-height: 1.8;">
+                        <p style="margin-bottom: 1.5rem;">
+                            <strong>The Problem:</strong> Russian aerial attacks typically commence in evening hours (18:00-22:00 local Kyiv time) and continue through the night, concluding in early morning hours (05:00-09:00) the following calendar day. This creates an inherent ambiguity in date attribution: should an attack be recorded under the date it began or the date it concluded?
+                        </p>
+                        
+                        <div style="background: #fef2f2; border: 1px solid #fecaca; padding: 1.25rem; margin-bottom: 1.5rem; border-radius: 0;">
+                            <p style="margin-bottom: 1rem; font-weight: 600; color: #991b1b;">
+                                Example: Attack on the Night of September 6-7, 2025
+                            </p>
+                            <ul style="margin-left: 1.5rem; color: #7f1d1d;">
+                                <li style="margin-bottom: 0.5rem;"><strong>Attack initiated:</strong> 19:00 on September 6, 2025</li>
+                                <li style="margin-bottom: 0.5rem;"><strong>Attack concluded:</strong> 07:30 on September 7, 2025</li>
+                                <li style="margin-bottom: 0.5rem;"><strong>Official report published:</strong> ~09:00 on September 7, 2025</li>
+                            </ul>
+                        </div>
+                        
+                        <p style="margin-bottom: 1.5rem;">
+                            <strong>Our Methodology (Time-Start Attribution):</strong> This platform records attacks using the <code>time_start</code> field—the timestamp when the attack was initiated. In the example above, the attack would be attributed to <strong>September 6, 2025</strong>. This approach captures the <em>offensive decision point</em>: the moment when Russian military command authorized and commenced the operation.
+                        </p>
+                        
+                        <p style="margin-bottom: 1.5rem;">
+                            <strong>Alternative Methodology (Report-Date Attribution):</strong> Other research institutions and foreign governments frequently attribute overnight attacks to the date when the official Ukrainian Air Force morning summary is published, or to the date referenced in the report's nomenclature (e.g., "the night of September 7"). Using this convention, the same attack would be recorded as <strong>September 7, 2025</strong>.
+                        </p>
+                        
+                        <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 1.25rem; margin-bottom: 1.5rem; border-radius: 0;">
+                            <p style="margin-bottom: 0.75rem; font-weight: 600; color: #166534;">
+                                Implications for Data Comparison
+                            </p>
+                            <p style="color: #15803d;">
+                                When comparing NYU Conflict Monitor data with other sources, researchers should expect a <strong>systematic one-day offset</strong> for the majority of strike events. Our data points will consistently appear one day earlier than sources using report-date attribution. This is not a data error but a methodological difference in temporal assignment.
+                            </p>
+                        </div>
+                        
+                        <p>
+                            <strong>Rationale for Our Approach:</strong> For analyses grounded in game theory and strategic decision-making frameworks, the attack initiation time more accurately reflects the timing of Russian strategic choices. The launch time represents when the decision to strike was operationalized, which is the analytically relevant moment for studying offensive behavior, deterrence dynamics, and strategic timing patterns. The report publication time, by contrast, reflects Ukrainian information processing and communication cycles rather than Russian decision-making.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Chart Calculation Methodology -->
+                <div class="chart-container">
+                    <h3 class="chart-title">Chart Calculation Methods</h3>
+                    <div style="padding: 1.5rem; line-height: 1.8;">
+                        
+                        <h4 style="color: var(--un-blue); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);">Daily Aggregations</h4>
+                        <p style="margin-bottom: 1.5rem;">
+                            Daily totals (e.g., "Weapons Launched per Day") sum all recorded values for each unique calendar date derived from the <code>time_start</code> field. When multiple weapon types are deployed in a single attack wave, each weapon type's quantities are aggregated separately before being combined into daily totals.
+                        </p>
+                        
+                        <h4 style="color: var(--un-blue); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);">Monthly Averages</h4>
+                        <p style="margin-bottom: 1.5rem;">
+                            Monthly average overlays (displayed as step lines on daily charts) are calculated as the arithmetic mean of daily values within each calendar month. The formula is: <em>Monthly Average = (Sum of Daily Values in Month) ÷ (Number of Days with Recorded Activity in Month)</em>. Days with zero recorded launches are excluded from the denominator to avoid deflating averages during periods of sporadic activity.
+                        </p>
+                        
+                        <h4 style="color: var(--un-blue); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);">Interception Rates</h4>
+                        <p style="margin-bottom: 1.5rem;">
+                            Interception percentages are calculated as: <em>Interception Rate = (Destroyed ÷ Launched) × 100</em>. The "destroyed" count includes weapons reported as shot down by air defense systems as well as those neutralized by electronic warfare (jammed or lost). Weapons categorized as "not reaching goal" or "still attacking" at report time are handled according to subsequent official updates when available.
+                        </p>
+                        
+                        <h4 style="color: var(--un-blue); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);">Attack Complexity Tiers</h4>
+                        <p style="margin-bottom: 1.5rem;">
+                            The Attack Complexity Analysis module classifies strikes by the number of distinct weapon systems employed simultaneously. Complexity tiers are defined as:
+                        </p>
+                        <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.5rem;"><strong>Tier 1 (Simple):</strong> Single weapon type deployed</li>
+                            <li style="margin-bottom: 0.5rem;"><strong>Tier 2 (Moderate):</strong> 2-3 distinct weapon types</li>
+                            <li style="margin-bottom: 0.5rem;"><strong>Tier 3 (Complex):</strong> 4-5 distinct weapon types</li>
+                            <li style="margin-bottom: 0.5rem;"><strong>Tier 4 (Highly Complex):</strong> 6+ distinct weapon types</li>
+                        </ul>
+                        <p>
+                            Weapon type distinctness is determined by the <code>model</code> field; variants of the same platform (e.g., Shahed-136 vs. Shahed-131) are counted as separate types when explicitly differentiated in source reporting.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Database Input Methodology -->
+                <div class="chart-container">
+                    <h3 class="chart-title">Database Input Standards</h3>
+                    <div style="padding: 1.5rem; line-height: 1.8;">
+                        
+                        <h4 style="color: var(--un-blue); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);">Weapon System Classification</h4>
+                        <p style="margin-bottom: 1.5rem;">
+                            Weapon systems are recorded using standardized nomenclature aligned with Ukrainian Air Force reporting conventions. When reports use informal designations or collective terms (e.g., "missiles of various types"), entries are recorded as stated with annotations in the <code>launched_details</code> field. The Weapon Database tab provides detailed profiles for each classified system.
+                        </p>
+                        
+                        <h4 style="color: var(--un-blue); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);">Geographic Data</h4>
+                        <p style="margin-bottom: 1.5rem;">
+                            Launch locations (<code>launch_place</code>) reflect attributed origins as stated in official reports, typically identified by city, region, or occupied territory designation. Target locations use a hierarchical structure: <code>target_main</code> indicates the primary strategic target category while <code>target</code> provides specific location information when available. The <code>affected region</code> field captures Ukrainian oblasts reporting impacts or debris.
+                        </p>
+                        
+                        <h4 style="color: var(--un-blue); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);">Numeric Field Handling</h4>
+                        <p style="margin-bottom: 1.5rem;">
+                            Numeric fields (<code>launched</code>, <code>destroyed</code>, <code>not_reach_goal</code>, <code>still_attacking</code>) are recorded as reported. When ranges are given (e.g., "approximately 50-60"), the midpoint value is used. When qualitative descriptors are used without numbers (e.g., "several"), the field is left null and the descriptor is captured in the corresponding <code>_details</code> field.
+                        </p>
+                        
+                        <h4 style="color: var(--un-blue); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);">Components Intelligence Database</h4>
+                        <p>
+                            The Components Database draws exclusively from publicly verified sources including Ukrainian government intelligence releases (GUR), internationally recognized think tank analyses, and official sanctions documentation. Component identification relies on photographic evidence from recovered weapons systems published by Ukrainian authorities and verified open-source intelligence.
+                        </p>
+                    </div>
+                </div>
+                
+            </div>
+            
             <!-- Components Charts Tab -->
             <div id="componentsCharts" class="tab-content">
                 <div class="info-card">
@@ -4211,7 +4196,7 @@
                     
                     <!-- Manufacturer Frequency Chart -->
                     <div class="chart-container" style="margin-bottom: 1.5rem;">
-                        <h3 class="chart-title">Top Foreign Manufacturers</h3>
+                        <h3 class="chart-title">Top Foreign Manufacturers of Components Used in Russian Missiles and UAVs</h3>
                         <div id="manufacturerFrequencyChart" style="padding: 1rem;">
                             <!-- Chart will be inserted here -->
                         </div>
@@ -4221,221 +4206,6 @@
                 </div>
             </div>
             
-            <!-- Regression Analysis Tab -->
-            <div id="regression" class="tab-content">
-                <!-- Introduction -->
-                <div class="info-card">
-                    <h2 class="section-title">Regression Analysis Suite</h2>
-                    <p class="section-subtitle">
-                        Formal statistical hypothesis testing and inferential analysis. Move beyond descriptive statistics 
-                        to test relationships, control for confounders, and quantify effects with statistical significance.
-                    </p>
-                    <p class="secondary-text" style="font-size: 0.95rem; margin-top: 1rem;">
-                        <strong>Available Models:</strong> OLS Regression (continuous outcomes), Poisson Regression (count data), 
-                        Logistic Regression (binary outcomes). All models include coefficient estimates, standard errors, 
-                        p-values, confidence intervals, and diagnostic plots.
-                    </p>
-                </div>
-                
-                <!-- Model Configuration -->
-                <div class="chart-container">
-                    <h3 class="chart-title">Model Specification</h3>
-                    
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
-                        <div>
-                            <label class="control-label">Model Type</label>
-                            <select id="regressionModelType" class="width-full">
-                                <option value="ols">OLS Regression (Continuous)</option>
-                                <option value="poisson">Poisson Regression (Count Data)</option>
-                                <option value="logistic">Logistic Regression (Binary)</option>
-                            </select>
-                        </div>
-                        
-                        <div>
-                            <label class="control-label">Dependent Variable (Y)</label>
-                            <select id="regressionDependentVar" class="width-full">
-                                <option value="">-- Select Dependent Variable --</option>
-                                <option value="launched">Weapons Launched</option>
-                                <option value="destroyed">Weapons Intercepted</option>
-                                <option value="interception_rate">Interception Rate (%)</option>
-                                <option value="attack_success_rate">Attack Success Rate (%)</option>
-                                <option value="complexity_score">Complexity Score</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div style="margin-bottom: 2rem;">
-                        <label class="control-label">Independent Variables (X) - Select Multiple</label>
-                        <div id="regressionIndependentVars" style="margin-top: 1rem;">
-                            <div style="padding: 0.75rem; margin-bottom: 0.75rem; background: white; border: 2px solid #e0e0e0; border-radius: 0; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='#57068c'; this.style.background='#f8f9fa';" onmouseout="this.style.borderColor='#e0e0e0'; this.style.background='white';" onclick="var cb = this.querySelector('input'); cb.checked = !cb.checked;">
-                                <input type="checkbox" name="indep_var" value="week_number" style="margin-right: 0.75rem; cursor: pointer;" onclick="event.stopPropagation();">
-                                <strong>Week Number (Time Trend)</strong>
-                            </div>
-                            
-                            <div style="padding: 0.75rem; margin-bottom: 0.75rem; background: white; border: 2px solid #e0e0e0; border-radius: 0; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='#57068c'; this.style.background='#f8f9fa';" onmouseout="this.style.borderColor='#e0e0e0'; this.style.background='white';" onclick="var cb = this.querySelector('input'); cb.checked = !cb.checked;">
-                                <input type="checkbox" name="indep_var" value="weapon_diversity" style="margin-right: 0.75rem; cursor: pointer;" onclick="event.stopPropagation();">
-                                <strong>Weapon Diversity</strong>
-                            </div>
-                            
-                            <div style="padding: 0.75rem; margin-bottom: 0.75rem; background: white; border: 2px solid #e0e0e0; border-radius: 0; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='#57068c'; this.style.background='#f8f9fa';" onmouseout="this.style.borderColor='#e0e0e0'; this.style.background='white';" onclick="var cb = this.querySelector('input'); cb.checked = !cb.checked;">
-                                <input type="checkbox" name="indep_var" value="launch_diversity" style="margin-right: 0.75rem; cursor: pointer;" onclick="event.stopPropagation();">
-                                <strong>Launch Location Diversity</strong>
-                            </div>
-                            
-                            <div style="padding: 0.75rem; margin-bottom: 0.75rem; background: white; border: 2px solid #e0e0e0; border-radius: 0; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='#57068c'; this.style.background='#f8f9fa';" onmouseout="this.style.borderColor='#e0e0e0'; this.style.background='white';" onclick="var cb = this.querySelector('input'); cb.checked = !cb.checked;">
-                                <input type="checkbox" name="indep_var" value="target_diversity" style="margin-right: 0.75rem; cursor: pointer;" onclick="event.stopPropagation();">
-                                <strong>Target Diversity</strong>
-                            </div>
-                            
-                            <div style="padding: 0.75rem; margin-bottom: 0.75rem; background: white; border: 2px solid #e0e0e0; border-radius: 0; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='#57068c'; this.style.background='#f8f9fa';" onmouseout="this.style.borderColor='#e0e0e0'; this.style.background='white';" onclick="var cb = this.querySelector('input'); cb.checked = !cb.checked;">
-                                <input type="checkbox" name="indep_var" value="lagged_destroyed" style="margin-right: 0.75rem; cursor: pointer;" onclick="event.stopPropagation();">
-                                <strong>Lagged Interception (t-1)</strong>
-                            </div>
-                            
-                            <div style="padding: 0.75rem; margin-bottom: 0; background: white; border: 2px solid #e0e0e0; border-radius: 0; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='#57068c'; this.style.background='#f8f9fa';" onmouseout="this.style.borderColor='#e0e0e0'; this.style.background='white';" onclick="var cb = this.querySelector('input'); cb.checked = !cb.checked;">
-                                <input type="checkbox" name="indep_var" value="lagged_launched" style="margin-right: 0.75rem; cursor: pointer;" onclick="event.stopPropagation();">
-                                <strong>Lagged Launches (t-1)</strong>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <button onclick="runRegression()" style="width: 100%; max-width: 400px; margin: 0 auto; display: block;">
-                        Run Regression Analysis
-                    </button>
-                </div>
-                
-                <!-- Results Section -->
-                <div id="regressionResults" class="display-none">
-                    <!-- Key Findings Summary Card -->
-                    <div class="chart-container" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 4px solid #f59e0b;">
-                        <h3 class="chart-title" style="color: #92400e;">
-                            Key Findings at a Glance
-                        </h3>
-                        <div id="keyFindingsSummary" style="line-height: 1.8;">
-                            <!-- Will be populated with summary -->
-                        </div>
-                    </div>
-                    
-                    <!-- Plain English Interpretation -->
-                    <div class="chart-container" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border: 4px solid #0ea5e9;">
-                        <h3 class="chart-title" style="color: #0369a1;">
-                            Plain English Interpretation
-                        </h3>
-                        <div id="plainEnglishInterpretation" style="line-height: 1.8;">
-                            <!-- Will be populated with interpretation -->
-                        </div>
-                    </div>
-                    
-                    <!-- Show Your Work Section -->
-                    <div class="chart-container" style="background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%); border: 4px solid #a855f7;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                            <h3 class="chart-title" style="color: #7e22ce; margin: 0;">
-                                Mathematical Derivations
-                            </h3>
-                            <button onclick="toggleShowYourWork()" style="width: auto; padding: 0.5rem 1rem; font-size: 0.9rem;">
-                                <span id="showYourWorkToggle">Show Calculations &#9660;</span>
-                            </button>
-                        </div>
-                        <p style="color: #6b21a8; margin-bottom: 1rem; font-size: 0.95rem;">
-                            See the complete mathematical derivation of every statistic.
-                        </p>
-                        <div id="showYourWork" style="display: none;">
-                            <!-- Will be populated with step-by-step calculations -->
-                        </div>
-                    </div>
-                    
-                    <!-- Model Summary -->
-                    <div class="chart-container">
-                        <h3 class="chart-title">Regression Results</h3>
-                        
-                        <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0; margin-bottom: 1.5rem;">
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                                <div>
-                                    <strong>Model:</strong> <span id="resModelType"></span>
-                                </div>
-                                <div>
-                                    <strong>Observations:</strong> <span id="resNObs"></span>
-                                </div>
-                                <div>
-                                    <strong>R-squared:</strong> <span id="resRSquared"></span>
-                                </div>
-                                <div>
-                                    <strong>Adj. R-squared:</strong> <span id="resAdjRSquared"></span>
-                                </div>
-                                <div>
-                                    <strong>F-statistic:</strong> <span id="resFStat"></span>
-                                </div>
-                                <div>
-                                    <strong>Prob (F-stat):</strong> <span id="resFProb"></span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Coefficients Table -->
-                        <div class="data-table">
-                            <table id="regressionCoefTable">
-                                <thead>
-                                    <tr>
-                                        <th>Variable</th>
-                                        <th>Coefficient</th>
-                                        <th>Std. Error</th>
-                                        <th>t-statistic</th>
-                                        <th>p-value</th>
-                                        <th>95% CI Lower</th>
-                                        <th>95% CI Upper</th>
-                                        <th>Sig.</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="regressionCoefBody">
-                                </tbody>
-                            </table>
-                        </div>
-                        
-                        <div style="margin-top: 1rem; padding: 1rem; background: #e8f4f8; border-radius: 0; font-size: 0.9rem;">
-                            <strong>Significance codes:</strong> *** p < 0.001, ** p < 0.01, * p < 0.05, . p < 0.1
-                        </div>
-                    </div>
-                    
-                    <!-- Coefficient Plot -->
-                    <div class="chart-container">
-                        <h3 class="chart-title">Coefficient Plot with 95% Confidence Intervals</h3>
-                        <canvas id="coefficientPlot"></canvas>
-                    </div>
-                    
-                    <!-- Diagnostic Plots -->
-                    <div class="chart-container">
-                        <h3 class="chart-title">Diagnostic Plots</h3>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1.5rem;">
-                            <div>
-                                <h4 style="font-size: 1rem; margin-bottom: 1rem; color: var(--text-secondary);">Residuals vs. Fitted</h4>
-                                <canvas id="residualPlot"></canvas>
-                            </div>
-                            <div>
-                                <h4 style="font-size: 1rem; margin-bottom: 1rem; color: var(--text-secondary);">Q-Q Plot</h4>
-                                <canvas id="qqPlot"></canvas>
-                            </div>
-                        </div>
-                        <div style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 0; font-size: 0.9rem;">
-                            <strong>Interpretation:</strong><br/>
-                            &bull; <strong>Residuals vs. Fitted:</strong> Points should be randomly scattered around zero (no patterns)<br/>
-                            &bull; <strong>Q-Q Plot:</strong> Points should fall on diagonal line (normality of residuals)
-                        </div>
-                    </div>
-                    
-                    <!-- Export Options -->
-                    <div class="chart-container">
-                        <h3 class="chart-title">Export Results</h3>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                            <button onclick="exportRegressionCSV()" style="width: 100%;">
-                                &#128260; Export to CSV
-                            </button>
-                            <button onclick="copyRegressionResults()" style="width: 100%;">
-                                &#128203; Copy to Clipboard
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
             
             <!-- Real-Time Alerts Tab -->
             <div id="alertVisualization" class="tab-content">
@@ -4902,7 +4672,7 @@
         let fullData = [];
         let filteredData = [];
         let charts = {};
-        let weaponViewMode = 'all'; // 'all' or 'excluding'
+        let weaponViewMode = 'excluding'; // 'all' or 'excluding' - default to excluding UAVs
         
         // INDEPENDENT DATE RANGE CHART PATTERN - REFERENCE IMPLEMENTATION (Shahed)
         // These variables exemplify the standard for all Independent Date Range Charts
@@ -4988,7 +4758,7 @@
         let networkDateRangeEnd = '2025-12-31';
         let networkDateRangeMode = '2025';
         
-        // INDEPENDENT DATE RANGE CHART - Multi-Dimensional Temporal (Seventeenth implementation)
+        // INDEPENDENT DATE RANGE CHART - Strategic Intensity and Coordination Timeline (Seventeenth implementation)
         let timeline3DDateRangeStart = '2025-01-01';
         let timeline3DDateRangeEnd = '2025-12-31';
         let timeline3DDateRangeMode = '2025';
@@ -5503,10 +5273,6 @@
                     // Profile is updated on weapon selection, not on filter change
                     break;
                     
-                case 'regression':
-                    // Regression tab - no automatic updates, user-triggered analysis
-                    break;
-                    
                 case 'weaponsEffectiveness':
                     updateComplexityEffectivenessChart();
                     updateIndividualSaturationChart();
@@ -5525,12 +5291,13 @@
                     
                 case 'complexity':
                     updateComplexityTimeSeries();
-                    updateComplexityStacked();
-                    updateComplexityHeatmap();
                     updateComplexityParallel();
                     updateComplexityControl();
                     updateComplexityChangePoint();
                     updateComplexityPCA();
+                    break;
+                    
+                case 'strikeTiming':
                     updateTimeBetweenStrikesChart();
                     updateTimeBetweenMissileStrikesChart();
                     updateTimeBetweenKh101StrikesChart();
@@ -5631,9 +5398,20 @@
             let sorted;
             
             if (weaponViewMode === 'excluding') {
-                // Exclude Shahed-136 and related variants
+                // Exclude all UAVs: specific models (Shahed, Lancet, Молнія, ZALA, Supercam, Orlan) and any model with UAV/drone/БПЛА in name
                 sorted = Object.entries(modelStats)
-                    .filter(entry => !entry[0].toLowerCase().includes('shahed'))
+                    .filter(entry => {
+                        const modelName = entry[0].toLowerCase();
+                        return !modelName.includes('shahed') && 
+                               !modelName.includes('lancet') &&
+                               !modelName.includes('молнія') &&
+                               !modelName.includes('zala') &&
+                               !modelName.includes('supercam') &&
+                               !modelName.includes('orlan') &&
+                               !modelName.includes('uav') &&
+                               !modelName.includes('бпла') &&
+                               !modelName.includes('drone');
+                    })
                     .sort((a, b) => b[1].launched - a[1].launched)
                     .slice(0, 10);
             } else {
@@ -5686,7 +5464,7 @@
                 btn.textContent = 'All Systems';
             } else {
                 weaponViewMode = 'all';
-                btn.textContent = 'Exclude Shahed-136';
+                btn.textContent = 'Exclude Shahed-136/UAVs';
             }
             
             // Redraw the chart with the new mode
@@ -7703,7 +7481,7 @@
             requestAnimationFrame(() => { window.scrollTo(0, scrollPosition); });
         }
         
-        // Multi-Dimensional Temporal Control Functions
+        // Strategic Intensity and Coordination Timeline Control Functions
         function setTimeline3DDateRangeFromDropdown() {
             const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
             const yearSelect = document.getElementById('timeline3DYearSelect');
@@ -10862,11 +10640,20 @@
             });
             
             // Map tabs to their dropdown parent buttons
+            const overviewDropdownTabs = ['overview', 'methodology'];
             const weaponsDropdownTabs = ['shahed', 'weaponsInfo', 'weaponsEffectiveness', 'componentsCharts', 'components'];
-            const advancedDropdownTabs = ['complexity', 'advancedFrequency', 'regression', 'geographic'];
+            const advancedDropdownTabs = ['complexity', 'strikeTiming', 'advancedFrequency', 'geographic'];
             const liveAlertsDropdownTabs = ['alertVisualization', 'data'];
             
-            if (weaponsDropdownTabs.includes(tabName)) {
+            if (overviewDropdownTabs.includes(tabName)) {
+                // Highlight the Overview dropdown button
+                const overviewTab = document.getElementById('overviewTab');
+                if (overviewTab) overviewTab.classList.add('active');
+                // Highlight the specific dropdown item
+                if (event && event.target) {
+                    event.target.classList.add('active');
+                }
+            } else if (weaponsDropdownTabs.includes(tabName)) {
                 // Highlight the Weapons dropdown button
                 const weaponsTab = document.getElementById('weaponsTab');
                 if (weaponsTab) weaponsTab.classList.add('active');
@@ -11391,7 +11178,7 @@
          * Dimensions: Time (X), Attack Intensity (Y), Interception Rate (bubble size), Weapon Diversity (color)
          */
         /**
-         * Multi-Dimensional Temporal Analysis
+         * Strategic Intensity and Coordination Timeline
          * INDEPENDENT DATE RANGE CHART: Uses chart-specific date range, NOT global filters
          */
         function update3DTimeline() {
@@ -11530,7 +11317,7 @@
             // Update statistics
             const statsDiv = document.getElementById('timeline3DStats');
             statsDiv.innerHTML = `
-                <strong>Multi-Dimensional Temporal Analysis:</strong><br/>
+                <strong>Strategic Intensity and Coordination Timeline:</strong><br/>
                 &bull; Analysis period: ${chartData.length} weeks<br/>
                 &bull; Average weekly attack intensity: ${avgIntensity.toFixed(1)} weapons<br/>
                 &bull; Average interception rate: ${avgInterception.toFixed(1)}%<br/>
@@ -15879,2156 +15666,6 @@
             Toast.success(`Exported ${alertData.history.length} data points to JSON file`);
         }
         
-        // ========== REGRESSION ANALYSIS SUITE ==========
-        
-        // Store regression results globally
-        let regressionResults = null;
-        
-        /**
-         * Prepare weekly aggregated data for regression analysis
-         * Returns dataset with all variables needed for modeling
-         */
-        function prepareRegressionData() {
-            const weeklyData = getWeeklyAggregatedData();
-            
-            if (weeklyData.length < 10) {
-                Toast.warning(`Insufficient data for regression analysis. Minimum 10 observations required. Current: ${weeklyData.length}`);
-                return null;
-            }
-            
-            // Calculate lagged variables
-            const data = weeklyData.map((row, idx) => {
-                const prevRow = idx > 0 ? weeklyData[idx - 1] : null;
-                
-                return {
-                    // Time variables
-                    week: row.week,
-                    week_number: idx + 1,
-                    
-                    // Dependent variable options
-                    launched: row.launched,
-                    destroyed: row.destroyed,
-                    interception_rate: row.interceptionRate,
-                    attack_success_rate: row.launched > 0 ? ((row.launched - row.destroyed) / row.launched) * 100 : 0,
-                    complexity_score: row.compositeComplexity,
-                    
-                    // Independent variable options
-                    weapon_diversity: row.weaponDiversity,
-                    launch_diversity: row.launchDiversity,
-                    target_diversity: row.targetDiversity,
-                    
-                    // Lagged variables
-                    lagged_destroyed: prevRow ? prevRow.destroyed : null,
-                    lagged_launched: prevRow ? prevRow.launched : null,
-                    lagged_interception_rate: prevRow ? prevRow.interceptionRate : null
-                };
-            });
-            
-            return data;
-        }
-        
-        /**
-         * Main regression analysis function
-         */
-        function runRegression() {
-            const modelType = document.getElementById('regressionModelType').value;
-            const dependentVar = document.getElementById('regressionDependentVar').value;
-            
-            if (!dependentVar) {
-                Toast.warning('Please select a dependent variable (Y)');
-                return;
-            }
-            
-            // Get selected independent variables
-            const checkboxes = document.querySelectorAll('input[name="indep_var"]:checked');
-            const independentVars = Array.from(checkboxes).map(cb => cb.value);
-            
-            if (independentVars.length === 0) {
-                Toast.warning('Please select at least one independent variable (X)');
-                return;
-            }
-            
-            // Prepare data
-            const data = prepareRegressionData();
-            if (!data) return;
-            
-            // Run appropriate model
-            let results;
-            try {
-                if (modelType === 'ols') {
-                    results = runOLSRegression(data, dependentVar, independentVars);
-                } else if (modelType === 'poisson') {
-                    results = runPoissonRegression(data, dependentVar, independentVars);
-                } else if (modelType === 'logistic') {
-                    results = runLogisticRegression(data, dependentVar, independentVars);
-                }
-                
-                regressionResults = results;
-                displayRegressionResults(results);
-            } catch (error) {
-                console.error('Regression error:', error);
-                Toast.error(`Error running regression: ${error.message}`);
-            }
-        }
-        
-        /**
-         * OLS Regression Implementation
-         */
-        function runOLSRegression(data, dependentVar, independentVars) {
-            // Filter out rows with null values in any variable
-            const cleanData = data.filter(row => {
-                if (row[dependentVar] === null || row[dependentVar] === undefined) return false;
-                for (const indepVar of independentVars) {
-                    if (row[indepVar] === null || row[indepVar] === undefined) return false;
-                }
-                return true;
-            });
-            
-            if (cleanData.length < independentVars.length + 2) {
-                throw new Error('Insufficient observations after removing missing values. Need at least ' + (independentVars.length + 2));
-            }
-            
-            const n = cleanData.length;
-            const k = independentVars.length;
-            
-            // Extract Y and X data
-            const Y = cleanData.map(row => row[dependentVar]);
-            const X = cleanData.map(row => 
-                independentVars.map(v => row[v])
-            );
-            
-            // Add intercept (column of 1s) to X
-            const XWithIntercept = X.map(row => [1, ...row]);
-            
-            // Calculate coefficients using matrix operations
-            const beta = calculateOLSCoefficients(XWithIntercept, Y);
-            
-            // Calculate fitted values
-            const fitted = XWithIntercept.map(x => 
-                x.reduce((sum, val, i) => sum + val * beta[i], 0)
-            );
-            
-            // Calculate residuals
-            const residuals = Y.map((y, i) => y - fitted[i]);
-            
-            // Calculate statistics
-            const yMean = ss.mean(Y);
-            const TSS = Y.reduce((sum, y) => sum + Math.pow(y - yMean, 2), 0);
-            const RSS = residuals.reduce((sum, r) => sum + r * r, 0);
-            const ESS = TSS - RSS;
-            
-            const rSquared = ESS / TSS;
-            const adjRSquared = 1 - ((1 - rSquared) * (n - 1) / (n - k - 1));
-            
-            // Calculate standard errors
-            const sigma2 = RSS / (n - k - 1);
-            const XtX_inv = calculateMatrixInverse(matrixMultiply(transpose(XWithIntercept), XWithIntercept));
-            const standardErrors = XtX_inv.map((row, i) => Math.sqrt(sigma2 * row[i]));
-            
-            // Calculate t-statistics and p-values
-            const tStats = beta.map((b, i) => b / standardErrors[i]);
-            const pValues = tStats.map(t => 2 * (1 - tDistributionCDF(Math.abs(t), n - k - 1)));
-            
-            // Calculate confidence intervals (95%)
-            const tCritical = tDistributionQuantile(0.975, n - k - 1);
-            const confidenceIntervals = beta.map((b, i) => ({
-                lower: b - tCritical * standardErrors[i],
-                upper: b + tCritical * standardErrors[i]
-            }));
-            
-            // F-statistic
-            const fStat = (ESS / k) / (RSS / (n - k - 1));
-            const fProb = 1 - fDistributionCDF(fStat, k, n - k - 1);
-            
-            // Variable names
-            const varNames = ['Intercept', ...independentVars];
-            
-            return {
-                modelType: 'OLS Regression',
-                dependentVar: dependentVar,
-                independentVars: independentVars,
-                nObs: n,
-                coefficients: beta,
-                standardErrors: standardErrors,
-                tStats: tStats,
-                pValues: pValues,
-                confidenceIntervals: confidenceIntervals,
-                varNames: varNames,
-                rSquared: rSquared,
-                adjRSquared: adjRSquared,
-                fStat: fStat,
-                fProb: fProb,
-                fitted: fitted,
-                residuals: residuals,
-                Y: Y,
-                totalSS: TSS,
-                explainedSS: ESS,
-                residualSS: RSS
-            };
-        }
-        
-        /**
-         * Poisson Regression Implementation (simplified)
-         */
-        function runPoissonRegression(data, dependentVar, independentVars) {
-            // Filter out rows with null values
-            const cleanData = data.filter(row => {
-                if (row[dependentVar] === null || row[dependentVar] === undefined) return false;
-                for (const indepVar of independentVars) {
-                    if (row[indepVar] === null || row[indepVar] === undefined) return false;
-                }
-                return true;
-            });
-            
-            if (cleanData.length < independentVars.length + 2) {
-                throw new Error('Insufficient observations for Poisson regression');
-            }
-            
-            // For simplicity, we'll use a quasi-Poisson approach with log link
-            // Transform Y to log(Y + 1) to handle zeros
-            const transformedData = cleanData.map(row => ({
-                ...row,
-                log_y: Math.log(row[dependentVar] + 1)
-            }));
-            
-            // Run OLS on log-transformed data
-            const olsResults = runOLSRegression(transformedData, 'log_y', independentVars);
-            
-            // Adjust results for Poisson interpretation
-            return {
-                ...olsResults,
-                modelType: 'Poisson Regression (Quasi-Poisson with log link)',
-                dependentVar: dependentVar,
-                note: 'Coefficients represent log-linear effects. Exponentiate for multiplicative interpretation.'
-            };
-        }
-        
-        /**
-         * Logistic Regression Implementation (simplified)
-         */
-        function runLogisticRegression(data, dependentVar, independentVars) {
-            // Convert dependent variable to binary (> median = 1, <= median = 0)
-            const yValues = data.map(row => row[dependentVar]).filter(v => v !== null && v !== undefined);
-            const yMedian = ss.median(yValues);
-            
-            const binaryData = data.map(row => ({
-                ...row,
-                binary_y: row[dependentVar] > yMedian ? 1 : 0
-            }));
-            
-            // Filter out rows with null values
-            const cleanData = binaryData.filter(row => {
-                if (row.binary_y === null || row.binary_y === undefined) return false;
-                for (const indepVar of independentVars) {
-                    if (row[indepVar] === null || row[indepVar] === undefined) return false;
-                }
-                return true;
-            });
-            
-            if (cleanData.length < independentVars.length + 2) {
-                throw new Error('Insufficient observations for logistic regression');
-            }
-            
-            // For simplicity, use linear probability model (OLS with binary outcome)
-            const lpmResults = runOLSRegression(cleanData, 'binary_y', independentVars);
-            
-            return {
-                ...lpmResults,
-                modelType: 'Logistic Regression (Linear Probability Model)',
-                dependentVar: dependentVar + ' (binary: > median)',
-                note: 'Coefficients represent probability changes. Values outside [0,1] possible with LPM.'
-            };
-        }
-        
-        /**
-         * Calculate OLS coefficients using matrix algebra
-         * beta = (X'X)^-1 X'Y
-         */
-        function calculateOLSCoefficients(X, Y) {
-            const Xt = transpose(X);
-            const XtX = matrixMultiply(Xt, X);
-            const XtX_inv = calculateMatrixInverse(XtX);
-            const XtY = Xt.map(row => 
-                row.reduce((sum, val, i) => sum + val * Y[i], 0)
-            );
-            
-            return XtX_inv.map(row => 
-                row.reduce((sum, val, i) => sum + val * XtY[i], 0)
-            );
-        }
-        
-        /**
-         * Matrix transpose
-         */
-        function transpose(matrix) {
-            return matrix[0].map((_, i) => matrix.map(row => row[i]));
-        }
-        
-        /**
-         * Matrix multiplication
-         */
-        function matrixMultiply(A, B) {
-            const rowsA = A.length;
-            const colsA = A[0].length;
-            const colsB = B[0].length;
-            
-            const result = Array(rowsA).fill(0).map(() => Array(colsB).fill(0));
-            
-            for (let i = 0; i < rowsA; i++) {
-                for (let j = 0; j < colsB; j++) {
-                    for (let k = 0; k < colsA; k++) {
-                        result[i][j] += A[i][k] * B[k][j];
-                    }
-                }
-            }
-            
-            return result;
-        }
-        
-        /**
-         * Calculate matrix inverse using Gauss-Jordan elimination
-         */
-        function calculateMatrixInverse(matrix) {
-            const n = matrix.length;
-            const augmented = matrix.map((row, i) => 
-                [...row, ...Array(n).fill(0).map((_, j) => i === j ? 1 : 0)]
-            );
-            
-            // Forward elimination
-            for (let i = 0; i < n; i++) {
-                // Find pivot
-                let maxRow = i;
-                for (let k = i + 1; k < n; k++) {
-                    if (Math.abs(augmented[k][i]) > Math.abs(augmented[maxRow][i])) {
-                        maxRow = k;
-                    }
-                }
-                [augmented[i], augmented[maxRow]] = [augmented[maxRow], augmented[i]];
-                
-                // Make diagonal 1
-                const pivot = augmented[i][i];
-                if (Math.abs(pivot) < 1e-10) {
-                    throw new Error('Matrix is singular or nearly singular');
-                }
-                
-                for (let j = 0; j < 2 * n; j++) {
-                    augmented[i][j] /= pivot;
-                }
-                
-                // Eliminate column
-                for (let k = 0; k < n; k++) {
-                    if (k !== i) {
-                        const factor = augmented[k][i];
-                        for (let j = 0; j < 2 * n; j++) {
-                            augmented[k][j] -= factor * augmented[i][j];
-                        }
-                    }
-                }
-            }
-            
-            // Extract inverse (right half of augmented matrix)
-            return augmented.map(row => row.slice(n));
-        }
-        
-        /**
-         * T-distribution CDF approximation
-         */
-        function tDistributionCDF(t, df) {
-            // Using approximation for t-distribution CDF
-            const x = df / (t * t + df);
-            return 1 - 0.5 * incompleteBeta(x, df / 2, 0.5);
-        }
-        
-        /**
-         * T-distribution quantile approximation
-         */
-        function tDistributionQuantile(p, df) {
-            // Approximation using normal distribution for df > 30
-            if (df > 30) {
-                return normalQuantile(p);
-            }
-            
-            // Rough approximation for smaller df
-            const z = normalQuantile(p);
-            return z * Math.sqrt(df / (df - 2));
-        }
-        
-        /**
-         * Normal distribution quantile (inverse CDF)
-         */
-        function normalQuantile(p) {
-            // Beasley-Springer-Moro algorithm
-            const a = [2.50662823884, -18.61500062529, 41.39119773534, -25.44106049637];
-            const b = [-8.47351093090, 23.08336743743, -21.06224101826, 3.13082909833];
-            const c = [0.3374754822726147, 0.9761690190917186, 0.1607979714918209, 
-                       0.0276438810333863, 0.0038405729373609, 0.0003951896511919,
-                       0.0000321767881768, 0.0000002888167364, 0.0000003960315187];
-            
-            const y = p - 0.5;
-            
-            if (Math.abs(y) < 0.42) {
-                const r = y * y;
-                return y * (((a[3] * r + a[2]) * r + a[1]) * r + a[0]) /
-                       ((((b[3] * r + b[2]) * r + b[1]) * r + b[0]) * r + 1);
-            }
-            
-            let r = p;
-            if (y > 0) r = 1 - p;
-            r = Math.log(-Math.log(r));
-            
-            let val = c[0];
-            for (let i = 1; i < c.length; i++) {
-                val += c[i] * Math.pow(r, i);
-            }
-            
-            if (y < 0) val = -val;
-            return val;
-        }
-        
-        /**
-         * F-distribution CDF approximation
-         */
-        function fDistributionCDF(f, df1, df2) {
-            const x = df2 / (df2 + df1 * f);
-            return 1 - incompleteBeta(x, df2 / 2, df1 / 2);
-        }
-        
-        /**
-         * Log-Gamma function (natural log of Gamma function)
-         * Using Lanczos approximation for better accuracy
-         */
-        function logGamma(z) {
-            // Lanczos approximation coefficients
-            const g = 7;
-            const coef = [
-                0.99999999999980993,
-                676.5203681218851,
-                -1259.1392167224028,
-                771.32342877765313,
-                -176.61502916214059,
-                12.507343278686905,
-                -0.13857109526572012,
-                9.9843695780195716e-6,
-                1.5056327351493116e-7
-            ];
-            
-            if (z < 0.5) {
-                // Use reflection formula: &Gamma;(1-z)&Gamma;(z) = &pi;/sin(&pi;z)
-                return Math.log(Math.PI) - Math.log(Math.sin(Math.PI * z)) - logGamma(1 - z);
-            }
-            
-            z -= 1;
-            let x = coef[0];
-            for (let i = 1; i < g + 2; i++) {
-                x += coef[i] / (z + i);
-            }
-            
-            const t = z + g + 0.5;
-            return Math.log(Math.sqrt(2 * Math.PI)) + Math.log(t) * (z + 0.5) - t + Math.log(x);
-        }
-        
-        /**
-         * Incomplete beta function (regularized)
-         */
-        function incompleteBeta(x, a, b) {
-            if (x <= 0) return 0;
-            if (x >= 1) return 1;
-            
-            // Using continued fraction expansion
-            const EPSILON = 1e-10;
-            const MAX_ITER = 200;
-            
-            const bt = Math.exp(
-                logGamma(a + b) - logGamma(a) - logGamma(b) +
-                a * Math.log(x) + b * Math.log(1 - x)
-            );
-            
-            if (x < (a + 1) / (a + b + 2)) {
-                return bt * betaContinuedFraction(x, a, b, EPSILON, MAX_ITER) / a;
-            } else {
-                return 1 - bt * betaContinuedFraction(1 - x, b, a, EPSILON, MAX_ITER) / b;
-            }
-        }
-        
-        /**
-         * Beta continued fraction
-         */
-        function betaContinuedFraction(x, a, b, epsilon, maxIter) {
-            const qab = a + b;
-            const qap = a + 1;
-            const qam = a - 1;
-            let c = 1;
-            let d = 1 - qab * x / qap;
-            
-            if (Math.abs(d) < 1e-30) d = 1e-30;
-            d = 1 / d;
-            let h = d;
-            
-            for (let m = 1; m <= maxIter; m++) {
-                const m2 = 2 * m;
-                let aa = m * (b - m) * x / ((qam + m2) * (a + m2));
-                d = 1 + aa * d;
-                if (Math.abs(d) < 1e-30) d = 1e-30;
-                c = 1 + aa / c;
-                if (Math.abs(c) < 1e-30) c = 1e-30;
-                d = 1 / d;
-                h *= d * c;
-                
-                aa = -(a + m) * (qab + m) * x / ((a + m2) * (qap + m2));
-                d = 1 + aa * d;
-                if (Math.abs(d) < 1e-30) d = 1e-30;
-                c = 1 + aa / c;
-                if (Math.abs(c) < 1e-30) c = 1e-30;
-                d = 1 / d;
-                const del = d * c;
-                h *= del;
-                
-                if (Math.abs(del - 1) < epsilon) break;
-            }
-            
-            return h;
-        }
-        
-        /**
-         * Generate key findings summary - Executive summary at a glance
-         */
-        function generateKeyFindingsSummary(results) {
-            const container = document.getElementById('keyFindingsSummary');
-            
-            let html = '';
-            
-            // Count significant predictors
-            let sigPredictors = [];
-            for (let i = 1; i < results.varNames.length; i++) {
-                if (results.pValues[i] < 0.05) {
-                    sigPredictors.push({
-                        name: results.varNames[i],
-                        coef: results.coefficients[i],
-                        pVal: results.pValues[i]
-                    });
-                }
-            }
-            
-            // Overall verdict
-            const modelQuality = interpretModelQuality(results.rSquared, results.fProb);
-            
-            html += `
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
-                    <div style="padding: 1.25rem; background: white; border-radius: 0; text-align: center;">
-                        <div style="font-size: 2.5rem; font-weight: 700; color: ${modelQuality.color}; margin-bottom: 0.5rem;">
-                            ${modelQuality.icon}
-                        </div>
-                        <div style="font-size: 1.1rem; font-weight: 600; color: ${modelQuality.color};">
-                            ${modelQuality.verdict}
-                        </div>
-                        <div style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">
-                            R&sup2; = ${(results.rSquared * 100).toFixed(1)}%
-                        </div>
-                    </div>
-                    
-                    <div style="padding: 1.25rem; background: white; border-radius: 0; text-align: center;">
-                        <div style="font-size: 2.5rem; font-weight: 700; color: #0ea5e9; margin-bottom: 0.5rem;">
-                            ${sigPredictors.length}
-                        </div>
-                        <div style="font-size: 1.1rem; font-weight: 600; color: #0369a1;">
-                            Significant Factors
-                        </div>
-                        <div style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">
-                            out of ${results.varNames.length - 1} tested
-                        </div>
-                    </div>
-                    
-                    <div style="padding: 1.25rem; background: white; border-radius: 0; text-align: center;">
-                        <div style="font-size: 2.5rem; font-weight: 700; color: #8b5cf6; margin-bottom: 0.5rem;">
-                            ${results.nObs}
-                        </div>
-                        <div style="font-size: 1.1rem; font-weight: 600; color: #7c3aed;">
-                            Observations
-                        </div>
-                        <div style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">
-                            ${results.nObs >= 30 ? 'Good sample size' : 'Small sample'}
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            // Main findings
-            if (sigPredictors.length > 0) {
-                html += `
-                    <div style="padding: 1.5rem; background: white; border-radius: 0;">
-                        <h4 style="color: #92400e; margin-bottom: 1rem; font-size: 1.05rem;">
-                            Main Findings:
-                        </h4>
-                        <ul style="margin: 0; padding-left: 1.5rem; line-height: 2;">
-                `;
-                
-                sigPredictors.forEach(pred => {
-                    const direction = pred.coef > 0 ? 'increases' : 'decreases';
-                    const strength = pred.pVal < 0.001 ? 'very strongly' : pred.pVal < 0.01 ? 'strongly' : '';
-                    html += `
-                        <li style="font-size: 1rem;">
-                            <strong>${pred.name}</strong> ${strength} ${direction} ${results.dependentVar}
-                            ${pred.pVal < 0.001 ? ' (p < 0.001 ***)' : pred.pVal < 0.01 ? ' (p < 0.01 **)' : ' (p < 0.05 *)'}
-                        </li>
-                    `;
-                });
-                
-                html += `
-                        </ul>
-                    </div>
-                `;
-            } else {
-                html += `
-                    <div style="padding: 1.5rem; background: white; border-radius: 0;">
-                        <h4 style="color: #92400e; margin-bottom: 1rem; font-size: 1.05rem;">
-                            Main Findings:
-                        </h4>
-                        <p style="margin: 0; font-size: 1rem; color: #666;">
-                            No significant predictors were found. The factors tested do not appear to have 
-                            a statistically reliable relationship with ${results.dependentVar}.
-                        </p>
-                    </div>
-                `;
-            }
-            
-            container.innerHTML = html;
-        }
-        
-        /**
-         * Toggle show your work section
-         */
-        function toggleShowYourWork() {
-            const section = document.getElementById('showYourWork');
-            const toggle = document.getElementById('showYourWorkToggle');
-            
-            if (section.style.display === 'none') {
-                section.style.display = 'block';
-                toggle.textContent = 'Hide Calculations &#9650;';
-            } else {
-                section.style.display = 'none';
-                toggle.textContent = 'Show Calculations &#9660;';
-            }
-        }
-        
-        /**
-         * Generate complete mathematical derivations
-         */
-        function generateShowYourWork(results) {
-            const container = document.getElementById('showYourWork');
-            
-            let html = '';
-            
-            // Calculate TSS, ESS, RSS at the beginning for use in all sections
-            let TSS, ESS, RSS;
-            
-            if (results.totalSS && results.explainedSS && results.residualSS) {
-                // Use pre-calculated values if available
-                TSS = results.totalSS;
-                ESS = results.explainedSS;
-                RSS = results.residualSS;
-            } else if (results.Y && results.fitted && results.residuals) {
-                // Calculate from raw data
-                const yMean = results.Y.reduce((sum, y) => sum + y, 0) / results.Y.length;
-                TSS = results.Y.reduce((sum, y) => sum + Math.pow(y - yMean, 2), 0);
-                
-                const fittedMean = results.fitted.reduce((sum, f) => sum + f, 0) / results.fitted.length;
-                ESS = results.fitted.reduce((sum, f) => sum + Math.pow(f - fittedMean, 2), 0);
-                
-                RSS = results.residuals.reduce((sum, r) => sum + r * r, 0);
-            } else {
-                // Fallback: calculate from R&sup2; and residuals
-                RSS = results.residuals ? results.residuals.reduce((sum, r) => sum + r * r, 0) : 0;
-                if (results.rSquared > 0 && results.rSquared < 1 && RSS > 0) {
-                    TSS = RSS / (1 - results.rSquared);
-                    ESS = results.rSquared * TSS;
-                } else {
-                    // Last resort: use R&sup2; directly
-                    TSS = 100;  // Dummy value for display
-                    ESS = results.rSquared * TSS;
-                    RSS = (1 - results.rSquared) * TSS;
-                }
-            }
-            
-            // Final safety check: ensure all values are valid numbers
-            TSS = TSS || 0;
-            ESS = ESS || 0;
-            RSS = RSS || 0;
-            
-            // SECTION 1: Data Preparation
-            html += `
-                <div style="padding: 1.5rem; background: white; border-radius: 0; margin-bottom: 1.5rem; border: 4px solid #8b5cf6;">
-                    <h4 style="color: #7c3aed; margin-bottom: 1rem;">1. Data Preparation</h4>
-                    
-                    <p style="margin-bottom: 1rem;"><strong>Sample Size:</strong></p>
-                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; font-family: Helvetica, "Helvetica Neue"; margin-bottom: 1rem;">
-                        n = ${results.nObs} observations (weeks)<br/>
-                        k = ${results.varNames.length - 1} predictors (independent variables)<br/>
-                        p = ${results.varNames.length} parameters (including intercept)
-                    </div>
-                    
-                    <p style="margin-bottom: 1rem;"><strong>Variables:</strong></p>
-                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; margin-bottom: 1rem;">
-                        <strong>Dependent variable (Y):</strong> ${results.dependentVar}<br/>
-                        <strong>Independent variables (X):</strong><br/>
-                        <ul style="margin: 0.5rem 0 0 1.5rem;">
-                            ${results.varNames.slice(1).map(v => `<li>${v}</li>`).join('')}
-                        </ul>
-                    </div>
-                    
-                    <p style="margin-bottom: 0.5rem;"><strong>Matrix Dimensions:</strong></p>
-                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; font-family: Helvetica, "Helvetica Neue";">
-                        Y: ${results.nObs} &times; 1  (column vector of outcomes)<br/>
-                        X: ${results.nObs} &times; ${results.varNames.length}  (design matrix with intercept column)<br/>
-                        &beta;: ${results.varNames.length} &times; 1  (coefficient vector to estimate)
-                    </div>
-                </div>
-            `;
-            
-            // SECTION 2: OLS Estimation
-            html += `
-                <div style="padding: 1.5rem; background: white; border-radius: 0; margin-bottom: 1.5rem; border: 4px solid #8b5cf6;">
-                    <h4 style="color: #7c3aed; margin-bottom: 1rem;">2. OLS Coefficient Estimation</h4>
-                    
-                    <p style="margin-bottom: 1rem;">
-                        We estimate coefficients using the <strong>Ordinary Least Squares (OLS)</strong> formula:
-                    </p>
-                    
-                    <div style="background: #f3e8ff; padding: 1.5rem; border-radius: 0; margin-bottom: 1rem; text-align: center;">
-                        <div style="font-size: 1.2rem; font-family: Helvetica, "Helvetica Neue"; font-weight: 600;">
-                            &beta;&#770; = (X'X)<sup>-1</sup>&sup1;X'Y
-                        </div>
-                        <div style="margin-top: 0.5rem; font-size: 0.9rem; color: #6b21a8;">
-                            The hat (&beta;&#770;) indicates this is an estimate, not the true population value
-                        </div>
-                    </div>
-                    
-                    <p style="margin-bottom: 1rem;"><strong>Step-by-step calculation:</strong></p>
-                    
-                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; margin-bottom: 1rem;">
-                        <strong>Step 1:</strong> Transpose X to get X'<br/>
-                        <span style="color: #666; font-size: 0.9rem; font-family: Helvetica, "Helvetica Neue";">
-                            X' has dimensions ${results.varNames.length} &times; ${results.nObs}
-                        </span>
-                    </div>
-                    
-                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; margin-bottom: 1rem;">
-                        <strong>Step 2:</strong> Multiply X'X<br/>
-                        <span style="color: #666; font-size: 0.9rem; font-family: Helvetica, "Helvetica Neue";">
-                            Result: ${results.varNames.length} &times; ${results.varNames.length} matrix (sum of squares and cross-products)
-                        </span>
-                    </div>
-                    
-                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; margin-bottom: 1rem;">
-                        <strong>Step 3:</strong> Invert (X'X) to get (X'X)<sup>-1</sup>&sup1;<br/>
-                        <span style="color: #666; font-size: 0.9rem;">
-                            Using Gauss-Jordan elimination with partial pivoting<br/>
-                            This is the variance-covariance matrix (unnormalized)
-                        </span>
-                    </div>
-                    
-                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; margin-bottom: 1rem;">
-                        <strong>Step 4:</strong> Multiply (X'X)<sup>-1</sup>&sup1; by X'<br/>
-                        <span style="color: #666; font-size: 0.9rem; font-family: Helvetica, "Helvetica Neue";">
-                            Result: ${results.varNames.length} &times; ${results.nObs} matrix
-                        </span>
-                    </div>
-                    
-                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; margin-bottom: 1rem;">
-                        <strong>Step 5:</strong> Multiply result by Y to get &beta;&#770;<br/>
-                        <span style="color: #666; font-size: 0.9rem; font-family: Helvetica, "Helvetica Neue";">
-                            Final result: ${results.varNames.length} &times; 1 vector of coefficients
-                        </span>
-                    </div>
-                    
-                    <p style="margin-bottom: 1rem;"><strong>Estimated Coefficients:</strong></p>
-                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; font-family: Helvetica, "Helvetica Neue";">
-                        ${results.varNames.map((v, i) => 
-                            `&beta;&#770;<sub>${i}</sub> (${v}) = ${results.coefficients[i].toFixed(6)}`
-                        ).join('<br/>')}
-                    </div>
-                </div>
-            `;
-            
-            // SECTION 3: Residuals and Fitted Values
-            html += `
-                <div style="padding: 1.5rem; background: white; border-radius: 0; margin-bottom: 1.5rem; border: 4px solid #8b5cf6;">
-                    <h4 style="color: #7c3aed; margin-bottom: 1rem;">3. Fitted Values and Residuals</h4>
-                    
-                    <p style="margin-bottom: 1rem;"><strong>Fitted values (predicted outcomes):</strong></p>
-                    <div style="background: #f3e8ff; padding: 1.5rem; border-radius: 0; margin-bottom: 1rem; text-align: center;">
-                        <div style="font-size: 1.2rem; font-family: Helvetica, "Helvetica Neue"; font-weight: 600;">
-                            Y&#770; = X&beta;&#770;
-                        </div>
-                        <div style="margin-top: 0.5rem; font-size: 0.9rem; color: #6b21a8;">
-                            Dimensions: ${results.nObs} &times; 1 (one predicted value per observation)
-                        </div>
-                    </div>
-                    
-                    <p style="margin-bottom: 1rem;"><strong>Residuals (prediction errors):</strong></p>
-                    <div style="background: #f3e8ff; padding: 1.5rem; border-radius: 0; margin-bottom: 1rem; text-align: center;">
-                        <div style="font-size: 1.2rem; font-family: Helvetica, "Helvetica Neue"; font-weight: 600;">
-                            &epsilon;&#770; = Y - Y&#770; = Y - X&beta;&#770;
-                        </div>
-                        <div style="margin-top: 0.5rem; font-size: 0.9rem; color: #6b21a8;">
-                            Residual = Actual outcome - Predicted outcome
-                        </div>
-                    </div>
-                    
-                    <p style="margin-bottom: 1rem;"><strong>Sum of squared residuals (RSS):</strong></p>
-                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; font-family: Helvetica, "Helvetica Neue";">
-                        RSS = &Sigma;(Yáµ¢ - Y&#770;áµ¢)&sup2; = &epsilon;&#770;'&epsilon;&#770; = ${RSS.toFixed(4)}
-                    </div>
-                </div>
-            `;
-            
-            // SECTION 4: R-squared
-            html += `
-                <div style="padding: 1.5rem; background: white; border-radius: 0; margin-bottom: 1.5rem; border: 4px solid #8b5cf6;">
-                    <h4 style="color: #7c3aed; margin-bottom: 1rem;">4. R-squared Calculation</h4>
-                    
-                    <p style="margin-bottom: 1rem;">
-                        R&sup2; measures the proportion of variance in Y explained by our model.
-                    </p>
-                    
-                    <p style="margin-bottom: 1rem;"><strong>Step 1: Calculate Total Sum of Squares (TSS)</strong></p>
-                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; margin-bottom: 1rem;">
-                        <div style="font-family: Helvetica, "Helvetica Neue"; margin-bottom: 0.5rem;">
-                            TSS = &Sigma;(Yáµ¢ - Y&#772;)&sup2;
-                        </div>
-                        <div style="color: #666; font-size: 0.9rem;">
-                            Total variation in Y around its mean<br/>
-                            TSS = ${TSS.toFixed(4)}
-                        </div>
-                    </div>
-                    
-                    <p style="margin-bottom: 1rem;"><strong>Step 2: Calculate Explained Sum of Squares (ESS)</strong></p>
-                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; margin-bottom: 1rem;">
-                        <div style="font-family: Helvetica, "Helvetica Neue"; margin-bottom: 0.5rem;">
-                            ESS = &Sigma;(Y&#770;áµ¢ - Y&#772;)&sup2;
-                        </div>
-                        <div style="color: #666; font-size: 0.9rem;">
-                            Variation in predicted values around the mean<br/>
-                            ESS = ${ESS.toFixed(4)}
-                        </div>
-                    </div>
-                    
-                    <p style="margin-bottom: 1rem;"><strong>Step 3: Calculate Residual Sum of Squares (RSS)</strong></p>
-                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; margin-bottom: 1rem;">
-                        <div style="font-family: Helvetica, "Helvetica Neue"; margin-bottom: 0.5rem;">
-                            RSS = &Sigma;(Yáµ¢ - Y&#770;áµ¢)&sup2;
-                        </div>
-                        <div style="color: #666; font-size: 0.9rem;">
-                            Unexplained variation (errors)<br/>
-                            RSS = ${RSS.toFixed(4)}
-                        </div>
-                    </div>
-                    
-                    <p style="margin-bottom: 1rem;"><strong>Step 4: Verify Decomposition</strong></p>
-                    <div style="background: #f3e8ff; padding: 1rem; border-radius: 0; margin-bottom: 1rem;">
-                        <div style="font-family: Helvetica, "Helvetica Neue"; margin-bottom: 0.5rem;">
-                            TSS = ESS + RSS
-                        </div>
-                        <div style="font-family: Helvetica, "Helvetica Neue"; color: #666;">
-                            ${TSS.toFixed(4)} = ${ESS.toFixed(4)} + ${RSS.toFixed(4)} &#10003;
-                        </div>
-                    </div>
-                    
-                    <p style="margin-bottom: 1rem;"><strong>Step 5: Calculate R&sup2;</strong></p>
-                    <div style="background: #f3e8ff; padding: 1.5rem; border-radius: 0; text-align: center;">
-                        <div style="font-size: 1.2rem; font-family: Helvetica, "Helvetica Neue"; font-weight: 600; margin-bottom: 1rem;">
-                            R&sup2; = ESS / TSS = 1 - (RSS / TSS)
-                        </div>
-                        <div style="font-size: 1.5rem; font-family: Helvetica, "Helvetica Neue"; font-weight: 700; color: #7c3aed;">
-                            R&sup2; = ${ESS.toFixed(4)} / ${TSS.toFixed(4)} = ${results.rSquared.toFixed(6)}
-                        </div>
-                        <div style="margin-top: 1rem; font-size: 1rem; color: #6b21a8;">
-                            = ${(results.rSquared * 100).toFixed(2)}% of variance explained
-                        </div>
-                    </div>
-                    
-                    <p style="margin-top: 1.5rem; margin-bottom: 1rem;"><strong>Step 6: Calculate Adjusted R&sup2;</strong></p>
-                    <div style="background: #f3e8ff; padding: 1.5rem; border-radius: 0; text-align: center;">
-                        <div style="font-size: 1.1rem; font-family: Helvetica, "Helvetica Neue"; margin-bottom: 0.5rem;">
-                            R&#772;&sup2; = 1 - [(1 - R&sup2;) &times; (n - 1) / (n - k - 1)]
-                        </div>
-                        <div style="font-size: 1.1rem; font-family: Helvetica, "Helvetica Neue"; margin-bottom: 0.5rem;">
-                            R&#772;&sup2; = 1 - [(1 - ${results.rSquared.toFixed(6)}) &times; (${results.nObs} - 1) / (${results.nObs} - ${results.varNames.length - 1} - 1)]
-                        </div>
-                        <div style="font-size: 1.5rem; font-family: Helvetica, "Helvetica Neue"; font-weight: 700; color: #7c3aed; margin-top: 1rem;">
-                            R&#772;&sup2; = ${results.adjRSquared.toFixed(6)}
-                        </div>
-                        <div style="margin-top: 0.5rem; font-size: 0.9rem; color: #6b21a8;">
-                            Adjusted for number of predictors
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            // SECTION 5: Standard Errors
-            const df = results.nObs - results.varNames.length;
-            const mse = RSS / df;
-            
-            html += `
-                <div style="padding: 1.5rem; background: white; border-radius: 0; margin-bottom: 1.5rem; border: 4px solid #8b5cf6;">
-                    <h4 style="color: #7c3aed; margin-bottom: 1rem;">5. Standard Errors</h4>
-                    
-                    <p style="margin-bottom: 1rem;"><strong>Step 1: Calculate Mean Squared Error (MSE)</strong></p>
-                    <div style="background: #f3e8ff; padding: 1.5rem; border-radius: 0; margin-bottom: 1rem; text-align: center;">
-                        <div style="font-size: 1.2rem; font-family: Helvetica, "Helvetica Neue"; margin-bottom: 0.5rem;">
-                            MSE = RSS / (n - k - 1) = RSS / df
-                        </div>
-                        <div style="font-size: 1.2rem; font-family: Helvetica, "Helvetica Neue"; font-weight: 600; color: #7c3aed;">
-                            MSE = ${RSS.toFixed(4)} / ${df} = ${mse.toFixed(6)}
-                        </div>
-                        <div style="margin-top: 0.5rem; font-size: 0.9rem; color: #6b21a8;">
-                            Estimate of error variance (&sigma;&#770;&sup2;)
-                        </div>
-                    </div>
-                    
-                    <p style="margin-bottom: 1rem;"><strong>Step 2: Calculate Variance-Covariance Matrix</strong></p>
-                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; margin-bottom: 1rem;">
-                        <div style="font-family: Helvetica, "Helvetica Neue"; margin-bottom: 0.5rem;">
-                            Var(&beta;&#770;) = MSE &times; (X'X)<sup>-1</sup>&sup1;
-                        </div>
-                        <div style="color: #666; font-size: 0.9rem;">
-                            This ${results.varNames.length} &times; ${results.varNames.length} matrix contains variances on diagonal,<br/>
-                            covariances on off-diagonal
-                        </div>
-                    </div>
-                    
-                    <p style="margin-bottom: 1rem;"><strong>Step 3: Extract Standard Errors</strong></p>
-                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; margin-bottom: 1rem;">
-                        <div style="font-family: Helvetica, "Helvetica Neue"; margin-bottom: 0.5rem;">
-                            SE(&beta;&#770;áµ¢) = &radic;[Var(&beta;&#770;)áµ¢áµ¢]
-                        </div>
-                        <div style="color: #666; font-size: 0.9rem;">
-                            Square root of diagonal elements
-                        </div>
-                    </div>
-                    
-                    <p style="margin-bottom: 1rem;"><strong>Standard Errors for Each Coefficient:</strong></p>
-                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; font-family: Helvetica, "Helvetica Neue";">
-                        ${results.varNames.map((v, i) => 
-                            `SE(&beta;&#770;<sub>${i}</sub>) = ${results.standardErrors[i].toFixed(6)}  [${v}]`
-                        ).join('<br/>')}
-                    </div>
-                </div>
-            `;
-            
-            // SECTION 6: T-statistics and P-values (show one example in detail)
-            html += `
-                <div style="padding: 1.5rem; background: white; border-radius: 0; margin-bottom: 1.5rem; border: 4px solid #8b5cf6;">
-                    <h4 style="color: #7c3aed; margin-bottom: 1rem;">6. T-statistics and P-values</h4>
-                    
-                    <p style="margin-bottom: 1rem;">
-                        We test whether each coefficient is significantly different from zero.
-                    </p>
-                    
-                    <p style="margin-bottom: 1rem;"><strong>Null Hypothesis:</strong></p>
-                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; margin-bottom: 1.5rem;">
-                        H<sub>0</sub>: &beta;áµ¢ = 0  (the predictor has no effect)<br/>
-                        H<sub>1</sub>: &beta;áµ¢ &ne; 0  (the predictor has an effect)
-                    </div>
-                    
-                    <p style="margin-bottom: 1rem;"><strong>Example calculation for ${results.varNames[1]}:</strong></p>
-                    
-                    <div style="background: #f3e8ff; padding: 1.5rem; border-radius: 0; margin-bottom: 1rem;">
-                        <p style="margin: 0 0 1rem 0;"><strong>Step 1: Calculate t-statistic</strong></p>
-                        <div style="text-align: center; font-family: Helvetica, "Helvetica Neue"; font-size: 1.2rem; margin-bottom: 1rem;">
-                            t = &beta;&#770; / SE(&beta;&#770;)
-                        </div>
-                        <div style="text-align: center; font-family: Helvetica, "Helvetica Neue"; font-size: 1.2rem; margin-bottom: 1rem;">
-                            t = ${results.coefficients[1].toFixed(6)} / ${results.standardErrors[1].toFixed(6)}
-                        </div>
-                        <div style="text-align: center; font-family: Helvetica, "Helvetica Neue"; font-size: 1.5rem; font-weight: 700; color: #7c3aed;">
-                            t = ${results.tStats[1].toFixed(4)}
-                        </div>
-                        <div style="margin-top: 1rem; text-align: center; color: #6b21a8; font-size: 0.9rem;">
-                            This follows a t-distribution with df = ${df} degrees of freedom
-                        </div>
-                    </div>
-                    
-                    <div style="background: #f3e8ff; padding: 1.5rem; border-radius: 0; margin-bottom: 1rem;">
-                        <p style="margin: 0 0 1rem 0;"><strong>Step 2: Calculate p-value</strong></p>
-                        <div style="color: #666; margin-bottom: 1rem; font-size: 0.95rem;">
-                            The p-value is the probability of observing a t-statistic this extreme (or more extreme) 
-                            if the null hypothesis were true. We use a two-tailed test.
-                        </div>
-                        <div style="text-align: center; font-family: Helvetica, "Helvetica Neue"; font-size: 1.1rem; margin-bottom: 1rem;">
-                            p-value = 2 &times; P(T > |t|) where T ~ t<sub>${df}</sub>
-                        </div>
-                        <div style="text-align: center; font-family: Helvetica, "Helvetica Neue"; font-size: 1.1rem; margin-bottom: 1rem;">
-                            p-value = 2 &times; P(T > ${Math.abs(results.tStats[1]).toFixed(4)})
-                        </div>
-                        <div style="text-align: center; font-family: Helvetica, "Helvetica Neue"; font-size: 1.5rem; font-weight: 700; color: #7c3aed;">
-                            p-value = ${results.pValues[1] < 0.001 ? '< 0.001' : results.pValues[1].toFixed(6)}
-                        </div>
-                        <div style="margin-top: 1rem; text-align: center; color: #6b21a8; font-size: 0.9rem;">
-                            ${results.pValues[1] < 0.05 ? '&#10003; Reject H<sub>0</sub>: Effect is statistically significant' : 'Fail to reject H<sub>0</sub>: Effect is not statistically significant'}
-                        </div>
-                    </div>
-                    
-                    <p style="margin-bottom: 1rem;"><strong>All coefficients:</strong></p>
-                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; overflow-x: auto;">
-                        <table style="width: 100%; font-family: Helvetica, "Helvetica Neue"; font-size: 0.9rem;">
-                            <tr style="border-bottom: 2px solid #ddd; font-weight: 600;">
-                                <td style="padding: 0.5rem;">Variable</td>
-                                <td style="padding: 0.5rem; text-align: right;">t-stat</td>
-                                <td style="padding: 0.5rem; text-align: right;">p-value</td>
-                                <td style="padding: 0.5rem; text-align: center;">Sig</td>
-                            </tr>
-                            ${results.varNames.map((v, i) => {
-                                let sig = '';
-                                if (results.pValues[i] < 0.001) sig = '***';
-                                else if (results.pValues[i] < 0.01) sig = '**';
-                                else if (results.pValues[i] < 0.05) sig = '*';
-                                else if (results.pValues[i] < 0.1) sig = '.';
-                                
-                                return `
-                                    <tr style="border-bottom: 1px solid #eee;">
-                                        <td style="padding: 0.5rem;">${v}</td>
-                                        <td style="padding: 0.5rem; text-align: right;">${results.tStats[i].toFixed(4)}</td>
-                                        <td style="padding: 0.5rem; text-align: right;">${results.pValues[i] < 0.001 ? '< 0.001' : results.pValues[i].toFixed(4)}</td>
-                                        <td style="padding: 0.5rem; text-align: center;"><strong>${sig}</strong></td>
-                                    </tr>
-                                `;
-                            }).join('')}
-                        </table>
-                    </div>
-                </div>
-            `;
-            
-            // SECTION 7: Confidence Intervals
-            html += `
-                <div style="padding: 1.5rem; background: white; border-radius: 0; margin-bottom: 1.5rem; border: 4px solid #8b5cf6;">
-                    <h4 style="color: #7c3aed; margin-bottom: 1rem;">7. 95% Confidence Intervals</h4>
-                    
-                    <p style="margin-bottom: 1rem;">
-                        Confidence intervals provide a range of plausible values for each coefficient.
-                    </p>
-                    
-                    <div style="background: #f3e8ff; padding: 1.5rem; border-radius: 0; margin-bottom: 1rem; text-align: center;">
-                        <div style="font-size: 1.2rem; font-family: Helvetica, "Helvetica Neue"; margin-bottom: 0.5rem;">
-                            CI = &beta;&#770; &plusmn; t<sub>&alpha;/2, df</sub> &times; SE(&beta;&#770;)
-                        </div>
-                        <div style="margin-top: 0.5rem; font-size: 0.9rem; color: #6b21a8;">
-                            For 95% CI: &alpha; = 0.05, so &alpha;/2 = 0.025<br/>
-                            Critical value t<sub>0.025, ${df}</sub> &asymp; ${(1.96 + 0.02 * Math.min(df, 30)).toFixed(3)}
-                        </div>
-                    </div>
-                    
-                    <p style="margin-bottom: 1rem;"><strong>Example for ${results.varNames[1]}:</strong></p>
-                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; margin-bottom: 1.5rem;">
-                        <div style="font-family: Helvetica, "Helvetica Neue";">
-                            Lower = ${results.coefficients[1].toFixed(6)} - ${(1.96 + 0.02 * Math.min(df, 30)).toFixed(3)} &times; ${results.standardErrors[1].toFixed(6)}<br/>
-                            Lower = ${results.confidenceIntervals[1].lower.toFixed(6)}<br/><br/>
-                            Upper = ${results.coefficients[1].toFixed(6)} + ${(1.96 + 0.02 * Math.min(df, 30)).toFixed(3)} &times; ${results.standardErrors[1].toFixed(6)}<br/>
-                            Upper = ${results.confidenceIntervals[1].upper.toFixed(6)}<br/><br/>
-                            <strong style="color: #7c3aed;">95% CI: [${results.confidenceIntervals[1].lower.toFixed(6)}, ${results.confidenceIntervals[1].upper.toFixed(6)}]</strong>
-                        </div>
-                        <div style="margin-top: 1rem; color: #666; font-size: 0.9rem;">
-                            Interpretation: We are 95% confident the true value of &beta; falls in this range.
-                        </div>
-                    </div>
-                    
-                    <p style="margin-bottom: 1rem;"><strong>All confidence intervals:</strong></p>
-                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; overflow-x: auto;">
-                        <table style="width: 100%; font-family: Helvetica, "Helvetica Neue"; font-size: 0.9rem;">
-                            <tr style="border-bottom: 2px solid #ddd; font-weight: 600;">
-                                <td style="padding: 0.5rem;">Variable</td>
-                                <td style="padding: 0.5rem; text-align: right;">Coefficient</td>
-                                <td style="padding: 0.5rem; text-align: right;">Lower 95%</td>
-                                <td style="padding: 0.5rem; text-align: right;">Upper 95%</td>
-                            </tr>
-                            ${results.varNames.map((v, i) => `
-                                <tr style="border-bottom: 1px solid #eee;">
-                                    <td style="padding: 0.5rem;">${v}</td>
-                                    <td style="padding: 0.5rem; text-align: right;">${results.coefficients[i].toFixed(6)}</td>
-                                    <td style="padding: 0.5rem; text-align: right;">${results.confidenceIntervals[i].lower.toFixed(6)}</td>
-                                    <td style="padding: 0.5rem; text-align: right;">${results.confidenceIntervals[i].upper.toFixed(6)}</td>
-                                </tr>
-                            `).join('')}
-                        </table>
-                    </div>
-                </div>
-            `;
-            
-            // SECTION 8: F-statistic
-            html += `
-                <div style="padding: 1.5rem; background: white; border-radius: 0; margin-bottom: 1.5rem; border: 4px solid #8b5cf6;">
-                    <h4 style="color: #7c3aed; margin-bottom: 1rem;">8. F-statistic (Overall Model Test)</h4>
-                    
-                    <p style="margin-bottom: 1rem;">
-                        Tests whether <em>any</em> of the predictors have an effect (tests the model as a whole).
-                    </p>
-                    
-                    <p style="margin-bottom: 1rem;"><strong>Null Hypothesis:</strong></p>
-                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; margin-bottom: 1.5rem;">
-                        H<sub>0</sub>: &beta;<sub>1</sub> = &beta;<sub>2</sub> = ... = &beta;<sub>k</sub> = 0  (all predictors have no effect)<br/>
-                        H<sub>1</sub>: At least one &beta;áµ¢ &ne; 0  (at least one predictor matters)
-                    </div>
-                    
-                    <div style="background: #f3e8ff; padding: 1.5rem; border-radius: 0; margin-bottom: 1rem; text-align: center;">
-                        <div style="font-size: 1.2rem; font-family: Helvetica, "Helvetica Neue"; margin-bottom: 1rem;">
-                            F = (ESS / k) / (RSS / (n - k - 1))
-                        </div>
-                        <div style="font-size: 1.2rem; font-family: Helvetica, "Helvetica Neue"; margin-bottom: 1rem;">
-                            F = (${ESS.toFixed(4)} / ${results.varNames.length - 1}) / (${RSS.toFixed(4)} / ${df})
-                        </div>
-                        <div style="font-size: 1.5rem; font-family: Helvetica, "Helvetica Neue"; font-weight: 700; color: #7c3aed; margin-bottom: 1rem;">
-                            F = ${results.fStat.toFixed(4)}
-                        </div>
-                        <div style="font-size: 0.9rem; color: #6b21a8;">
-                            Follows an F-distribution with df<sub>1</sub> = ${results.varNames.length - 1}, df<sub>2</sub> = ${df}
-                        </div>
-                    </div>
-                    
-                    <div style="background: #f3e8ff; padding: 1.5rem; border-radius: 0; text-align: center;">
-                        <div style="font-size: 1.1rem; margin-bottom: 0.5rem;">
-                            <strong>P-value (Prob > F):</strong>
-                        </div>
-                        <div style="font-size: 1.5rem; font-family: Helvetica, "Helvetica Neue"; font-weight: 700; color: #7c3aed;">
-                            ${results.fProb < 0.001 ? '< 0.001' : results.fProb.toFixed(6)}
-                        </div>
-                        <div style="margin-top: 1rem; font-size: 1rem; color: #6b21a8;">
-                            ${results.fProb < 0.001 ? '&#10003; Strong evidence that the model has predictive power' : 
-                              results.fProb < 0.05 ? '&#10003; Model is statistically significant' : 
-                              'Model is not statistically significant'}
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            // SECTION 9: Summary
-            html += `
-                <div style="padding: 1.5rem; background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: 0; border: 4px solid #f59e0b;">
-                    <h4 style="color: #92400e; margin-bottom: 1rem;">Calculation Summary</h4>
-                    <p style="margin-bottom: 1rem; font-size: 1rem;">
-                        We have now derived every statistic in the regression output:
-                    </p>
-                    <ul style="margin: 0; padding-left: 1.5rem; line-height: 2;">
-                        <li>&#10003; Coefficients via OLS: &beta;&#770; = (X'X)<sup>-1</sup>&sup1;X'Y</li>
-                        <li>&#10003; R&sup2; and Adjusted R&sup2; from sum of squares decomposition</li>
-                        <li>&#10003; Standard errors from variance-covariance matrix</li>
-                        <li>&#10003; T-statistics and p-values for individual coefficients</li>
-                        <li>&#10003; Confidence intervals using t-distribution</li>
-                        <li>&#10003; F-statistic and p-value for overall model</li>
-                    </ul>
-                </div>
-            `;
-            
-            container.innerHTML = html;
-        }
-        
-        /**
-         * Generate plain English interpretation of regression results
-         * For users without quantitative background
-         */
-        function generatePlainEnglishInterpretation(results) {
-            const container = document.getElementById('plainEnglishInterpretation');
-            
-            // Variable name lookup for better readability
-            const varNameLookup = {
-                'Intercept': 'Baseline',
-                'week_number': 'Week Number (Time Trend)',
-                'weapon_diversity': 'Weapon Diversity',
-                'launch_diversity': 'Launch Location Diversity',
-                'target_diversity': 'Target Diversity',
-                'lagged_destroyed': 'Previous Week\'s Interceptions',
-                'lagged_launched': 'Previous Week\'s Launches'
-            };
-            
-            const depVarLookup = {
-                'launched': 'number of weapons launched',
-                'destroyed': 'number of weapons intercepted',
-                'interception_rate': 'interception rate (percentage)',
-                'attack_success_rate': 'attack success rate (percentage)',
-                'complexity_score': 'attack complexity score'
-            };
-            
-            let html = '';
-            
-            // SECTION 1: What question did we ask?
-            html += `
-                <div style="margin-bottom: 2rem; padding: 1.5rem; background: white; border-radius: 0; border: 4px solid #0ea5e9;">
-                    <h4 style="color: #0369a1; margin-bottom: 1rem; font-size: 1.1rem;">
-                        Research Question
-                    </h4>
-                    <p style="margin: 0; font-size: 1.05rem;">
-                        <strong>How different factors affect 
-                        <span style="color: #0ea5e9; font-weight: 600;">${depVarLookup[results.dependentVar] || results.dependentVar}</span>.</strong>
-                    </p>
-                </div>
-            `;
-            
-            // SECTION 2: Overall model quality
-            const modelQuality = interpretModelQuality(results.rSquared, results.fProb);
-            html += `
-                <div style="margin-bottom: 2rem; padding: 1.5rem; background: white; border-radius: 0; border: 4px solid ${modelQuality.color};">
-                    <h4 style="color: ${modelQuality.color}; margin-bottom: 1rem; font-size: 1.1rem;">
-                        ${modelQuality.icon} Overall Model Quality
-                    </h4>
-                    <p style="margin-bottom: 1rem;">
-                        <strong>How well does our model explain the data?</strong>
-                    </p>
-                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 0; margin-bottom: 1rem;">
-                        <div style="margin-bottom: 0.75rem;">
-                            <strong style="color: #0369a1;">R&sup2; = ${(results.rSquared * 100).toFixed(1)}%</strong>
-                            <p style="margin: 0.25rem 0 0 0; font-size: 0.95rem;">
-                                ${modelQuality.r2Explanation}
-                            </p>
-                        </div>
-                        <div>
-                            <strong style="color: #0369a1;">Statistical Significance: ${results.fProb < 0.001 ? 'p < 0.001' : 'p = ' + results.fProb.toFixed(3)}</strong>
-                            <p style="margin: 0.25rem 0 0 0; font-size: 0.95rem;">
-                                ${modelQuality.sigExplanation}
-                            </p>
-                        </div>
-                    </div>
-                    <p style="margin: 0; padding: 1rem; background: ${modelQuality.bgColor}; border-radius: 0; font-size: 1rem;">
-                        <strong>${modelQuality.verdict}</strong> ${modelQuality.interpretation}
-                    </p>
-                </div>
-            `;
-            
-            // SECTION 3: What each factor tells us
-            html += `
-                <div style="margin-bottom: 2rem; padding: 1.5rem; background: white; border-radius: 0; border: 4px solid #8b5cf6;">
-                    <h4 style="color: #7c3aed; margin-bottom: 1rem; font-size: 1.1rem;">
-                        Findings
-                    </h4>
-            `;
-            
-            // Interpret each coefficient (skip intercept)
-            for (let i = 1; i < results.varNames.length; i++) {
-                const varName = results.varNames[i];
-                const friendlyName = varNameLookup[varName] || varName;
-                const coef = results.coefficients[i];
-                const pVal = results.pValues[i];
-                const ci = results.confidenceIntervals[i];
-                
-                const interpretation = interpretCoefficient(
-                    friendlyName,
-                    coef,
-                    pVal,
-                    ci,
-                    results.dependentVar,
-                    results.modelType
-                );
-                
-                html += `
-                    <div style="margin-bottom: 1.5rem; padding: 1.25rem; background: #f8f9fa; border-radius: 0; border: 4px solid ${interpretation.color};">
-                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.75rem;">
-                            <h5 style="margin: 0; color: #333; font-size: 1.05rem;">
-                                ${interpretation.icon} ${friendlyName}
-                            </h5>
-                            <span style="background: ${interpretation.badgeColor}; color: ${interpretation.badgeTextColor}; 
-                                         padding: 0.25rem 0.75rem; border-radius: 0; font-size: 0.85rem; font-weight: 600;">
-                                ${interpretation.strength}
-                            </span>
-                        </div>
-                        <p style="margin: 0 0 0.75rem 0; font-size: 1rem; line-height: 1.6;">
-                            ${interpretation.explanation}
-                        </p>
-                        <div style="background: white; padding: 0.75rem; border-radius: 0; font-size: 0.9rem; color: #666;">
-                            <strong>Technical details:</strong> Coefficient = ${coef.toFixed(3)}, 
-                            95% CI: [${ci.lower.toFixed(3)}, ${ci.upper.toFixed(3)}], 
-                            p ${pVal < 0.001 ? '< 0.001' : '= ' + pVal.toFixed(3)}
-                        </div>
-                    </div>
-                `;
-            }
-            
-            html += `</div>`;
-            
-            // SECTION 4: What does "statistically significant" mean?
-            html += `
-                <div style="margin-bottom: 2rem; padding: 1.5rem; background: white; border-radius: 0; border: 4px solid #f59e0b;">
-                    <h4 style="color: #d97706; margin-bottom: 1rem; font-size: 1.1rem;">
-                        Understanding "Statistical Significance"
-                    </h4>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                        <div style="padding: 1rem; background: #fee2e2; border-radius: 0; border: 3px solid #dc2626;">
-                            <div style="font-weight: 600; color: #dc2626; margin-bottom: 0.25rem;">*** (p < 0.001)</div>
-                            <div style="font-size: 0.9rem;">Very Strong Evidence - We're 99.9% confident</div>
-                        </div>
-                        <div style="padding: 1rem; background: #fed7aa; border-radius: 0; border: 3px solid #ea580c;">
-                            <div style="font-weight: 600; color: #ea580c; margin-bottom: 0.25rem;">** (p < 0.01)</div>
-                            <div style="font-size: 0.9rem;">Strong Evidence - We're 99% confident</div>
-                        </div>
-                        <div style="padding: 1rem; background: #fef3c7; border-radius: 0; border: 3px solid #f59e0b;">
-                            <div style="font-weight: 600; color: #f59e0b; margin-bottom: 0.25rem;">* (p < 0.05)</div>
-                            <div style="font-size: 0.9rem;">Good Evidence - We're 95% confident</div>
-                        </div>
-                        <div style="padding: 1rem; background: #e0e7ff; border-radius: 0; border: 3px solid #6366f1;">
-                            <div style="font-weight: 600; color: #6366f1; margin-bottom: 0.25rem;">. (p < 0.10)</div>
-                            <div style="font-size: 0.9rem;">Marginal - Suggestive but weak</div>
-                        </div>
-                        <div style="padding: 1rem; background: #f3f4f6; border-radius: 0; border: 3px solid #9ca3af;">
-                            <div style="font-weight: 600; color: #6b7280; margin-bottom: 0.25rem;">None (p &ge; 0.10)</div>
-                            <div style="font-size: 0.9rem;">Not Significant - Could be chance</div>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            // SECTION 5: Research implications
-            const implications = generateResearchImplications(results);
-            html += `
-                <div style="margin-bottom: 2rem; padding: 1.5rem; background: white; border-radius: 0; border: 4px solid #10b981;">
-                    <h4 style="color: #059669; margin-bottom: 1rem; font-size: 1.1rem;">
-                        Research Implications
-                    </h4>
-                    ${implications}
-                </div>
-            `;
-            
-            // SECTION 6: How to report this
-            html += `
-                <div style="margin-bottom: 2rem; padding: 1.5rem; background: white; border-radius: 0; border: 4px solid #6366f1;">
-                    <h4 style="color: #4f46e5; margin-bottom: 1rem; font-size: 1.1rem;">
-                        Report
-                    </h4>
-                    <div style="background: #f8f9fa; padding: 1.25rem; border-radius: 0; font-family: Helvetica, "Helvetica Neue"; 
-                                line-height: 1.8; border: 2px dashed #6366f1;">
-                        ${generatePaperTemplate(results)}
-                    </div>
-                </div>
-            `;
-            
-            // SECTION 7: Diagnostics check
-            const diagnostics = checkDiagnostics(results);
-            if (diagnostics.warnings.length > 0) {
-                html += `
-                    <div style="margin-bottom: 2rem; padding: 1.5rem; background: #fef3c7; border-radius: 0; border: 4px solid #f59e0b;">
-                        <h4 style="color: #d97706; margin-bottom: 1rem; font-size: 1.1rem;">
-                            Diagnostic Checks
-                        </h4>
-                        <p style="margin-bottom: 1rem;">
-                            Our analysis found some issues to be aware of:
-                        </p>
-                        <ul style="margin: 0; padding-left: 1.5rem;">
-                            ${diagnostics.warnings.map(w => `<li style="margin-bottom: 0.5rem;">${w}</li>`).join('')}
-                        </ul>
-                        <p style="margin: 1rem 0 0 0; font-size: 0.95rem; font-style: italic; color: #92400e;">
-                            These don't necessarily invalidate the results, but should be noted when interpreting findings.
-                        </p>
-                    </div>
-                `;
-            }
-            
-            container.innerHTML = html;
-        }
-        
-        /**
-         * Helper: Interpret overall model quality
-         */
-        function interpretModelQuality(rSquared, fProb) {
-            let r2Explanation, sigExplanation, verdict, interpretation, color, icon, bgColor;
-            
-            // R&sup2; interpretation
-            if (rSquared >= 0.7) {
-                r2Explanation = "Our model explains most of the variation in the outcome. This is excellent!";
-            } else if (rSquared >= 0.5) {
-                r2Explanation = "Our model explains more than half of the variation. This is quite good for social science research.";
-            } else if (rSquared >= 0.3) {
-                r2Explanation = "Our model explains a moderate amount of variation. This is typical for complex real-world data.";
-            } else if (rSquared >= 0.1) {
-                r2Explanation = "Our model explains some of the variation, but much remains unexplained. Other factors likely matter too.";
-            } else {
-                r2Explanation = "Our model explains little variation. The factors we studied may not be the main drivers.";
-            }
-            
-            // Significance interpretation
-            if (fProb < 0.001) {
-                sigExplanation = "There's less than 0.1% chance these results are due to random luck. We can be very confident in these findings.";
-            } else if (fProb < 0.01) {
-                sigExplanation = "There's less than 1% chance these results are due to random luck. We can be quite confident.";
-            } else if (fProb < 0.05) {
-                sigExplanation = "There's less than 5% chance these results are due to random luck. This meets the standard threshold.";
-            } else {
-                sigExplanation = "We cannot rule out that these results might be due to chance. The model may not be reliable.";
-            }
-            
-            // Overall verdict
-            if (rSquared >= 0.5 && fProb < 0.01) {
-                verdict = "Excellent Model";
-                interpretation = "This model performs well and provides reliable insights into the factors affecting the outcome.";
-                color = "#059669";
-                icon = "";
-                bgColor = "#d1fae5";
-            } else if (rSquared >= 0.3 && fProb < 0.05) {
-                verdict = "Good Model";
-                interpretation = "This model provides useful insights, though there's room for improvement. The results are trustworthy.";
-                color = "#0ea5e9";
-                icon = "";
-                bgColor = "#e0f2fe";
-            } else if (rSquared >= 0.1 || fProb < 0.05) {
-                verdict = "Acceptable Model";
-                interpretation = "This model shows some predictive power. Results should be interpreted cautiously and verified with additional analyses.";
-                color = "#f59e0b";
-                icon = "";
-                bgColor = "#fef3c7";
-            } else {
-                verdict = "Weak Model";
-                interpretation = "This model has limited explanatory power. Consider testing different variables or model specifications.";
-                color = "#ef4444";
-                icon = "";
-                bgColor = "#fee2e2";
-            }
-            
-            return { r2Explanation, sigExplanation, verdict, interpretation, color, icon, bgColor };
-        }
-        
-        /**
-         * Get effect size description (small/medium/large)
-         */
-        function getEffectSizeDescription(absCoef, depVar) {
-            let sizeLabel, sizeDesc;
-            
-            // Context-dependent effect size interpretation
-            if (depVar === 'launched' || depVar === 'destroyed') {
-                if (absCoef >= 10) {
-                    sizeLabel = "Very Large";
-                    sizeDesc = "This is a very substantial effect - changes of 10+ weapons per unit change.";
-                } else if (absCoef >= 5) {
-                    sizeLabel = "Large";
-                    sizeDesc = "This is a large effect - changes of 5-10 weapons per unit change.";
-                } else if (absCoef >= 2) {
-                    sizeLabel = "Medium";
-                    sizeDesc = "This is a moderate effect - changes of 2-5 weapons per unit change.";
-                } else if (absCoef >= 0.5) {
-                    sizeLabel = "Small";
-                    sizeDesc = "This is a small but meaningful effect.";
-                } else {
-                    sizeLabel = "Very Small";
-                    sizeDesc = "This is a very small effect - may not be practically significant.";
-                }
-            } else if (depVar === 'interception_rate' || depVar === 'attack_success_rate') {
-                if (absCoef >= 10) {
-                    sizeLabel = "Very Large";
-                    sizeDesc = "This is a very substantial effect - 10+ percentage point changes.";
-                } else if (absCoef >= 5) {
-                    sizeLabel = "Large";
-                    sizeDesc = "This is a large effect - 5-10 percentage point changes.";
-                } else if (absCoef >= 2) {
-                    sizeLabel = "Medium";
-                    sizeDesc = "This is a moderate effect - 2-5 percentage point changes.";
-                } else if (absCoef >= 0.5) {
-                    sizeLabel = "Small";
-                    sizeDesc = "This is a small but meaningful effect.";
-                } else {
-                    sizeLabel = "Very Small";
-                    sizeDesc = "This is a very small effect.";
-                }
-            } else {
-                // Generic interpretation
-                if (absCoef >= 5) {
-                    sizeLabel = "Large";
-                    sizeDesc = "This represents a large effect size.";
-                } else if (absCoef >= 2) {
-                    sizeLabel = "Medium";
-                    sizeDesc = "This represents a moderate effect size.";
-                } else if (absCoef >= 0.5) {
-                    sizeLabel = "Small";
-                    sizeDesc = "This represents a small but meaningful effect.";
-                } else {
-                    sizeLabel = "Very Small";
-                    sizeDesc = "This represents a very small effect.";
-                }
-            }
-            
-            return `<span style="color: #7c3aed; font-weight: 600;">${sizeLabel}</span> - ${sizeDesc}`;
-        }
-        
-        /**
-         * Generate concrete prediction example using the coefficient
-         */
-        function getConcreteExample(varName, coef, depVar) {
-            const direction = coef > 0 ? "increase" : "decrease";
-            const absCoef = Math.abs(coef);
-            
-            let example = '';
-            
-            // Variable-specific examples
-            if (varName.toLowerCase().includes('week')) {
-                if (coef > 0) {
-                    example = `Over 10 weeks, we'd expect ${depVar} to increase by approximately <strong>${(absCoef * 10).toFixed(1)} units</strong> (holding other factors constant).`;
-                } else {
-                    example = `Over 10 weeks, we'd expect ${depVar} to decrease by approximately <strong>${(absCoef * 10).toFixed(1)} units</strong> (holding other factors constant).`;
-                }
-            } else if (varName.toLowerCase().includes('diversity')) {
-                if (coef > 0) {
-                    example = `If this metric increased from 3 to 5 types (+2), ${depVar} would increase by <strong>${(absCoef * 2).toFixed(1)} units</strong>.`;
-                } else {
-                    example = `If this metric increased from 3 to 5 types (+2), ${depVar} would decrease by <strong>${(absCoef * 2).toFixed(1)} units</strong>.`;
-                }
-            } else if (varName.toLowerCase().includes('lagged')) {
-                if (coef < 0) {
-                    example = `If last week had 10 more interceptions, this week would see <strong>${absCoef.toFixed(1)} fewer</strong> ${depVar} (strategic adaptation).`;
-                } else {
-                    example = `If last week had 10 more, this week would see <strong>${absCoef.toFixed(1)} more</strong> ${depVar}.`;
-                }
-            } else {
-                example = `Increasing this factor by 5 units would ${direction} ${depVar} by <strong>${(absCoef * 5).toFixed(1)} units</strong>.`;
-            }
-            
-            return example;
-        }
-        
-        /**
-         * Create ASCII visualization of confidence interval
-         */
-        function getCIVisualization(coef, lower, upper) {
-            const includesZero = (lower <= 0 && upper >= 0);
-            
-            let viz = '<div style="background: #f8f9fa; padding: 1rem; border-radius: 0; font-family: Helvetica, \'Helvetica Neue\'; font-size: 0.9rem;">';
-            
-            viz += `<div style="margin-bottom: 0.75rem;">We're 95% confident the true effect is between <strong>${lower.toFixed(3)}</strong> and <strong>${upper.toFixed(3)}</strong></div>`;
-            
-            // Create visual bar
-            viz += '<div style="position: relative; height: 30px; background: linear-gradient(to right, #e5e7eb 0%, #e5e7eb 49%, #374151 49%, #374151 51%, #e5e7eb 51%, #e5e7eb 100%); border-radius: 0; margin: 0.75rem 0;">';
-            
-            // Calculate positions
-            const scale = Math.max(Math.abs(lower), Math.abs(upper)) * 1.3;
-            const lowerPos = Math.max(0, Math.min(100, 50 + (lower / scale) * 45));
-            const upperPos = Math.max(0, Math.min(100, 50 + (upper / scale) * 45));
-            const coefPos = Math.max(0, Math.min(100, 50 + (coef / scale) * 45));
-            
-            // CI range bar
-            const barColor = includesZero ? '#f59e0b' : '#059669';
-            viz += `<div style="position: absolute; left: ${lowerPos}%; width: ${upperPos - lowerPos}%; top: 10px; height: 10px; background: ${barColor}; border-radius: 0;"></div>`;
-            
-            // Point estimate marker
-            viz += `<div style="position: absolute; left: ${coefPos}%; top: 5px; width: 3px; height: 20px; background: #7c3aed;"></div>`;
-            
-            // Labels
-            viz += `<div style="position: absolute; left: ${lowerPos}%; top: -18px; font-size: 0.75rem; color: #666;">${lower.toFixed(2)}</div>`;
-            viz += `<div style="position: absolute; left: ${upperPos}%; top: -18px; font-size: 0.75rem; color: #666;">${upper.toFixed(2)}</div>`;
-            viz += `<div style="position: absolute; left: ${coefPos}%; top: 28px; font-size: 0.75rem; color: #7c3aed; font-weight: 600;">${coef.toFixed(2)}</div>`;
-            
-            viz += '</div>';
-            
-            // Interpretation
-            if (includesZero) {
-                viz += '<div style="color: #d97706; font-size: 0.85rem; margin-top: 0.5rem;">CI includes zero - some uncertainty about effect direction</div>';
-            } else if (coef > 0) {
-                viz += '<div style="color: #059669; font-size: 0.85rem; margin-top: 0.5rem;">&#10003; Consistently positive effect across plausible range</div>';
-            } else {
-                viz += '<div style="color: #059669; font-size: 0.85rem; margin-top: 0.5rem;">&#10003; Consistently negative effect across plausible range</div>';
-            }
-            
-            viz += '</div>';
-            
-            return viz;
-        }
-        
-        /**
-         * Helper: Interpret individual coefficient
-         */
-        function interpretCoefficient(varName, coef, pVal, ci, depVar, modelType) {
-            let explanation, strength, color, icon, badgeColor, badgeTextColor;
-            
-            // Determine significance
-            if (pVal < 0.001) {
-                strength = "Very Strong Effect";
-                color = "#dc2626";
-                badgeColor = "#fee2e2";
-                badgeTextColor = "#dc2626";
-                icon = "&#128308;";
-            } else if (pVal < 0.01) {
-                strength = "Strong Effect";
-                color = "#ea580c";
-                badgeColor = "#fed7aa";
-                badgeTextColor = "#ea580c";
-                icon = "&#128992;";
-            } else if (pVal < 0.05) {
-                strength = "Significant Effect";
-                color = "#f59e0b";
-                badgeColor = "#fef3c7";
-                badgeTextColor = "#f59e0b";
-                icon = "&#128993;";
-            } else if (pVal < 0.1) {
-                strength = "Marginal Effect";
-                color = "#6366f1";
-                badgeColor = "#e0e7ff";
-                badgeTextColor = "#6366f1";
-                icon = "&#128309;";
-            } else {
-                strength = "Not Significant";
-                color = "#9ca3af";
-                badgeColor = "#f3f4f6";
-                badgeTextColor = "#6b7280";
-                icon = "&#9898;";
-            }
-            
-            // Build explanation
-            const direction = coef > 0 ? "increases" : "decreases";
-            const absCoef = Math.abs(coef);
-            
-            if (pVal < 0.05) {
-                // Significant result
-                if (modelType === 'Poisson') {
-                    const multiplier = Math.exp(coef);
-                    const percentChange = ((multiplier - 1) * 100).toFixed(1);
-                    explanation = `When <strong>${varName}</strong> increases by one unit, the <strong>${depVar}</strong> ${coef > 0 ? 'increases' : 'decreases'} by approximately <strong>${Math.abs(percentChange)}%</strong>. `;
-                } else {
-                    explanation = `When <strong>${varName}</strong> increases by one unit, the <strong>${depVar}</strong> ${direction} by approximately <strong>${absCoef.toFixed(2)}</strong> units. `;
-                }
-                
-                if (pVal < 0.001) {
-                    explanation += "We are very confident this is a real relationship (99.9% confidence).";
-                } else if (pVal < 0.01) {
-                    explanation += "We are quite confident this is a real relationship (99% confidence).";
-                } else {
-                    explanation += "We have good evidence this is a real relationship (95% confidence).";
-                }
-                
-                // Add effect size interpretation
-                explanation += `<br/><br/><strong>Effect Size:</strong> ${getEffectSizeDescription(absCoef, depVar)}`;
-                
-                // Add concrete prediction example  
-                explanation += `<br/><br/><strong>Concrete Example:</strong> ${getConcreteExample(varName, coef, depVar)}`;
-                
-                // Add confidence interval visualization
-                explanation += `<br/><br/><strong>Uncertainty Range:</strong><br/>`;
-                explanation += getCIVisualization(coef, ci.lower, ci.upper);
-            } else if (pVal < 0.1) {
-                // Marginal result
-                explanation = `There is <strong>suggestive but weak evidence</strong> that ${varName} affects ${depVar}. `;
-                explanation += `The pattern suggests ${direction} of about ${absCoef.toFixed(2)} units, but we can only be ~90% confident this isn't due to chance.`;
-            } else {
-                // Not significant
-                explanation = `We found <strong>no significant relationship</strong> between ${varName} and ${depVar}. `;
-                explanation += `Any apparent pattern could easily be due to random chance. This factor may not be important for predicting the outcome.`;
-            }
-            
-            return { explanation, strength, color, icon, badgeColor, badgeTextColor };
-        }
-        
-        /**
-         * Helper: Generate research implications
-         */
-        function generateResearchImplications(results) {
-            let html = '<ul style="margin: 0; padding-left: 1.5rem; line-height: 1.8;">';
-            
-            // Count significant predictors
-            let sigCount = 0;
-            for (let i = 1; i < results.pValues.length; i++) {
-                if (results.pValues[i] < 0.05) sigCount++;
-            }
-            
-            if (sigCount === 0) {
-                html += `
-                    <li><strong>Limited Predictive Power:</strong> None of the factors we tested showed significant relationships. 
-                    This could mean: (1) the factors aren't relevant, (2) the relationship is non-linear, or 
-                    (3) there's too much noise in the data.</li>
-                    <li><strong>Consider:</strong> Testing different variables, using longer time periods, or examining specific subsets of the data.</li>
-                `;
-            } else if (sigCount === 1) {
-                html += `
-                    <li><strong>Single Key Factor:</strong> We identified one significant predictor. This suggests a relatively 
-                    straightforward relationship worth investigating further.</li>
-                    <li><strong>Consider:</strong> Examining why this factor matters while others don't, and testing for interaction effects.</li>
-                `;
-            } else {
-                html += `
-                    <li><strong>Multiple Factors Matter:</strong> We found ${sigCount} significant predictors, suggesting the outcome 
-                    is influenced by multiple factors working together.</li>
-                    <li><strong>Consider:</strong> Examining how these factors interact and which has the strongest effect.</li>
-                `;
-            }
-            
-            // R&sup2; implications
-            if (results.rSquared >= 0.5) {
-                html += `
-                    <li><strong>Strong Explanatory Power:</strong> These factors explain most of the variation, suggesting we've 
-                    identified the key drivers of ${results.dependentVar}.</li>
-                `;
-            } else if (results.rSquared < 0.3) {
-                html += `
-                    <li><strong>Unexplained Variation:</strong> Much remains unexplained (${((1-results.rSquared)*100).toFixed(0)}%). 
-                    Other factors not in this model likely play important roles.</li>
-                `;
-            }
-            
-            // Theoretical implications
-            if (results.varNames.includes('lagged_destroyed') || results.varNames.includes('lagged_launched')) {
-                const lagIdx = results.varNames.indexOf('lagged_destroyed');
-                if (lagIdx > 0 && results.pValues[lagIdx] < 0.05) {
-                    html += `
-                        <li><strong>Strategic Learning:</strong> The significant effect of previous week's interceptions suggests 
-                        strategic adaptation - actors are learning from past defensive effectiveness.</li>
-                    `;
-                }
-            }
-            
-            html += '</ul>';
-            return html;
-        }
-        
-        /**
-         * Helper: Generate paper template
-         */
-        function generatePaperTemplate(results) {
-            let template = `<p style="margin-bottom: 1rem;">`;
-            
-            // Opening sentence
-            template += `We estimated a${results.modelType.startsWith('O') ? 'n' : ''} ${results.modelType} regression `;
-            template += `predicting ${results.dependentVar} from ${results.varNames.length - 1} predictor${results.varNames.length > 2 ? 's' : ''}: `;
-            
-            // List predictors
-            const predictors = results.varNames.slice(1).join(', ');
-            template += `${predictors}. `;
-            
-            // Model fit
-            template += `The model explained ${(results.rSquared * 100).toFixed(1)}% of variance `;
-            template += `(R&sup2; = ${results.rSquared.toFixed(3)}, `;
-            template += `F(${results.varNames.length - 1}, ${results.nObs - results.varNames.length}) = ${results.fStat.toFixed(2)}, `;
-            template += `p ${results.fProb < 0.001 ? '< 0.001' : '= ' + results.fProb.toFixed(3)}). `;
-            
-            template += `</p>`;
-            
-            // Report significant coefficients
-            template += `<p style="margin-bottom: 1rem;">`;
-            let sigReported = false;
-            for (let i = 1; i < results.varNames.length; i++) {
-                if (results.pValues[i] < 0.05) {
-                    if (sigReported) template += ` `;
-                    template += `${results.varNames[i]} was significantly associated with ${results.dependentVar} `;
-                    template += `(&beta; = ${results.coefficients[i].toFixed(3)}, `;
-                    template += `SE = ${results.standardErrors[i].toFixed(3)}, `;
-                    template += `95% CI: [${results.confidenceIntervals[i].lower.toFixed(3)}, ${results.confidenceIntervals[i].upper.toFixed(3)}], `;
-                    template += `p ${results.pValues[i] < 0.001 ? '< 0.001' : '= ' + results.pValues[i].toFixed(3)}).`;
-                    sigReported = true;
-                }
-            }
-            
-            if (!sigReported) {
-                template += `No predictors reached statistical significance at the p < 0.05 level.`;
-            }
-            
-            template += `</p>`;
-            
-            return template;
-        }
-        
-        /**
-         * Helper: Check diagnostics for common issues
-         */
-        function checkDiagnostics(results) {
-            const warnings = [];
-            
-            // Check sample size
-            if (results.nObs < 30) {
-                warnings.push(`<strong>Small sample size (n=${results.nObs}):</strong> Results may be unreliable with fewer than 30 observations. Consider using longer time periods.`);
-            }
-            
-            // Check for very high R&sup2;
-            if (results.rSquared > 0.95) {
-                warnings.push(`<strong>Suspiciously high R&sup2; (${(results.rSquared*100).toFixed(1)}%):</strong> This might indicate overfitting or data issues. Check for multicollinearity.`);
-            }
-            
-            // Check for very wide confidence intervals (indicating high uncertainty)
-            for (let i = 1; i < results.coefficients.length; i++) {
-                const ci = results.confidenceIntervals[i];
-                const width = ci.upper - ci.lower;
-                const coef = Math.abs(results.coefficients[i]);
-                if (coef > 0 && width / coef > 10) {
-                    warnings.push(`<strong>Wide confidence interval for ${results.varNames[i]}:</strong> High uncertainty in this estimate. May need more data.`);
-                    break; // Only show once
-                }
-            }
-            
-            return { warnings };
-        }
-        
-        /**
-         * Display regression results in the UI
-         */
-        function displayRegressionResults(results) {
-            // Show results section
-            document.getElementById('regressionResults').classList.remove('display-none');
-            
-            // Update model summary
-            document.getElementById('resModelType').textContent = results.modelType;
-            document.getElementById('resNObs').textContent = results.nObs;
-            document.getElementById('resRSquared').textContent = results.rSquared.toFixed(4);
-            document.getElementById('resAdjRSquared').textContent = results.adjRSquared.toFixed(4);
-            document.getElementById('resFStat').textContent = results.fStat.toFixed(2);
-            document.getElementById('resFProb').textContent = results.fProb < 0.001 ? '< 0.001' : results.fProb.toFixed(4);
-            
-            // Update coefficients table
-            const tbody = document.getElementById('regressionCoefBody');
-            tbody.innerHTML = '';
-            
-            results.coefficients.forEach((coef, i) => {
-                const tr = document.createElement('tr');
-                const pVal = results.pValues[i];
-                
-                // Significance stars
-                let sig = '';
-                if (pVal < 0.001) sig = '***';
-                else if (pVal < 0.01) sig = '**';
-                else if (pVal < 0.05) sig = '*';
-                else if (pVal < 0.1) sig = '.';
-                
-                tr.innerHTML = `
-                    <td><strong>${results.varNames[i]}</strong></td>
-                    <td>${coef.toFixed(4)}</td>
-                    <td>${results.standardErrors[i].toFixed(4)}</td>
-                    <td>${results.tStats[i].toFixed(3)}</td>
-                    <td>${pVal < 0.001 ? '< 0.001' : pVal.toFixed(4)}</td>
-                    <td>${results.confidenceIntervals[i].lower.toFixed(4)}</td>
-                    <td>${results.confidenceIntervals[i].upper.toFixed(4)}</td>
-                    <td><strong>${sig}</strong></td>
-                `;
-                
-                tbody.appendChild(tr);
-            });
-            
-            // Create coefficient plot
-            createCoefficientPlot(results);
-            
-            // Create diagnostic plots
-            createDiagnosticPlots(results);
-            
-            // Generate key findings summary
-            generateKeyFindingsSummary(results);
-            
-            // Generate plain English interpretation
-            generatePlainEnglishInterpretation(results);
-            
-            // Generate show your work section
-            generateShowYourWork(results);
-        }
-        
-        /**
-         * Create coefficient plot with confidence intervals
-         */
-        function createCoefficientPlot(results) {
-            const ctx = document.getElementById('coefficientPlot');
-            
-            // Exclude intercept for better visualization
-            const varNames = results.varNames.slice(1);
-            const coefs = results.coefficients.slice(1);
-            const cis = results.confidenceIntervals.slice(1);
-            
-            if (charts.coefficientPlot) charts.coefficientPlot.destroy();
-            
-            charts.coefficientPlot = new Chart(ctx, {
-                type: 'scatter',
-                data: {
-                    datasets: [{
-                        label: 'Coefficient',
-                        data: coefs.map((c, i) => ({ x: i, y: c })),
-                        backgroundColor: '#57068c',
-                        borderColor: '#57068c',
-                        pointRadius: 8,
-                        pointHoverRadius: 10
-                    }, {
-                        label: '95% CI',
-                        data: cis.flatMap((ci, i) => [
-                            { x: i, y: ci.lower },
-                            { x: i, y: ci.upper }
-                        ]),
-                        showLine: true,
-                        borderColor: '#999',
-                        borderWidth: 2,
-                        pointRadius: 0,
-                        fill: false,
-                        segment: {
-                            borderDash: (ctx) => {
-                                // Vertical lines for CI
-                                return ctx.p0DataIndex % 2 === 0 ? [0, 0] : undefined;
-                            }
-                        }
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top'
-                        },
-                        tooltip: {
-                            callbacks: {
-                                title: function(context) {
-                                    const idx = context[0].parsed.x;
-                                    return varNames[idx];
-                                },
-                                label: function(context) {
-                                    return 'Coefficient: ' + context.parsed.y.toFixed(4);
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            type: 'linear',
-                            position: 'bottom',
-                            title: {
-                                display: false
-                            },
-                            ticks: {
-                                callback: function(value) {
-                                    return varNames[value] || '';
-                                },
-                                stepSize: 1
-                            }
-                        },
-                        y: {
-                            title: {
-                                display: true,
-                                text: 'Coefficient Value',
-                                font: { size: 13, weight: 'bold' }
-                            }
-                        }
-                    }
-                }
-            });
-        }
-        
-        /**
-         * Create diagnostic plots (residuals and Q-Q)
-         */
-        function createDiagnosticPlots(results) {
-            // Residuals vs Fitted
-            const ctxResid = document.getElementById('residualPlot');
-            
-            if (charts.residualPlot) charts.residualPlot.destroy();
-            
-            charts.residualPlot = new Chart(ctxResid, {
-                type: 'scatter',
-                data: {
-                    datasets: [{
-                        label: 'Residuals',
-                        data: results.fitted.map((f, i) => ({ 
-                            x: f, 
-                            y: results.residuals[i] 
-                        })),
-                        backgroundColor: 'rgba(87, 6, 140, 0.5)',
-                        borderColor: '#57068c',
-                        pointRadius: 4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    plugins: {
-                        legend: { display: false }
-                    },
-                    scales: {
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Fitted Values',
-                                font: { size: 12, weight: 'bold' }
-                            }
-                        },
-                        y: {
-                            title: {
-                                display: true,
-                                text: 'Residuals',
-                                font: { size: 12, weight: 'bold' }
-                            }
-                        }
-                    }
-                }
-            });
-            
-            // Q-Q Plot
-            const ctxQQ = document.getElementById('qqPlot');
-            
-            // Calculate quantiles for Q-Q plot
-            const sortedResiduals = [...results.residuals].sort((a, b) => a - b);
-            const n = sortedResiduals.length;
-            const theoreticalQuantiles = sortedResiduals.map((_, i) => 
-                normalQuantile((i + 0.5) / n)
-            );
-            
-            // Standardize residuals
-            const residMean = ss.mean(results.residuals);
-            const residStd = ss.standardDeviation(results.residuals);
-            const standardizedResiduals = sortedResiduals.map(r => (r - residMean) / residStd);
-            
-            if (charts.qqPlot) charts.qqPlot.destroy();
-            
-            charts.qqPlot = new Chart(ctxQQ, {
-                type: 'scatter',
-                data: {
-                    datasets: [{
-                        label: 'Sample Quantiles',
-                        data: theoreticalQuantiles.map((tq, i) => ({ 
-                            x: tq, 
-                            y: standardizedResiduals[i] 
-                        })),
-                        backgroundColor: 'rgba(87, 6, 140, 0.5)',
-                        borderColor: '#57068c',
-                        pointRadius: 4
-                    }, {
-                        label: '45&deg; Reference Line',
-                        data: [
-                            { x: Math.min(...theoreticalQuantiles), y: Math.min(...theoreticalQuantiles) },
-                            { x: Math.max(...theoreticalQuantiles), y: Math.max(...theoreticalQuantiles) }
-                        ],
-                        type: 'line',
-                        borderColor: '#b91c1c',
-                        borderWidth: 2,
-                        borderDash: [5, 5],
-                        pointRadius: 0,
-                        fill: false
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    plugins: {
-                        legend: { 
-                            display: true,
-                            position: 'top'
-                        }
-                    },
-                    scales: {
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Theoretical Quantiles',
-                                font: { size: 12, weight: 'bold' }
-                            }
-                        },
-                        y: {
-                            title: {
-                                display: true,
-                                text: 'Sample Quantiles',
-                                font: { size: 12, weight: 'bold' }
-                            }
-                        }
-                    }
-                }
-            });
-        }
-        
-        /**
-         * Export regression results to CSV
-         */
-        function exportRegressionCSV() {
-            if (!regressionResults) {
-                Toast.warning('Please run a regression analysis first');
-                return;
-            }
-            
-            const r = regressionResults;
-            
-            // Create CSV content
-            let csv = 'Regression Analysis Results\n\n';
-            csv += 'Model Type:,' + r.modelType + '\n';
-            csv += 'Dependent Variable:,' + r.dependentVar + '\n';
-            csv += 'Observations:,' + r.nObs + '\n';
-            csv += 'R-squared:,' + r.rSquared.toFixed(4) + '\n';
-            csv += 'Adj. R-squared:,' + r.adjRSquared.toFixed(4) + '\n';
-            csv += 'F-statistic:,' + r.fStat.toFixed(2) + '\n';
-            csv += 'Prob(F-stat):,' + r.fProb.toFixed(4) + '\n\n';
-            
-            csv += 'Variable,Coefficient,Std. Error,t-statistic,p-value,CI Lower,CI Upper\n';
-            r.coefficients.forEach((coef, i) => {
-                csv += r.varNames[i] + ',';
-                csv += coef.toFixed(4) + ',';
-                csv += r.standardErrors[i].toFixed(4) + ',';
-                csv += r.tStats[i].toFixed(3) + ',';
-                csv += r.pValues[i].toFixed(4) + ',';
-                csv += r.confidenceIntervals[i].lower.toFixed(4) + ',';
-                csv += r.confidenceIntervals[i].upper.toFixed(4) + '\n';
-            });
-            
-            // Download
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'regression_results_' + new Date().toISOString().split('T')[0] + '.csv';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
-        
-        /**
-         * Copy regression results to clipboard (formatted text)
-         */
-        function copyRegressionResults() {
-            if (!regressionResults) {
-                Toast.warning('Please run a regression analysis first');
-                return;
-            }
-            
-            const r = regressionResults;
-            
-            let text = r.modelType + ' Results\n';
-            text += '='.repeat(60) + '\n\n';
-            text += 'Dependent Variable: ' + r.dependentVar + '\n';
-            text += 'Observations: ' + r.nObs + '\n';
-            text += 'R-squared: ' + r.rSquared.toFixed(4) + '\n';
-            text += 'Adj. R-squared: ' + r.adjRSquared.toFixed(4) + '\n';
-            text += 'F-statistic: ' + r.fStat.toFixed(2) + ' (p = ' + r.fProb.toFixed(4) + ')\n\n';
-            
-            text += 'Coefficients:\n';
-            text += '-'.repeat(60) + '\n';
-            text += sprintf('%-20s %10s %10s %10s %10s\n', 
-                'Variable', 'Coef.', 'Std.Err.', 't-stat', 'p-value');
-            text += '-'.repeat(60) + '\n';
-            
-            r.coefficients.forEach((coef, i) => {
-                const pVal = r.pValues[i];
-                let sig = '';
-                if (pVal < 0.001) sig = '***';
-                else if (pVal < 0.01) sig = '**';
-                else if (pVal < 0.05) sig = '*';
-                
-                text += sprintf('%-20s %10.4f %10.4f %10.2f %10.4f %s\n',
-                    r.varNames[i],
-                    coef,
-                    r.standardErrors[i],
-                    r.tStats[i],
-                    pVal,
-                    sig
-                );
-            });
-            
-            text += '-'.repeat(60) + '\n';
-            text += 'Significance: *** p<0.001, ** p<0.01, * p<0.05\n';
-            
-            navigator.clipboard.writeText(text).then(() => {
-                Toast.success('Results copied to clipboard!');
-            }).catch(err => {
-                console.error('Failed to copy:', err);
-                Toast.error('Failed to copy to clipboard');
-            });
-        }
-        
-        /**
-         * Simple sprintf function for formatting
-         */
-        function sprintf(format, ...args) {
-            let i = 0;
-            return format.replace(/%(-?\d+)?(\.\d+)?([sd])/g, (match, width, precision, type) => {
-                const value = args[i++];
-                let str = type === 's' ? String(value) : Number(value).toFixed(precision ? parseInt(precision.slice(1)) : 0);
-                
-                if (width) {
-                    const w = parseInt(width);
-                    if (w < 0) {
-                        str = str.padEnd(-w, ' ');
-                    } else {
-                        str = str.padStart(w, ' ');
-                    }
-                }
-                
-                return str;
-            });
-        }
         
         /**
          * Update charts for specific tab - add alertVisualization case
@@ -18829,7 +16466,7 @@
                 .style('text-anchor', 'middle')
                 .style('font-size', '12px')
                 .style('fill', 'var(--text-secondary)')
-                .text('Number of Components');
+                .text('Number of Component Models');
             
             console.log('Manufacturer chart rendered with', data.length, 'manufacturers');
         }
