@@ -3650,6 +3650,78 @@
                     
                     <div id="timeBetweenMissileStats" style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 0; font-size: 0.9rem;"></div>
                 </div>
+                
+                <!-- Option 10: Time Between Kh-101/Kh-555 Strategic Strikes - INDEPENDENT DATE RANGE CHART -->
+                <div class="chart-container independent-date-range-chart">
+                    <h3 class="chart-title">10. Time Between Kh-101/Kh-555 Strategic Strikes</h3>
+                    
+                    <!-- Embedded Date Range Controls -->
+                    <div class="chart-date-controls" style="display: flex; gap: 1.5rem; padding: 1rem; background: #f8f9fa; border-radius: 0; margin-bottom: 1rem; border: 1px solid var(--border);">
+                        <!-- LEFT SECTION: Date Selection Controls -->
+                        <div style="flex: 0 0 260px; display: flex; flex-direction: column; gap: 0.5rem; border-right: 2px solid var(--border); padding-right: 1.5rem;">
+                            <select id="timeBetweenKh101YearSelect" onchange="setTimeBetweenKh101DateRangeFromDropdown()" style="padding: 0.5rem 0.8rem; border: 1px solid var(--border); border-radius: 0; font-weight: 500; font-size: 0.9rem;">
+                                <option value="all">All Time</option>
+                                <option value="2026">2026</option>
+                                <option value="2025" selected>2025</option>
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                            </select>
+                            
+                            <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <button onclick="setTimeBetweenKh101HalfYear('H1')" class="filter-button" style="flex: 1; padding: 0.4rem 0.6rem; font-size: 0.85rem;">H1</button>
+                                    <button onclick="setTimeBetweenKh101HalfYear('H2')" class="filter-button" style="flex: 1; padding: 0.4rem 0.6rem; font-size: 0.85rem;">H2</button>
+                                </div>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <button onclick="setTimeBetweenKh101Quarter('Q1')" class="filter-button" style="flex: 1; padding: 0.4rem 0.6rem; font-size: 0.85rem;">Q1</button>
+                                    <button onclick="setTimeBetweenKh101Quarter('Q2')" class="filter-button" style="flex: 1; padding: 0.4rem 0.6rem; font-size: 0.85rem;">Q2</button>
+                                    <button onclick="setTimeBetweenKh101Quarter('Q3')" class="filter-button" style="flex: 1; padding: 0.4rem 0.6rem; font-size: 0.85rem;">Q3</button>
+                                    <button onclick="setTimeBetweenKh101Quarter('Q4')" class="filter-button" style="flex: 1; padding: 0.4rem 0.6rem; font-size: 0.85rem;">Q4</button>
+                                </div>
+                            </div>
+                            
+                            <div id="timeBetweenKh101DateRangeDisplay" style="padding: 0.5rem; background: white; border: 1px solid var(--border); border-radius: 0; font-size: 0.85rem; color: var(--text-secondary); text-align: center;">
+                                <strong style="color: var(--text-primary);">2025</strong>
+                            </div>
+                            
+                            <!-- Complexity Tier Selection -->
+                            <div style="margin-top: 0.5rem;">
+                                <label style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-bottom: 0.3rem;">Complexity Tier:</label>
+                                <select id="timeBetweenKh101TierSelect" onchange="updateTimeBetweenKh101StrikesChart()" style="width: 100%; padding: 0.5rem 0.8rem; border: 1px solid var(--border); border-radius: 0; font-size: 0.9rem;">
+                                    <option value="all">All Tiers (Kh-101 present)</option>
+                                    <option value="tier1">Tier 1: Single Weapon (1 type)</option>
+                                    <option value="tier2">Tier 2: Low Complexity (2-3 types)</option>
+                                    <option value="tier3" selected>Tier 3: Medium Complexity (4-5 types)</option>
+                                    <option value="tier4">Tier 4: High Complexity (6+ types)</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- RIGHT SECTION: Analysis Context -->
+                        <div style="flex: 1; display: flex; flex-direction: column; gap: 0.5rem;">
+                            <h4 style="margin: 0; color: #1e40af; font-size: 1rem; border-bottom: 2px solid #1e40af; padding-bottom: 0.3rem;">Kh-101/Kh-555 Strategic Analysis</h4>
+                            <div style="flex: 1; display: flex; flex-direction: column; gap: 0.75rem;">
+                                <p style="margin: 0; color: var(--text-secondary); font-size: 0.85rem; line-height: 1.5;">
+                                    <strong>Purpose:</strong> Analyzes preparation cycles specifically for complex strikes where <strong>Kh-101 or Kh-555</strong> air-launched cruise missiles are deployed.
+                                </p>
+                                <p style="margin: 0; color: var(--text-secondary); font-size: 0.85rem; line-height: 1.5;">
+                                    <strong>Qualifying Criterion:</strong> Attack MUST include at least one Kh-101/Kh-555. Other weapons (Kalibr, Iskander, Shahed, etc.) may also be present but are not required.
+                                </p>
+                                <p style="margin: 0; color: var(--text-secondary); font-size: 0.85rem; line-height: 1.5;">
+                                    <strong>Strategic Context:</strong> Kh-101/Kh-555 are Russia's longest-range (4,500 km) conventional precision weapons, launched from Tu-95MS/Tu-160 strategic bombers at ~$13M per unit.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <canvas id="timeBetweenKh101DistributionChart" style="width: 100%; height: 400px; margin-bottom: 2rem;"></canvas>
+                        <canvas id="timeBetweenKh101TrendChart" style="width: 100%; height: 400px;"></canvas>
+                    </div>
+                    
+                    <div id="timeBetweenKh101Stats" style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 0; font-size: 0.9rem;"></div>
+                </div>
             </div>
             
             <div id="advancedFrequency" class="tab-content">
@@ -5461,6 +5533,7 @@
                     updateComplexityPCA();
                     updateTimeBetweenStrikesChart();
                     updateTimeBetweenMissileStrikesChart();
+                    updateTimeBetweenKh101StrikesChart();
                     break;
                     
                 case 'advancedFrequency':
@@ -13922,6 +13995,492 @@
             document.getElementById('timeBetweenMissileDateRangeDisplay').innerHTML = `<strong style="color: var(--text-primary);">${year} ${quarter}</strong>`;
             
             updateTimeBetweenMissileStrikesChart();
+        }
+        
+        // ========== TIME BETWEEN KH-101/KH-555 STRATEGIC STRIKES ANALYSIS ==========
+        
+        // Independent date range variables for Kh-101 chart
+        let timeBetweenKh101DateRangeStart = '2025-01-01';
+        let timeBetweenKh101DateRangeEnd = '2025-12-31';
+        
+        /**
+         * Check if a weapon is a Kh-101 or Kh-555 cruise missile
+         * Returns TRUE only for this specific weapon family
+         */
+        function isKh101Weapon(weaponName) {
+            if (!weaponName) return false;
+            
+            const weaponLower = weaponName.toLowerCase();
+            
+            // Kh-101/Kh-555 identification keywords
+            const kh101Keywords = [
+                // Standard Latin designations
+                'x-101', 'x-555',
+                'kh-101', 'kh-555',
+                'kh101', 'kh555',
+                // Cyrillic variants
+                'х-101', 'х-555',
+                // NATO reporting names
+                'as-23', 'kodiak',
+                // Common database variations
+                'x101', 'x555'
+            ];
+            
+            return kh101Keywords.some(keyword => weaponLower.includes(keyword));
+        }
+        
+        /**
+         * Check if an attack includes at least one Kh-101/Kh-555
+         * This is the REQUIRED qualifying criterion for Chart 10
+         */
+        function attackIncludesKh101(weapons) {
+            return weapons.some(w => isKh101Weapon(w));
+        }
+        
+        /**
+         * Update Time Between Kh-101/Kh-555 Complex Strikes chart
+         * Filters to ONLY include attacks where Kh-101 or Kh-555 is present
+         */
+        function updateTimeBetweenKh101StrikesChart() {
+            // Get selected tier
+            const selectedTier = document.getElementById('timeBetweenKh101TierSelect')?.value || 'tier3';
+            
+            // Group all data by time_start to identify complete attacks
+            const attackGroups = {};
+            filteredData.forEach(row => {
+                if (!row.time_start) return;
+                
+                const timeStart = row.time_start;
+                if (!attackGroups[timeStart]) {
+                    attackGroups[timeStart] = {
+                        time_start: timeStart,
+                        date: timeStart.split(' ')[0],
+                        weapons: [],
+                        rows: []
+                    };
+                }
+                
+                // Add weapons from this row
+                if (row.model && row.model.trim() !== '') {
+                    const weapons = row.model.split(' and ').map(w => w.trim()).filter(w => w);
+                    attackGroups[timeStart].weapons.push(...weapons);
+                }
+                attackGroups[timeStart].rows.push(row);
+            });
+            
+            // Calculate weapon diversity for each attack (unique weapons)
+            let attacks = Object.values(attackGroups).map(attack => {
+                const uniqueWeapons = [...new Set(attack.weapons)];
+                return {
+                    time_start: attack.time_start,
+                    date: attack.date,
+                    weaponDiversity: uniqueWeapons.length,
+                    weapons: uniqueWeapons,
+                    hasKh101: attackIncludesKh101(uniqueWeapons),
+                    kh101Weapons: uniqueWeapons.filter(w => isKh101Weapon(w))
+                };
+            }).filter(attack => attack.date);
+            
+            // *** CRITICAL FILTER: Only include attacks with Kh-101/Kh-555 ***
+            attacks = attacks.filter(attack => attack.hasKh101);
+            
+            // Apply independent date range filter
+            if (timeBetweenKh101DateRangeStart && timeBetweenKh101DateRangeEnd) {
+                attacks = attacks.filter(attack => {
+                    return attack.date >= timeBetweenKh101DateRangeStart && 
+                           attack.date <= timeBetweenKh101DateRangeEnd;
+                });
+            }
+            
+            // Add tier classification
+            attacks = attacks.map(attack => ({
+                ...attack,
+                tier: getComplexityTier(attack.weaponDiversity)
+            }));
+            
+            // Filter by selected tier (unless "all" is selected)
+            if (selectedTier !== 'all') {
+                attacks = attacks.filter(attack => attack.tier === selectedTier);
+            }
+            // For "all", include all Kh-101 strikes regardless of complexity
+            // Rationale: Kh-101 is inherently strategic, even if used alone
+            
+            // Sort by time_start
+            attacks.sort((a, b) => {
+                const timeCompare = a.time_start.localeCompare(b.time_start);
+                if (timeCompare !== 0) return timeCompare;
+                return new Date(a.date) - new Date(b.date);
+            });
+            
+            // For same-day attacks, keep the most complex one
+            const dailyStrikes = {};
+            attacks.forEach(attack => {
+                if (!dailyStrikes[attack.date]) {
+                    dailyStrikes[attack.date] = attack;
+                } else {
+                    if (attack.weaponDiversity > dailyStrikes[attack.date].weaponDiversity) {
+                        dailyStrikes[attack.date] = attack;
+                    }
+                }
+            });
+            
+            // Convert to array and sort
+            const strikes = Object.values(dailyStrikes).sort((a, b) => 
+                new Date(a.date) - new Date(b.date)
+            );
+            
+            // Handle insufficient data
+            if (strikes.length < 2) {
+                const container1 = document.getElementById('timeBetweenKh101DistributionChart');
+                const container2 = document.getElementById('timeBetweenKh101TrendChart');
+                if (container1 && container1.getContext) {
+                    const ctx1 = container1.getContext('2d');
+                    ctx1.clearRect(0, 0, container1.width, container1.height);
+                    ctx1.font = '14px Arial';
+                    ctx1.fillStyle = '#666';
+                    ctx1.textAlign = 'center';
+                    ctx1.fillText('Insufficient Kh-101/Kh-555 data (need at least 2 strikes)', container1.width/2, container1.height/2);
+                }
+                if (container2 && container2.getContext) {
+                    const ctx2 = container2.getContext('2d');
+                    ctx2.clearRect(0, 0, container2.width, container2.height);
+                    ctx2.font = '14px Arial';
+                    ctx2.fillStyle = '#666';
+                    ctx2.textAlign = 'center';
+                    ctx2.fillText('Insufficient Kh-101/Kh-555 data (need at least 2 strikes)', container2.width/2, container2.height/2);
+                }
+                document.getElementById('timeBetweenKh101Stats').innerHTML = '<em>Insufficient Kh-101/Kh-555 data for analysis. Try selecting "All Tiers" or a broader date range.</em>';
+                return;
+            }
+            
+            // Calculate time intervals between consecutive Kh-101 strikes
+            const intervals = [];
+            for (let i = 1; i < strikes.length; i++) {
+                const prevDate = new Date(strikes[i-1].date);
+                const currDate = new Date(strikes[i].date);
+                const daysBetween = Math.round((currDate - prevDate) / (1000 * 60 * 60 * 24));
+                
+                intervals.push({
+                    days: daysBetween,
+                    fromDate: strikes[i-1].date,
+                    toDate: strikes[i].date,
+                    fromDiversity: strikes[i-1].weaponDiversity,
+                    toDiversity: strikes[i].weaponDiversity,
+                    fromKh101: strikes[i-1].kh101Weapons,
+                    toKh101: strikes[i].kh101Weapons
+                });
+            }
+            
+            // Calculate statistics
+            const intervalDays = intervals.map(i => i.days);
+            const mean = intervalDays.reduce((sum, val) => sum + val, 0) / intervalDays.length;
+            const sortedDays = [...intervalDays].sort((a, b) => a - b);
+            const median = sortedDays[Math.floor(sortedDays.length / 2)];
+            const stdDev = Math.sqrt(
+                intervalDays.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / intervalDays.length
+            );
+            const min = Math.min(...intervalDays);
+            const max = Math.max(...intervalDays);
+            const q1 = sortedDays[Math.floor(sortedDays.length * 0.25)];
+            const q3 = sortedDays[Math.floor(sortedDays.length * 0.75)];
+            
+            // Update visualizations
+            updateTimeBetweenKh101Distribution(intervals, { mean, median, stdDev, min, max, q1, q3 });
+            updateTimeBetweenKh101Trend(intervals, { mean, median }, strikes);
+            
+            // Update statistics display
+            const tierNames = {
+                'tier1': 'Single Weapon (1 type)',
+                'tier2': 'Low Complexity (2-3 types)',
+                'tier3': 'Medium Complexity (4-5 types)',
+                'tier4': 'High Complexity (6+ types)',
+                'all': 'All Complexity Levels'
+            };
+            
+            // Example strikes showing Kh-101 presence
+            const exampleStrikes = strikes.slice(0, 5).map(s => {
+                const otherWeapons = s.weapons.filter(w => !isKh101Weapon(w));
+                const otherStr = otherWeapons.length > 0 ? 
+                    ` + ${otherWeapons.slice(0, 2).join(', ')}${otherWeapons.length > 2 ? '...' : ''}` : '';
+                return `${s.date}: <strong>${s.kh101Weapons.join(', ')}</strong>${otherStr} (${s.weaponDiversity} types total)`;
+            }).join('<br/>');
+            
+            document.getElementById('timeBetweenKh101Stats').innerHTML = `
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                    <div>
+                        <strong style="color: #1e40af;">Analysis Summary</strong><br/>
+                        <span style="color: var(--text-secondary);">Filter: <strong>Kh-101/Kh-555 Required</strong></span><br/>
+                        <span style="color: var(--text-secondary);">Complexity Tier: ${tierNames[selectedTier]}</span><br/>
+                        <span style="color: var(--text-secondary);">Qualifying Strikes: ${strikes.length}</span><br/>
+                        <span style="color: var(--text-secondary);">Intervals Analyzed: ${intervals.length}</span><br/>
+                        <span style="color: var(--text-secondary);">Date Range: ${strikes[0].date} to ${strikes[strikes.length-1].date}</span>
+                    </div>
+                    <div>
+                        <strong style="color: #1e40af;">Central Tendency</strong><br/>
+                        <span style="color: var(--text-secondary);">Mean: ${mean.toFixed(1)} days</span><br/>
+                        <span style="color: var(--text-secondary);">Median: ${median} days</span><br/>
+                        <span style="color: var(--text-secondary);">Mode: ${findMode(intervalDays)} days</span>
+                    </div>
+                    <div>
+                        <strong style="color: #1e40af;">Dispersion</strong><br/>
+                        <span style="color: var(--text-secondary);">Std Deviation: ${stdDev.toFixed(1)} days</span><br/>
+                        <span style="color: var(--text-secondary);">Min: ${min} days</span><br/>
+                        <span style="color: var(--text-secondary);">Max: ${max} days</span><br/>
+                        <span style="color: var(--text-secondary);">Range: ${max - min} days</span>
+                    </div>
+                    <div>
+                        <strong style="color: #1e40af;">Quartiles</strong><br/>
+                        <span style="color: var(--text-secondary);">Q1 (25th): ${q1} days</span><br/>
+                        <span style="color: var(--text-secondary);">Q2 (50th): ${median} days</span><br/>
+                        <span style="color: var(--text-secondary);">Q3 (75th): ${q3} days</span><br/>
+                        <span style="color: var(--text-secondary);">IQR: ${q3 - q1} days</span>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 1rem; padding: 1rem; background: white; border: 3px solid #1e40af;">
+                    <strong>Example Kh-101/Kh-555 Strikes (first 5):</strong><br/>
+                    <span style="font-size: 0.85rem; color: var(--text-secondary);">${exampleStrikes}</span>
+                </div>
+                
+                <div style="margin-top: 1rem; padding: 1rem; background: white; border: 3px solid #dc2626;">
+                    <strong>Strategic Interpretation:</strong><br/>
+                    ${mean < 14 ? 
+                        'Short intervals (<14 days) indicate high strategic bomber operational tempo with sustained Kh-101/Kh-555 availability. This suggests either large stockpiles or active production replenishment.' : 
+                      mean < 30 ? 
+                        'Moderate intervals (14-30 days) suggest deliberate strategic strike planning cycles, possibly tied to intelligence collection and target development timelines.' :
+                        'Extended intervals (>30 days) may indicate Kh-101/Kh-555 stockpile conservation, bomber maintenance cycles, or strategic restraint for high-value target prioritization.'}
+                    <br/><br/>
+                    The coefficient of variation (${(stdDev/mean*100).toFixed(1)}%) 
+                    ${(stdDev/mean) < 0.5 ? 'shows consistent' : (stdDev/mean) < 1 ? 'indicates moderate' : 'reveals high'} 
+                    variability in strategic cruise missile strike timing.
+                    <br/><br/>
+                    <em><strong>Note:</strong> Kh-101/Kh-555 missiles are Russia's longest-range conventional precision weapons (~4,500 km), 
+                    launched exclusively from Tu-95MS and Tu-160 strategic bombers. Each missile costs approximately $13 million, 
+                    making deployment patterns a direct indicator of strategic prioritization and resource allocation decisions.</em>
+                </div>
+            `;
+        }
+        
+        /**
+         * Distribution chart for Kh-101 strikes (histogram of intervals)
+         */
+        let timeBetweenKh101DistributionChart = null;
+        function updateTimeBetweenKh101Distribution(intervals, stats) {
+            const canvas = document.getElementById('timeBetweenKh101DistributionChart');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            
+            if (timeBetweenKh101DistributionChart) {
+                timeBetweenKh101DistributionChart.destroy();
+            }
+            
+            // Create histogram bins (5-day intervals)
+            const intervalDays = intervals.map(i => i.days);
+            const binSize = 5;
+            const maxDays = Math.max(...intervalDays);
+            const numBins = Math.ceil(maxDays / binSize) + 1;
+            
+            const bins = Array(numBins).fill(0);
+            const binLabels = Array(numBins).fill(0).map((_, i) => `${i*binSize}-${(i+1)*binSize-1}`);
+            
+            intervalDays.forEach(days => {
+                const binIndex = Math.floor(days / binSize);
+                if (binIndex < numBins) bins[binIndex]++;
+            });
+            
+            timeBetweenKh101DistributionChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: binLabels,
+                    datasets: [{
+                        label: 'Frequency',
+                        data: bins,
+                        backgroundColor: 'rgba(30, 64, 175, 0.7)',
+                        borderColor: 'rgba(30, 64, 175, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Distribution of Time Between Kh-101/Kh-555 Strikes',
+                            font: { size: 14, weight: 'bold' }
+                        },
+                        legend: { display: false }
+                    },
+                    scales: {
+                        x: {
+                            title: { 
+                                display: true, 
+                                text: 'Days Between Strikes',
+                                font: { weight: 'bold' }
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: { 
+                                display: true, 
+                                text: 'Number of Intervals',
+                                font: { weight: 'bold' }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        /**
+         * Trend chart for Kh-101 strikes (intervals over time)
+         */
+        let timeBetweenKh101TrendChart = null;
+        function updateTimeBetweenKh101Trend(intervals, stats, strikes) {
+            const canvas = document.getElementById('timeBetweenKh101TrendChart');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            
+            if (timeBetweenKh101TrendChart) {
+                timeBetweenKh101TrendChart.destroy();
+            }
+            
+            const labels = intervals.map(i => i.toDate);
+            const data = intervals.map(i => i.days);
+            
+            timeBetweenKh101TrendChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Days Since Previous Kh-101 Strike',
+                            data: data,
+                            borderColor: 'rgba(30, 64, 175, 1)',
+                            backgroundColor: 'rgba(30, 64, 175, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.1,
+                            pointRadius: 4,
+                            pointBackgroundColor: 'rgba(30, 64, 175, 1)'
+                        },
+                        {
+                            label: 'Mean',
+                            data: Array(labels.length).fill(stats.mean),
+                            borderColor: 'rgba(220, 38, 38, 0.8)',
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            pointRadius: 0,
+                            fill: false
+                        },
+                        {
+                            label: 'Median',
+                            data: Array(labels.length).fill(stats.median),
+                            borderColor: 'rgba(34, 197, 94, 0.8)',
+                            borderWidth: 2,
+                            borderDash: [10, 5],
+                            pointRadius: 0,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Kh-101/Kh-555 Strike Interval Trend Over Time',
+                            font: { size: 14, weight: 'bold' }
+                        },
+                        legend: { position: 'top' },
+                        tooltip: {
+                            callbacks: {
+                                afterLabel: function(context) {
+                                    if (context.datasetIndex === 0) {
+                                        const idx = context.dataIndex;
+                                        return `From: ${intervals[idx].fromDate}`;
+                                    }
+                                    return '';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: { 
+                                display: true, 
+                                text: 'Strike Date',
+                                font: { weight: 'bold' }
+                            },
+                            ticks: { maxRotation: 45, minRotation: 45 }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: { 
+                                display: true, 
+                                text: 'Days Since Previous Strike',
+                                font: { weight: 'bold' }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Date range control functions for Kh-101 chart
+        function setTimeBetweenKh101DateRangeFromDropdown() {
+            const year = document.getElementById('timeBetweenKh101YearSelect').value;
+            
+            if (year === 'all') {
+                timeBetweenKh101DateRangeStart = null;
+                timeBetweenKh101DateRangeEnd = null;
+                document.getElementById('timeBetweenKh101DateRangeDisplay').innerHTML = '<strong style="color: var(--text-primary);">All Time</strong>';
+            } else {
+                timeBetweenKh101DateRangeStart = `${year}-01-01`;
+                timeBetweenKh101DateRangeEnd = `${year}-12-31`;
+                document.getElementById('timeBetweenKh101DateRangeDisplay').innerHTML = `<strong style="color: var(--text-primary);">${year}</strong>`;
+            }
+            
+            updateTimeBetweenKh101StrikesChart();
+        }
+        
+        function setTimeBetweenKh101HalfYear(half) {
+            const year = document.getElementById('timeBetweenKh101YearSelect').value;
+            if (year === 'all') return;
+            
+            if (half === 'H1') {
+                timeBetweenKh101DateRangeStart = `${year}-01-01`;
+                timeBetweenKh101DateRangeEnd = `${year}-06-30`;
+                document.getElementById('timeBetweenKh101DateRangeDisplay').innerHTML = `<strong style="color: var(--text-primary);">${year} H1</strong>`;
+            } else {
+                timeBetweenKh101DateRangeStart = `${year}-07-01`;
+                timeBetweenKh101DateRangeEnd = `${year}-12-31`;
+                document.getElementById('timeBetweenKh101DateRangeDisplay').innerHTML = `<strong style="color: var(--text-primary);">${year} H2</strong>`;
+            }
+            
+            updateTimeBetweenKh101StrikesChart();
+        }
+        
+        function setTimeBetweenKh101Quarter(quarter) {
+            const year = document.getElementById('timeBetweenKh101YearSelect').value;
+            if (year === 'all') return;
+            
+            const quarters = {
+                'Q1': { start: '01-01', end: '03-31' },
+                'Q2': { start: '04-01', end: '06-30' },
+                'Q3': { start: '07-01', end: '09-30' },
+                'Q4': { start: '10-01', end: '12-31' }
+            };
+            
+            const q = quarters[quarter];
+            timeBetweenKh101DateRangeStart = `${year}-${q.start}`;
+            timeBetweenKh101DateRangeEnd = `${year}-${q.end}`;
+            document.getElementById('timeBetweenKh101DateRangeDisplay').innerHTML = `<strong style="color: var(--text-primary);">${year} ${quarter}</strong>`;
+            
+            updateTimeBetweenKh101StrikesChart();
         }
         
         // ========== WEAPON SYSTEMS INTELLIGENCE DATABASE ==========
