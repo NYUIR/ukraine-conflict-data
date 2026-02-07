@@ -2697,6 +2697,64 @@
                             <!-- Will be populated dynamically -->
                         </div>
                     </div>
+                    
+                    <!-- Weapon-Specific Attack Frequency vs Interceptions Chart -->
+                    <div class="chart-container">
+                        <h3 class="chart-title" id="weaponTimeSeriesTitle">Daily Launches vs Interceptions</h3>
+                        
+                        <!-- Date Range Controls -->
+                        <div class="chart-date-controls" style="display: flex; gap: 1.5rem; padding: 1rem; background: #f8f9fa; border-radius: 0; margin-bottom: 1rem; border: 1px solid var(--border);">
+                            <!-- LEFT SECTION: Date Selection Controls -->
+                            <div style="flex: 0 0 260px; display: flex; flex-direction: column; gap: 0.5rem; border-right: 2px solid var(--border); padding-right: 1.5rem;">
+                                <select id="weaponTimeSeriesYearSelect" onchange="setWeaponTimeSeriesDateRangeFromDropdown()" style="padding: 0.5rem 0.8rem; border: 1px solid var(--border); border-radius: 0; font-weight: 500; font-size: 0.9rem;">
+                                    <option value="all" selected>All Time</option>
+                                    <option value="2026">2026</option>
+                                    <option value="2025">2025</option>
+                                    <option value="2024">2024</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2022">2022</option>
+                                </select>
+                                
+                                <!-- H1/H2 and Q1-Q4 buttons -->
+                                <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <button onclick="setWeaponTimeSeriesHalfYear('H1')" class="filter-button" style="flex: 1; padding: 0.4rem 0.6rem; font-size: 0.85rem;">H1</button>
+                                        <button onclick="setWeaponTimeSeriesHalfYear('H2')" class="filter-button" style="flex: 1; padding: 0.4rem 0.6rem; font-size: 0.85rem;">H2</button>
+                                    </div>
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <button onclick="setWeaponTimeSeriesQuarter('Q1')" class="filter-button" style="flex: 1; padding: 0.4rem 0.6rem; font-size: 0.85rem;">Q1</button>
+                                        <button onclick="setWeaponTimeSeriesQuarter('Q2')" class="filter-button" style="flex: 1; padding: 0.4rem 0.6rem; font-size: 0.85rem;">Q2</button>
+                                        <button onclick="setWeaponTimeSeriesQuarter('Q3')" class="filter-button" style="flex: 1; padding: 0.4rem 0.6rem; font-size: 0.85rem;">Q3</button>
+                                        <button onclick="setWeaponTimeSeriesQuarter('Q4')" class="filter-button" style="flex: 1; padding: 0.4rem 0.6rem; font-size: 0.85rem;">Q4</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Display Indicator -->
+                                <div id="weaponTimeSeriesDateRangeDisplay" style="padding: 0.5rem; background: white; border: 1px solid var(--border); border-radius: 0; font-size: 0.85rem; color: var(--text-secondary); text-align: center;">
+                                    <strong style="color: var(--text-primary);">All Time</strong>
+                                </div>
+                            </div>
+                            
+                            <!-- RIGHT SECTION: Period Statistics -->
+                            <div style="flex: 1; display: flex; flex-direction: column; gap: 0.5rem;">
+                                <h4 style="margin: 0; color: #b91c1c; font-size: 1rem; border-bottom: 2px solid #b91c1c; padding-bottom: 0.3rem;">Period Statistics & Top 5 Penetration Days</h4>
+                                <div id="weaponTimeSeriesStatsContainer" style="display: flex; flex-wrap: wrap; gap: 0.75rem; flex: 1; align-content: flex-start;">
+                                    <!-- Statistics will be populated here -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Chart Canvas -->
+                        <div id="weaponTimeSeriesChartWrapper" style="position: relative; height: 400px;">
+                            <canvas id="weaponTimeSeriesChart"></canvas>
+                        </div>
+                        
+                        <!-- No Data Message (shown when weapon has insufficient data) -->
+                        <div id="weaponTimeSeriesNoData" style="display: none; padding: 2rem; text-align: center; color: var(--text-secondary);">
+                            <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">Insufficient data for time series visualization</p>
+                            <p style="font-size: 0.9rem;">This weapon system requires more deployment events to generate a meaningful daily chart.</p>
+                        </div>
+                    </div>
                 </div>
                 
                 <!-- Placeholder when no weapon selected -->
@@ -4751,6 +4809,11 @@
         let targetRegionsDateRangeEnd = '2025-12-31';
         let targetRegionsDateRangeMode = '2025';
         
+        // INDEPENDENT DATE RANGE CHART - Weapon Database Time Series (Eleventh implementation)
+        let weaponTimeSeriesDateRangeStart = null;
+        let weaponTimeSeriesDateRangeEnd = null;
+        let weaponTimeSeriesDateRangeMode = 'all';
+        
         // INDEPENDENT DATE RANGE CHART - Pattern Recognition Heatmap (Eleventh implementation)
         let heatmapDateRangeStart = '2025-01-01';
         let heatmapDateRangeEnd = '2025-12-31';
@@ -6085,6 +6148,168 @@
             
             // Update the chart
             updateShahedInterceptionChart();
+            
+            // INDEPENDENT DATE RANGE CHART PATTERN: Restore scroll position
+            requestAnimationFrame(() => {
+                window.scrollTo(0, scrollPosition);
+            });
+        }
+        
+        // ============================================================================
+        // INDEPENDENT DATE RANGE CHART - Weapon Database Time Series Control Functions
+        // ============================================================================
+        
+        function setWeaponTimeSeriesDateRangeFromDropdown() {
+            // INDEPENDENT DATE RANGE CHART PATTERN: Preserve scroll position
+            const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+            
+            const yearSelect = document.getElementById('weaponTimeSeriesYearSelect');
+            const mode = yearSelect.value;
+            
+            // Remove active styling from all H/Q buttons in weaponsInfo tab
+            document.querySelectorAll('#weaponsInfo .filter-button').forEach(btn => {
+                btn.style.background = '';
+                btn.style.color = '';
+                btn.style.borderColor = '';
+            });
+            
+            const displayElement = document.getElementById('weaponTimeSeriesDateRangeDisplay');
+            
+            if (mode === 'all') {
+                weaponTimeSeriesDateRangeStart = null;
+                weaponTimeSeriesDateRangeEnd = null;
+                weaponTimeSeriesDateRangeMode = 'all';
+                if (displayElement) {
+                    displayElement.innerHTML = '<strong>All Time</strong>';
+                }
+            } else {
+                // Year selection
+                weaponTimeSeriesDateRangeStart = `${mode}-01-01`;
+                weaponTimeSeriesDateRangeEnd = `${mode}-12-31`;
+                weaponTimeSeriesDateRangeMode = mode;
+                if (displayElement) {
+                    displayElement.innerHTML = `<strong>${mode}</strong>`;
+                }
+            }
+            
+            // Update the chart (only if a weapon is selected)
+            const select = document.getElementById('weaponSystemSelect');
+            if (select && select.value) {
+                updateWeaponTimeSeriesChart(select.value);
+            }
+            
+            // INDEPENDENT DATE RANGE CHART PATTERN: Restore scroll position
+            requestAnimationFrame(() => {
+                window.scrollTo(0, scrollPosition);
+            });
+        }
+        
+        function setWeaponTimeSeriesHalfYear(half) {
+            // INDEPENDENT DATE RANGE CHART PATTERN: Preserve scroll position
+            const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Get year from dropdown
+            const yearSelect = document.getElementById('weaponTimeSeriesYearSelect');
+            let year = yearSelect.value;
+            
+            // If 'all' is selected, default to 2025
+            if (year === 'all') {
+                year = '2025';
+                yearSelect.value = '2025';
+            }
+            
+            // Remove active styling from all buttons
+            document.querySelectorAll('#weaponsInfo .filter-button').forEach(btn => {
+                btn.style.background = '';
+                btn.style.color = '';
+                btn.style.borderColor = '';
+            });
+            
+            const displayElement = document.getElementById('weaponTimeSeriesDateRangeDisplay');
+            
+            if (half === 'H1') {
+                weaponTimeSeriesDateRangeStart = `${year}-01-01`;
+                weaponTimeSeriesDateRangeEnd = `${year}-06-30`;
+                weaponTimeSeriesDateRangeMode = `${year}-H1`;
+            } else {
+                weaponTimeSeriesDateRangeStart = `${year}-07-01`;
+                weaponTimeSeriesDateRangeEnd = `${year}-12-31`;
+                weaponTimeSeriesDateRangeMode = `${year}-H2`;
+            }
+            
+            if (displayElement) {
+                displayElement.innerHTML = `<strong>${year} ${half}</strong>`;
+            }
+            
+            // Highlight the clicked button
+            if (typeof event !== 'undefined' && event.target) {
+                event.target.style.background = 'var(--un-blue)';
+                event.target.style.color = 'white';
+            }
+            
+            // Update the chart (only if a weapon is selected)
+            const select = document.getElementById('weaponSystemSelect');
+            if (select && select.value) {
+                updateWeaponTimeSeriesChart(select.value);
+            }
+            
+            // INDEPENDENT DATE RANGE CHART PATTERN: Restore scroll position
+            requestAnimationFrame(() => {
+                window.scrollTo(0, scrollPosition);
+            });
+        }
+        
+        function setWeaponTimeSeriesQuarter(quarter) {
+            // INDEPENDENT DATE RANGE CHART PATTERN: Preserve scroll position
+            const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Get year from dropdown
+            const yearSelect = document.getElementById('weaponTimeSeriesYearSelect');
+            let year = yearSelect.value;
+            
+            // If 'all' is selected, default to 2025
+            if (year === 'all') {
+                year = '2025';
+                yearSelect.value = '2025';
+            }
+            
+            // Remove active styling from all buttons
+            document.querySelectorAll('#weaponsInfo .filter-button').forEach(btn => {
+                btn.style.background = '';
+                btn.style.color = '';
+                btn.style.borderColor = '';
+            });
+            
+            const displayElement = document.getElementById('weaponTimeSeriesDateRangeDisplay');
+            
+            // Set date ranges for each quarter
+            const quarterRanges = {
+                'Q1': { start: `${year}-01-01`, end: `${year}-03-31` },
+                'Q2': { start: `${year}-04-01`, end: `${year}-06-30` },
+                'Q3': { start: `${year}-07-01`, end: `${year}-09-30` },
+                'Q4': { start: `${year}-10-01`, end: `${year}-12-31` }
+            };
+            
+            const range = quarterRanges[quarter];
+            weaponTimeSeriesDateRangeStart = range.start;
+            weaponTimeSeriesDateRangeEnd = range.end;
+            weaponTimeSeriesDateRangeMode = `${year}-${quarter}`;
+            
+            if (displayElement) {
+                displayElement.innerHTML = `<strong>${year} ${quarter}</strong>`;
+            }
+            
+            // Highlight the clicked button
+            if (typeof event !== 'undefined' && event.target) {
+                event.target.style.background = 'var(--un-blue)';
+                event.target.style.color = 'white';
+            }
+            
+            // Update the chart (only if a weapon is selected)
+            const select = document.getElementById('weaponSystemSelect');
+            if (select && select.value) {
+                updateWeaponTimeSeriesChart(select.value);
+            }
             
             // INDEPENDENT DATE RANGE CHART PATTERN: Restore scroll position
             requestAnimationFrame(() => {
@@ -14828,6 +15053,11 @@
             if (!selectedWeapon) {
                 profileContainer.style.display = 'none';
                 placeholder.style.display = 'block';
+                // Clear the time series chart when no weapon is selected
+                if (charts.weaponTimeSeries) {
+                    charts.weaponTimeSeries.destroy();
+                    charts.weaponTimeSeries = null;
+                }
                 return;
             }
             
@@ -14988,6 +15218,294 @@
                     <em>Note: Statistics reflect current filter settings.</em>
                 </div>
             `;
+            
+            // Update the weapon-specific time series chart
+            updateWeaponTimeSeriesChart(weaponName);
+        }
+        
+        /**
+         * Update the weapon-specific Attack Frequency vs Interceptions chart
+         * Shows daily launches, interceptions, and monthly hit percentage for the selected weapon
+         */
+        function updateWeaponTimeSeriesChart(weaponName) {
+            const ctx = document.getElementById('weaponTimeSeriesChart');
+            const chartWrapper = document.getElementById('weaponTimeSeriesChartWrapper');
+            const noDataMessage = document.getElementById('weaponTimeSeriesNoData');
+            const statsContainer = document.getElementById('weaponTimeSeriesStatsContainer');
+            const titleElement = document.getElementById('weaponTimeSeriesTitle');
+            
+            if (!ctx) return;
+            
+            // Update chart title with weapon name
+            titleElement.textContent = `${weaponName}: Daily Launches vs Interceptions`;
+            
+            // INDEPENDENT FILTERING: Filter by weapon AND date range
+            const weaponData = filteredData.filter(row => {
+                // First check if it's the selected weapon
+                if (row.model !== weaponName) {
+                    return false;
+                }
+                
+                // Apply independent date range filter
+                if (weaponTimeSeriesDateRangeStart && weaponTimeSeriesDateRangeEnd) {
+                    const rowDate = row.time_start.split(' ')[0];
+                    return rowDate >= weaponTimeSeriesDateRangeStart && rowDate <= weaponTimeSeriesDateRangeEnd;
+                }
+                
+                return true; // No date filter if range is null (all time)
+            });
+            
+            // Check if we have enough data for visualization
+            if (weaponData.length < 2) {
+                chartWrapper.style.display = 'none';
+                noDataMessage.style.display = 'block';
+                statsContainer.innerHTML = '';
+                if (charts.weaponTimeSeries) {
+                    charts.weaponTimeSeries.destroy();
+                    charts.weaponTimeSeries = null;
+                }
+                return;
+            }
+            
+            chartWrapper.style.display = 'block';
+            noDataMessage.style.display = 'none';
+            
+            // Group by date
+            const dateGroups = {};
+            weaponData.forEach(row => {
+                const date = row.time_start.split(' ')[0];
+                if (!dateGroups[date]) {
+                    dateGroups[date] = { launched: 0, destroyed: 0 };
+                }
+                const launched = parseFloat(row.launched) || 0;
+                const destroyed = parseFloat(row.destroyed) || 0;
+                dateGroups[date].launched += launched;
+                dateGroups[date].destroyed += destroyed;
+            });
+            
+            // Sort dates and prepare data
+            const dates = Object.keys(dateGroups).sort();
+            const launches = dates.map(d => dateGroups[d].launched);
+            const interceptions = dates.map(d => dateGroups[d].destroyed);
+            
+            // Calculate period statistics
+            const totalLaunched = launches.reduce((a, b) => a + b, 0);
+            const totalIntercepted = interceptions.reduce((a, b) => a + b, 0);
+            const overallInterceptionRate = totalLaunched > 0 ? ((totalIntercepted / totalLaunched) * 100).toFixed(1) : '0.0';
+            
+            // Find top 5 days with most hits (absolute number that got through)
+            const hitDays = dates.map((date, idx) => {
+                const hit = launches[idx] - interceptions[idx];
+                return { date, launched: launches[idx], intercepted: interceptions[idx], hit };
+            }).filter(d => d.launched >= 1); // Include days with at least 1 launch
+            
+            hitDays.sort((a, b) => b.hit - a.hit);
+            const topHitDays = hitDays.slice(0, 5);
+            
+            // Create a map of date to rank and hit count for chart labels
+            const dateToHitInfo = {};
+            topHitDays.forEach((day, idx) => {
+                if (day.hit > 0) { // Only mark days with actual hits
+                    dateToHitInfo[day.date] = {
+                        rank: idx + 1,
+                        hits: day.hit
+                    };
+                }
+            });
+            
+            // Update statistics container
+            let statsHTML = `
+                <div style="flex: 1; min-width: 150px; padding: 0.75rem; background: white; border-radius: 0; border: 3px solid #b91c1c; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                    <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.25rem;">Total Launched</div>
+                    <div style="font-size: 1.3rem; font-weight: bold; color: #b91c1c;">${totalLaunched.toLocaleString()}</div>
+                </div>
+                <div style="flex: 1; min-width: 150px; padding: 0.75rem; background: white; border-radius: 0; border: 3px solid #22C55E; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                    <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.25rem;">Total Intercepted</div>
+                    <div style="font-size: 1.3rem; font-weight: bold; color: #22C55E;">${totalIntercepted.toLocaleString()}</div>
+                </div>
+                <div style="flex: 1; min-width: 150px; padding: 0.75rem; background: white; border-radius: 0; border: 3px solid #000000; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                    <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.25rem;">Interception Rate</div>
+                    <div style="font-size: 1.3rem; font-weight: bold; color: var(--text-primary);">${overallInterceptionRate}%</div>
+                </div>
+            `;
+            
+            // Add top hit days if there are any
+            if (topHitDays.length > 0 && topHitDays[0].hit > 0) {
+                statsHTML += '<div style="flex-basis: 100%; height: 0.5rem;"></div>';
+                statsHTML += '<div style="flex-basis: 100%; font-size: 0.85rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 0.25rem;">Top Days by Penetration:</div>';
+                topHitDays.filter(d => d.hit > 0).slice(0, 5).forEach((day, idx) => {
+                    statsHTML += `
+                        <div style="flex: 1; min-width: 120px; padding: 0.5rem; background: white; border-radius: 0; border: 2px solid #b91c1c; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;">
+                                <span style="font-weight: bold; color: #b91c1c; font-size: 0.8rem;">#${idx + 1}</span>
+                                <span style="font-size: 0.75rem; color: var(--text-primary); font-weight: 500;">${day.date}</span>
+                                <span style="font-weight: bold; font-size: 0.85rem; color: #b91c1c;">${day.hit}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+            
+            statsContainer.innerHTML = statsHTML;
+            
+            // Destroy existing chart if it exists
+            if (charts.weaponTimeSeries) charts.weaponTimeSeries.destroy();
+            
+            // Define custom plugin for top hit day labels
+            const topHitDaysLabelsPlugin = {
+                id: 'topHitDaysLabelsWeapon',
+                afterDatasetsDraw: function(chart) {
+                    const chartCtx = chart.ctx;
+                    const meta = chart.getDatasetMeta(0);
+                    const chartArea = chart.chartArea;
+                    
+                    if (!meta || !meta.data) return;
+                    
+                    chartCtx.save();
+                    chartCtx.font = 'bold 9px Arial';
+                    chartCtx.textAlign = 'center';
+                    chartCtx.textBaseline = 'bottom';
+                    
+                    meta.data.forEach((bar, index) => {
+                        const date = dates[index];
+                        const info = dateToHitInfo[date];
+                        
+                        if (info) {
+                            const x = bar.x;
+                            const line1 = `#${info.rank}`;
+                            const line2 = date.substring(5);
+                            const line3 = `${info.hits} hits`;
+                            
+                            const maxWidth = Math.max(
+                                chartCtx.measureText(line1).width,
+                                chartCtx.measureText(line2).width,
+                                chartCtx.measureText(line3).width
+                            );
+                            const padding = 3;
+                            const lineHeight = 11;
+                            const totalHeight = lineHeight * 3;
+                            
+                            const y = Math.max(bar.y - 5, chartArea.top + totalHeight + 10);
+                            
+                            chartCtx.fillStyle = 'rgba(185, 28, 28, 0.95)';
+                            chartCtx.fillRect(
+                                x - maxWidth / 2 - padding,
+                                y - totalHeight - padding,
+                                maxWidth + padding * 2,
+                                totalHeight + padding * 2
+                            );
+                            
+                            chartCtx.fillStyle = 'white';
+                            chartCtx.fillText(line1, x, y - lineHeight * 2);
+                            chartCtx.fillText(line2, x, y - lineHeight);
+                            chartCtx.fillText(line3, x, y);
+                        }
+                    });
+                    
+                    chartCtx.restore();
+                }
+            };
+            
+            // Create the chart
+            charts.weaponTimeSeries = new Chart(ctx, {
+                type: 'bar',
+                plugins: [topHitDaysLabelsPlugin],
+                data: {
+                    labels: dates,
+                    datasets: [
+                        {
+                            label: 'Launched',
+                            data: launches,
+                            backgroundColor: 'rgba(185, 28, 28, 0.85)',
+                            borderColor: 'rgba(185, 28, 28, 1)',
+                            borderWidth: 1,
+                            hoverBackgroundColor: 'rgba(185, 28, 28, 1)',
+                            hoverBorderWidth: 2,
+                            order: 2
+                        },
+                        {
+                            label: 'Intercepted',
+                            data: interceptions,
+                            backgroundColor: 'rgba(34, 197, 94, 0.85)',
+                            borderColor: 'rgba(34, 197, 94, 1)',
+                            borderWidth: 1,
+                            hoverBackgroundColor: 'rgba(34, 197, 94, 1)',
+                            hoverBorderWidth: 2,
+                            order: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    plugins: {
+                        legend: {
+                            onClick: null,
+                            display: true,
+                            position: 'top'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: function(context) {
+                                    return context[0].label || '';
+                                },
+                                label: function(context) {
+                                    const label = context.dataset.label || '';
+                                    const value = context.parsed.y;
+                                    return `${label}: ${value}`;
+                                },
+                                afterLabel: function(context) {
+                                    if (context.dataset.label === 'Launched') {
+                                        const index = context.dataIndex;
+                                        const launched = context.parsed.y;
+                                        const intercepted = context.chart.data.datasets[1].data[index];
+                                        const hit = launched - intercepted;
+                                        const hitRate = launched > 0 ? ((hit / launched) * 100).toFixed(1) : '0.0';
+                                        const interceptionRate = launched > 0 ? ((intercepted / launched) * 100).toFixed(1) : '0.0';
+                                        
+                                        return [
+                                            '',
+                                            `Penetrated: ${hit}`,
+                                            `Hit Rate: ${hitRate}%`,
+                                            `Interception Rate: ${interceptionRate}%`
+                                        ];
+                                    }
+                                    return '';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            display: true,
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                maxRotation: 45,
+                                minRotation: 45,
+                                autoSkip: true,
+                                maxTicksLimit: 20
+                            }
+                        },
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            beginAtZero: true,
+                            grace: '15%',
+                            title: {
+                                display: true,
+                                text: 'Count'
+                            }
+                        }
+                    }
+                }
+            });
         }
         
         // Call this when data is loaded to populate the weapon dropdown
